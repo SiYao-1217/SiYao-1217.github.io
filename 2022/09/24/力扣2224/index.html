@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>力扣2224 | YAO</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="转化时间需要的最少操作数给你两个字符串 current 和 correct ，表示两个 24 小时制时间 。 24 小时制时间 按 “HH:MM” 进行格式化，其中 HH 在 00 和 23 之间，而 MM 在 00 和 59 之间。最早的 24 小时制时间为 00:00 ，最晚的是 23:59 。 在一步操作中，你可以将 current 这个时间增加 1、5、15 或 60 分钟。你可以执行这一">
+<meta property="og:type" content="article">
+<meta property="og:title" content="力扣2224">
+<meta property="og:url" content="http://example.com/2022/09/24/%E5%8A%9B%E6%89%A32224/index.html">
+<meta property="og:site_name" content="YAO">
+<meta property="og:description" content="转化时间需要的最少操作数给你两个字符串 current 和 correct ，表示两个 24 小时制时间 。 24 小时制时间 按 “HH:MM” 进行格式化，其中 HH 在 00 和 23 之间，而 MM 在 00 和 59 之间。最早的 24 小时制时间为 00:00 ，最晚的是 23:59 。 在一步操作中，你可以将 current 这个时间增加 1、5、15 或 60 分钟。你可以执行这一">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-09-24T15:37:24.000Z">
+<meta property="article:modified_time" content="2022-09-24T15:41:28.206Z">
+<meta property="article:author" content="思遥Yao">
+<meta property="article:tag" content="力扣">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="YAO" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">YAO</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-力扣2224" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/09/24/%E5%8A%9B%E6%89%A32224/" class="article-date">
+  <time datetime="2022-09-24T15:37:24.000Z" itemprop="datePublished">2022-09-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      力扣2224
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="转化时间需要的最少操作数"><a href="#转化时间需要的最少操作数" class="headerlink" title="转化时间需要的最少操作数"></a>转化时间需要的最少操作数</h1><p>给你两个字符串 current 和 correct ，表示两个 24 小时制时间 。</p>
+<p>24 小时制时间 按 “HH:MM” 进行格式化，其中 HH 在 00 和 23 之间，而 MM 在 00 和 59 之间。最早的 24 小时制时间为 00:00 ，最晚的是 23:59 。</p>
+<p>在一步操作中，你可以将 current 这个时间增加 1、5、15 或 60 分钟。你可以执行这一操作 任意 次数。</p>
+<p>返回将 current 转化为 correct 需要的 最少操作数 。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">convertTime</span>(<span class="params">self, current: <span class="built_in">str</span>, correct: <span class="built_in">str</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        time1 = (<span class="built_in">int</span>(current[<span class="number">0</span>])*<span class="number">10</span>+<span class="built_in">int</span>(current[<span class="number">1</span>]))*<span class="number">60</span>+(<span class="built_in">int</span>(current[<span class="number">3</span>])*<span class="number">10</span>+<span class="built_in">int</span>(current[<span class="number">4</span>]))</span><br><span class="line">        time2 = (<span class="built_in">int</span>(correct[<span class="number">0</span>])*<span class="number">10</span>+<span class="built_in">int</span>(correct[<span class="number">1</span>]))*<span class="number">60</span>+(<span class="built_in">int</span>(correct[<span class="number">3</span>])*<span class="number">10</span>+<span class="built_in">int</span>(correct[<span class="number">4</span>]))</span><br><span class="line">        time = time2 - time1</span><br><span class="line">        <span class="comment">#print(time1,time2,time)</span></span><br><span class="line">        process = [<span class="number">60</span>,<span class="number">15</span>,<span class="number">5</span>,<span class="number">1</span>]</span><br><span class="line">        count = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> process:</span><br><span class="line">            temp = time // i</span><br><span class="line">            count += temp</span><br><span class="line">            time -= temp * i</span><br><span class="line">            <span class="keyword">if</span> time == <span class="number">0</span>:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">return</span> count</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/09/24/%E5%8A%9B%E6%89%A32224/" data-id="cl8g3gd1f0000tsuyecne6f0b" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8A%9B%E6%89%A3/" rel="tag">力扣</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/09/24/%E5%8A%9B%E6%89%A31640/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          力扣1640
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/09/24/%E5%8A%9B%E6%89%A31636/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">力扣1636</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/co-lab/" rel="tag">co-lab</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%9B%E6%89%A3/" rel="tag">力扣</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/co-lab/" style="font-size: 10px;">co-lab</a> <a href="/tags/%E5%8A%9B%E6%89%A3/" style="font-size: 20px;">力扣</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/09/24/kaggle-co-lab-01/">kaggle&amp;co-lab 01</a>
+          </li>
+        
+          <li>
+            <a href="/2022/09/24/%E5%8A%9B%E6%89%A31640/">力扣1640</a>
+          </li>
+        
+          <li>
+            <a href="/2022/09/24/%E5%8A%9B%E6%89%A32224/">力扣2224</a>
+          </li>
+        
+          <li>
+            <a href="/2022/09/24/%E5%8A%9B%E6%89%A31636/">力扣1636</a>
+          </li>
+        
+          <li>
+            <a href="/2022/09/22/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 思遥Yao<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
