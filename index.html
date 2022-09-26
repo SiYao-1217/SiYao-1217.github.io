@@ -66,6 +66,93 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-力扣-面试题17-19" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/09/26/%E5%8A%9B%E6%89%A3-%E9%9D%A2%E8%AF%95%E9%A2%9817-19/" class="article-date">
+  <time datetime="2022-09-26T04:44:20.000Z" itemprop="datePublished">2022-09-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/09/26/%E5%8A%9B%E6%89%A3-%E9%9D%A2%E8%AF%95%E9%A2%9817-19/">力扣#面试题17.19</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="消失的两个数字（hard）"><a href="#消失的两个数字（hard）" class="headerlink" title="消失的两个数字（hard）"></a>消失的两个数字（hard）</h1><p>给定一个数组，包含从 1 到 N 所有的整数，但其中缺了两个数字。你能在 O(N) 时间内只用 O(1) 的空间找到它们吗？</p>
+<p>以任意顺序返回这两个数字均可。</p>
+        
+          <p class="article-more-link">
+            <a href="/2022/09/26/%E5%8A%9B%E6%89%A3-%E9%9D%A2%E8%AF%95%E9%A2%9817-19/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/09/26/%E5%8A%9B%E6%89%A3-%E9%9D%A2%E8%AF%95%E9%A2%9817-19/" data-id="cl8iflzpz0003qcuy9wub4bxs" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8A%9B%E6%89%A3/" rel="tag">力扣</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-STL容器之vector" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/09/25/STL%E5%AE%B9%E5%99%A8%E4%B9%8Bvector/" class="article-date">
+  <time datetime="2022-09-25T15:31:51.000Z" itemprop="datePublished">2022-09-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/09/25/STL%E5%AE%B9%E5%99%A8%E4%B9%8Bvector/">STL容器之vector</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Vector"><a href="#Vector" class="headerlink" title="Vector"></a>Vector</h1><p>头文件：#include <vector></p>
+        
+          <p class="article-more-link">
+            <a href="/2022/09/25/STL%E5%AE%B9%E5%99%A8%E4%B9%8Bvector/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/09/25/STL%E5%AE%B9%E5%99%A8%E4%B9%8Bvector/" data-id="cl8iflzpp0000qcuydaj52xft" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-kaggle-co-lab-01" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2022/09/24/kaggle-co-lab-01/" class="article-date">
@@ -88,15 +175,12 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="co-lab中挂载kaggle数据集（解压缩）"><a href="#co-lab中挂载kaggle数据集（解压缩）" class="headerlink" title="co-lab中挂载kaggle数据集（解压缩）"></a>co-lab中挂载kaggle数据集（解压缩）</h1><h2 id="加载kaggle环境"><a href="#加载kaggle环境" class="headerlink" title="加载kaggle环境"></a>加载kaggle环境</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">! pip install kaggle</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line">os.environ[<span class="string">&#x27;KAGGLE_CONFIG_DIR&#x27;</span>] = <span class="string">&#x27;/kaggle&#x27;</span></span><br><span class="line"><span class="comment"># kaggle文件夹中存放个人API token</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="下载数据集"><a href="#下载数据集" class="headerlink" title="下载数据集"></a>下载数据集</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">! kaggle competitions download -c cifar-10</span><br></pre></td></tr></table></figure>
-
-<h2 id="解压zip"><a href="#解压zip" class="headerlink" title="解压zip"></a>解压zip</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">! unzip xxx.<span class="built_in">zip</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="解压7z"><a href="#解压7z" class="headerlink" title="解压7z"></a>解压7z</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">! pip install py7zr</span><br><span class="line"><span class="keyword">from</span> py7zr <span class="keyword">import</span> unpack_7zarchive</span><br><span class="line"><span class="keyword">import</span> shutil</span><br><span class="line">shutil.register_unpack_format(<span class="string">&#x27;7zip&#x27;</span>,[<span class="string">&#x27;.7z&#x27;</span>],unpack_7zarchive)</span><br><span class="line">shutil.unpack_archive(<span class="string">&#x27;源路径&#x27;</span>, <span class="string">&#x27;目标路径&#x27;</span>) </span><br></pre></td></tr></table></figure>
-
-
+        <h1 id="co-lab中挂载kaggle数据集（解压缩）"><a href="#co-lab中挂载kaggle数据集（解压缩）" class="headerlink" title="co-lab中挂载kaggle数据集（解压缩）"></a>co-lab中挂载kaggle数据集（解压缩）</h1>
+        
+          <p class="article-more-link">
+            <a href="/2022/09/24/kaggle-co-lab-01/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
@@ -136,10 +220,11 @@
       
         <h1 id="能否连接形成数组"><a href="#能否连接形成数组" class="headerlink" title="能否连接形成数组"></a>能否连接形成数组</h1><p>给你一个整数数组 arr ，数组中的每个整数 互不相同 。另有一个由整数数组构成的数组 pieces，其中的整数也 互不相同 。请你以 任意顺序 连接 pieces 中的数组以形成 arr 。但是，不允许 对每个数组 pieces[i] 中的整数重新排序。</p>
 <p>如果可以连接 pieces 中的数组形成 arr ，返回 true ；否则，返回 false 。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">canFormArray</span>(<span class="params">self, arr: <span class="type">List</span>[<span class="built_in">int</span>], pieces: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]</span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> pieces:</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">len</span>(i) == <span class="number">1</span>:    <span class="comment"># 小数组只含1个数字时 仅需判断该数字是否在arr</span></span><br><span class="line">                <span class="keyword">if</span> i[<span class="number">0</span>] <span class="keyword">not</span> <span class="keyword">in</span> arr:  </span><br><span class="line">                    <span class="comment"># print(1)</span></span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    <span class="keyword">pass</span></span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">len</span>(i) &gt; <span class="number">1</span>: </span><br><span class="line">                <span class="comment"># 小数组中含有多个数字，找到首个数字在arr中的index，然后向后遍历</span></span><br><span class="line">                <span class="comment"># arr，在小数组长度上是否对应相等</span></span><br><span class="line">                first_num = i[<span class="number">0</span>]</span><br><span class="line">                <span class="keyword">if</span> first_num <span class="keyword">not</span> <span class="keyword">in</span> arr:</span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">                arr_loc = arr.index(first_num)</span><br><span class="line">                <span class="keyword">if</span> arr_loc+<span class="built_in">len</span>(i) &gt; <span class="built_in">len</span>(arr):</span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">                <span class="keyword">for</span> j <span class="keyword">in</span> i: <span class="comment"># 遍历小数组</span></span><br><span class="line">                    <span class="keyword">if</span> arr[arr_loc] != j:</span><br><span class="line">                        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">                    <span class="keyword">if</span> arr[arr_loc] == j:</span><br><span class="line">                        arr_loc += <span class="number">1</span></span><br><span class="line">                        <span class="keyword">continue</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br></pre></td></tr></table></figure>
-
-<p>执行用时: 32 ms<br>内存消耗: 14.8 MB</p>
-
+        
+          <p class="article-more-link">
+            <a href="/2022/09/24/%E5%8A%9B%E6%89%A31640/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
@@ -181,9 +266,11 @@
 <p>24 小时制时间 按 “HH:MM” 进行格式化，其中 HH 在 00 和 23 之间，而 MM 在 00 和 59 之间。最早的 24 小时制时间为 00:00 ，最晚的是 23:59 。</p>
 <p>在一步操作中，你可以将 current 这个时间增加 1、5、15 或 60 分钟。你可以执行这一操作 任意 次数。</p>
 <p>返回将 current 转化为 correct 需要的 最少操作数 。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">convertTime</span>(<span class="params">self, current: <span class="built_in">str</span>, correct: <span class="built_in">str</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        time1 = (<span class="built_in">int</span>(current[<span class="number">0</span>])*<span class="number">10</span>+<span class="built_in">int</span>(current[<span class="number">1</span>]))*<span class="number">60</span>+(<span class="built_in">int</span>(current[<span class="number">3</span>])*<span class="number">10</span>+<span class="built_in">int</span>(current[<span class="number">4</span>]))</span><br><span class="line">        time2 = (<span class="built_in">int</span>(correct[<span class="number">0</span>])*<span class="number">10</span>+<span class="built_in">int</span>(correct[<span class="number">1</span>]))*<span class="number">60</span>+(<span class="built_in">int</span>(correct[<span class="number">3</span>])*<span class="number">10</span>+<span class="built_in">int</span>(correct[<span class="number">4</span>]))</span><br><span class="line">        time = time2 - time1</span><br><span class="line">        <span class="comment">#print(time1,time2,time)</span></span><br><span class="line">        process = [<span class="number">60</span>,<span class="number">15</span>,<span class="number">5</span>,<span class="number">1</span>]</span><br><span class="line">        count = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> process:</span><br><span class="line">            temp = time // i</span><br><span class="line">            count += temp</span><br><span class="line">            time -= temp * i</span><br><span class="line">            <span class="keyword">if</span> time == <span class="number">0</span>:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">return</span> count</span><br></pre></td></tr></table></figure>
-
-
+        
+          <p class="article-more-link">
+            <a href="/2022/09/24/%E5%8A%9B%E6%89%A32224/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
@@ -223,12 +310,11 @@
       
         <h1 id="按照频率将数组升序排序"><a href="#按照频率将数组升序排序" class="headerlink" title="按照频率将数组升序排序"></a>按照频率将数组升序排序</h1><p>给你一个整数数组 nums ，请你将数组按照每个值的频率 升序 排序。如果有多个值的频率相同，请你按照数值本身将它们 降序 排序。 </p>
 <p>请你返回排序后的数组。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">frequencySort</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="type">List</span>[<span class="built_in">int</span>]:</span><br><span class="line">        set_nums = <span class="built_in">set</span>(nums) <span class="comment">#求集合 去除重复项</span></span><br><span class="line">        nums_dict = &#123;&#125;</span><br><span class="line">        nums_dict_items = []</span><br><span class="line">        res = []</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> set_nums:</span><br><span class="line">            nums_dict.setdefault(i, nums.count(i))  <span class="comment">#数字，频率对应放入字典</span></span><br><span class="line">        <span class="comment">#print(nums_dict)</span></span><br><span class="line">        nums_dict_items = nums_dict.items()</span><br><span class="line">        nums_dict_items = <span class="built_in">sorted</span>(nums_dict_items, key=<span class="keyword">lambda</span> x:x[<span class="number">1</span>])</span><br><span class="line">        <span class="comment">#print(nums_dict_items)</span></span><br><span class="line">        nums_dict_items.append((<span class="string">&#x27;k&#x27;</span>, <span class="string">&#x27;k&#x27;</span>))</span><br><span class="line"></span><br><span class="line">        i = <span class="number">0</span></span><br><span class="line">        j = <span class="number">1</span></span><br><span class="line">        flag = <span class="number">0</span></span><br><span class="line">        <span class="keyword">while</span> j &lt; <span class="built_in">len</span>(nums_dict_items):</span><br><span class="line">            <span class="keyword">if</span> nums_dict_items[i][<span class="number">1</span>] != nums_dict_items[j][<span class="number">1</span>]:</span><br><span class="line">                <span class="keyword">if</span> flag == <span class="number">1</span>:</span><br><span class="line">                    nums_dict_items[i:j] = <span class="built_in">sorted</span>(nums_dict_items[i:j], key=<span class="keyword">lambda</span> x:x[<span class="number">0</span>], reverse=<span class="literal">True</span>)</span><br><span class="line">                i = j</span><br><span class="line">                j = i + <span class="number">1</span></span><br><span class="line">            <span class="keyword">elif</span> nums_dict_items[i][<span class="number">1</span>] == nums_dict_items[j][<span class="number">1</span>]:</span><br><span class="line">                j += <span class="number">1</span></span><br><span class="line">                flag = <span class="number">1</span></span><br><span class="line">        nums_dict_items.pop()</span><br><span class="line"></span><br><span class="line">        <span class="comment">#print(nums_dict_items)</span></span><br><span class="line">        <span class="keyword">for</span> data <span class="keyword">in</span> nums_dict_items:</span><br><span class="line">            val, times = data</span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(times):</span><br><span class="line">                res.append(val)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
-
-<p>sorted函数，按指定位置排序</p>
-<p>先按频率完成第1次排序，然后定位全部的同一频率的数值，用flag指示，然后将这部分{数字：频率}按数字排序</p>
-<p>ps：写的过程中没解决好out of index，在nums_dict_items最后加了一项不存在的值，以避免bug，输出前将该值删除</p>
-
+        
+          <p class="article-more-link">
+            <a href="/2022/09/24/%E5%8A%9B%E6%89%A31636/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
@@ -267,19 +353,11 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
+        
+          <p class="article-more-link">
+            <a href="/2022/09/22/hello-world/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
@@ -306,7 +384,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/co-lab/" rel="tag">co-lab</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%9B%E6%89%A3/" rel="tag">力扣</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/co-lab/" rel="tag">co-lab</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%9B%E6%89%A3/" rel="tag">力扣</a></li></ul>
     </div>
   </div>
 
@@ -316,7 +394,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/co-lab/" style="font-size: 10px;">co-lab</a> <a href="/tags/%E5%8A%9B%E6%89%A3/" style="font-size: 20px;">力扣</a>
+      <a href="/tags/C/" style="font-size: 10px;">C++</a> <a href="/tags/co-lab/" style="font-size: 10px;">co-lab</a> <a href="/tags/%E5%8A%9B%E6%89%A3/" style="font-size: 20px;">力扣</a>
     </div>
   </div>
 
@@ -338,6 +416,14 @@
       <ul>
         
           <li>
+            <a href="/2022/09/26/%E5%8A%9B%E6%89%A3-%E9%9D%A2%E8%AF%95%E9%A2%9817-19/">力扣#面试题17.19</a>
+          </li>
+        
+          <li>
+            <a href="/2022/09/25/STL%E5%AE%B9%E5%99%A8%E4%B9%8Bvector/">STL容器之vector</a>
+          </li>
+        
+          <li>
             <a href="/2022/09/24/kaggle-co-lab-01/">kaggle&amp;co-lab 01</a>
           </li>
         
@@ -347,14 +433,6 @@
         
           <li>
             <a href="/2022/09/24/%E5%8A%9B%E6%89%A32224/">力扣2224</a>
-          </li>
-        
-          <li>
-            <a href="/2022/09/24/%E5%8A%9B%E6%89%A31636/">力扣1636</a>
-          </li>
-        
-          <li>
-            <a href="/2022/09/22/hello-world/">Hello World</a>
           </li>
         
       </ul>

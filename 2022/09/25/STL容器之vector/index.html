@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>STL容器之vector | YAO</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Vector头文件：#include">
+<meta property="og:type" content="article">
+<meta property="og:title" content="STL容器之vector">
+<meta property="og:url" content="http://example.com/2022/09/25/STL%E5%AE%B9%E5%99%A8%E4%B9%8Bvector/index.html">
+<meta property="og:site_name" content="YAO">
+<meta property="og:description" content="Vector头文件：#include">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-09-25T15:31:51.000Z">
+<meta property="article:modified_time" content="2022-09-26T07:26:34.405Z">
+<meta property="article:author" content="思遥Yao">
+<meta property="article:tag" content="C++">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="YAO" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">YAO</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-STL容器之vector" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/09/25/STL%E5%AE%B9%E5%99%A8%E4%B9%8Bvector/" class="article-date">
+  <time datetime="2022-09-25T15:31:51.000Z" itemprop="datePublished">2022-09-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      STL容器之vector
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Vector"><a href="#Vector" class="headerlink" title="Vector"></a>Vector</h1><p>头文件：#include <vector></p>
+<span id="more"></span>
+
+<h2 id="存放内置数据类型"><a href="#存放内置数据类型" class="headerlink" title="存放内置数据类型"></a>存放内置数据类型</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">// 创建vector对象，通过模板参数指定存放的数据类型</span></span><br><span class="line">    vector&lt;<span class="type">int</span>&gt;v;</span><br><span class="line">    <span class="comment">// 放入数据</span></span><br><span class="line">    v.<span class="built_in">push_back</span>(<span class="number">1</span>);</span><br><span class="line">    v.<span class="built_in">push_back</span>(<span class="number">2</span>);</span><br><span class="line">    v.<span class="built_in">push_back</span>(<span class="number">3</span>);</span><br><span class="line">    <span class="comment">// v.begin()返回迭代器，这个迭代器指向容器中第一个数据</span></span><br><span class="line">	<span class="comment">// v.end()返回迭代器，这个迭代器指向容器元素的最后一个元素的 下一个位置</span></span><br><span class="line">	<span class="comment">// vector&lt;int&gt;::iterator 拿到vector&lt;int&gt;这种容器的迭代器类型</span></span><br><span class="line">    vector&lt;<span class="type">int</span>&gt;::iterator pbegin = v.<span class="built_in">begin</span>();</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt;::iterator pend = v.<span class="built_in">end</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (pbegin != pend)</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; * pbegin &lt;&lt; endl;</span><br><span class="line">        pbegin ++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">输出：</span></span><br><span class="line"><span class="comment">1</span></span><br><span class="line"><span class="comment">2</span></span><br><span class="line"><span class="comment">3</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="存放自定义数据类型"><a href="#存放自定义数据类型" class="headerlink" title="存放自定义数据类型"></a>存放自定义数据类型</h2><p>自定义类person：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">person</span>&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">string name;</span><br><span class="line"><span class="type">int</span> age;</span><br><span class="line">    <span class="built_in">person</span>(string n,<span class="type">int</span> a)&#123;</span><br><span class="line">        name = n;</span><br><span class="line">        age = a;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="方法1：创建vector存放person类型数据"><a href="#方法1：创建vector存放person类型数据" class="headerlink" title="方法1：创建vector存放person类型数据"></a>方法1：创建vector存放person类型数据</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;person&gt;v;</span><br><span class="line"><span class="comment">// 放入数据</span></span><br><span class="line"><span class="function">person <span class="title">p1</span><span class="params">(<span class="string">&quot;a&quot;</span>,<span class="number">1</span>)</span></span>;</span><br><span class="line"><span class="function">person <span class="title">p2</span><span class="params">(<span class="string">&quot;b&quot;</span>,<span class="number">2</span>)</span></span>;</span><br><span class="line"><span class="function">person <span class="title">p3</span><span class="params">(<span class="string">&quot;c&quot;</span>,<span class="number">3</span>)</span></span>;</span><br><span class="line">v.<span class="built_in">push_back</span>(p1);</span><br><span class="line">v.<span class="built_in">push_back</span>(p2);</span><br><span class="line">v.<span class="built_in">push_back</span>(p3);</span><br><span class="line"></span><br><span class="line">vector&lt;person&gt;::iterator pbegin = v.<span class="built_in">begin</span>();</span><br><span class="line"><span class="comment">//pbegin是指向v中第一个元素的指针，即pbegin是指向p1的指针</span></span><br><span class="line">vector&lt;person&gt;::iterator pend = v.<span class="built_in">end</span>();</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> (pbegin != pend)</span><br><span class="line">&#123;</span><br><span class="line">    cout &lt;&lt; (*pbegin).name &lt;&lt; (*pbegin).age &lt;&lt; endl;</span><br><span class="line">    pbegin ++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="方法2：创建vector存放person类的指针数据"><a href="#方法2：创建vector存放person类的指针数据" class="headerlink" title="方法2：创建vector存放person类的指针数据"></a>方法2：创建vector存放person类的指针数据</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;person*&gt;v;</span><br><span class="line">    <span class="comment">// 放入数据</span></span><br><span class="line">    <span class="function">person <span class="title">p1</span><span class="params">(<span class="string">&quot;a&quot;</span>,<span class="number">1</span>)</span></span>;</span><br><span class="line">    <span class="function">person <span class="title">p2</span><span class="params">(<span class="string">&quot;b&quot;</span>,<span class="number">2</span>)</span></span>;</span><br><span class="line">    <span class="function">person <span class="title">p3</span><span class="params">(<span class="string">&quot;c&quot;</span>,<span class="number">3</span>)</span></span>;</span><br><span class="line">    v.<span class="built_in">push_back</span>(&amp;p1);</span><br><span class="line">    v.<span class="built_in">push_back</span>(&amp;p2);</span><br><span class="line">    v.<span class="built_in">push_back</span>(&amp;p3);</span><br><span class="line">   	<span class="comment">//v中存放的是指向p1 p2 p3的指针</span></span><br><span class="line">    vector&lt;person*&gt;::iterator pbegin = v.<span class="built_in">begin</span>();</span><br><span class="line">	<span class="comment">//pbegin是指向指针的指针</span></span><br><span class="line">    vector&lt;person*&gt;::iterator pend = v.<span class="built_in">end</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (pbegin != pend)</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; (*pbegin)-&gt;name &lt;&lt; (*pbegin)-&gt;age &lt;&lt; endl;</span><br><span class="line">        pbegin ++;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="vector嵌套"><a href="#vector嵌套" class="headerlink" title="vector嵌套"></a>vector嵌套</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;<span class="type">int</span>&gt;v1;</span><br><span class="line">vector&lt;<span class="type">int</span>&gt;v2;</span><br><span class="line">vector&lt;<span class="type">int</span>&gt;v3;</span><br><span class="line">vector&lt;vector&lt;<span class="type">int</span>&gt;&gt;v;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>;i&lt;<span class="number">4</span>;i++)&#123;</span><br><span class="line">    v1.<span class="built_in">push_back</span>(i);</span><br><span class="line">    v2.<span class="built_in">push_back</span>(i*<span class="number">2</span>);</span><br><span class="line">    v3.<span class="built_in">push_back</span>(i*<span class="number">3</span>);</span><br><span class="line">&#125;</span><br><span class="line">v.<span class="built_in">push_back</span>(v1);</span><br><span class="line">v.<span class="built_in">push_back</span>(v2);</span><br><span class="line">v.<span class="built_in">push_back</span>(v3);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (vector&lt;vector&lt;<span class="type">int</span>&gt;&gt;::iterator it = v.<span class="built_in">begin</span>(); it != v.<span class="built_in">end</span>(); it++)&#123;</span><br><span class="line">    <span class="keyword">for</span> (vector&lt;<span class="type">int</span>&gt;::iterator itt = (*it).<span class="built_in">begin</span>(); itt != (*it).<span class="built_in">end</span>(); itt++)&#123;</span><br><span class="line">        cout &lt;&lt; *itt &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="构造vector"><a href="#构造vector" class="headerlink" title="构造vector"></a>构造vector</h2><ul>
+<li><code>vector&lt;T&gt; v; </code>                            //采用模板实现类实现，默认构造函数</li>
+<li><code>vector(v.begin(), v.end());   </code>       //将v[begin(), end())区间中的元素拷贝给本身。</li>
+<li><code>vector(n, elem);</code>                            //构造函数将n个elem拷贝给本身。</li>
+<li><code>vector(const vector &amp;vec);</code>         //拷贝构造函数。</li>
+</ul>
+<p>v.begin+5即代表从begin位置向后5位开始索引</p>
+<h2 id="赋值"><a href="#赋值" class="headerlink" title="赋值"></a>赋值</h2><ul>
+<li><code>assign(beg, end);</code>       //将[beg, end)区间中的数据拷贝赋值给本身。</li>
+<li><code>assign(n, elem);</code>        //将n个elem拷贝赋值给本身。</li>
+</ul>
+<h2 id="容量与大小"><a href="#容量与大小" class="headerlink" title="容量与大小"></a>容量与大小</h2><ul>
+<li><p><code>empty(); </code>                            //判断容器是否为空</p>
+</li>
+<li><p><code>capacity();</code>                      //容器的容量</p>
+</li>
+<li><p><code>size();</code>                              //返回容器中元素的个数</p>
+</li>
+<li><p><code>resize(int num);</code>             //重新指定容器的长度为num，若容器变长，则以默认值填充新位置。</p>
+<p>​                          //如果容器变短，则末尾超出容器长度的元素被删除。</p>
+</li>
+<li><p><code>resize(int num, elem);</code>  //重新指定容器的长度为num，若容器变长，则以elem值填充新位置。</p>
+<p>​                              //如果容器变短，则末尾超出容器长度的元素被删除</p>
+</li>
+</ul>
+<h2 id="插入与删除"><a href="#插入与删除" class="headerlink" title="插入与删除"></a>插入与删除</h2><ul>
+<li><code>push_back(ele);</code>                                         //尾部插入元素ele</li>
+<li><code>pop_back();</code>                                                //删除最后一个元素</li>
+<li><code>insert(const_iterator pos, ele);</code>        //迭代器指向位置pos插入元素ele</li>
+<li><code>insert(const_iterator pos, int count,ele);</code>//迭代器指向位置pos插入count个元素ele</li>
+<li><code>erase(const_iterator pos);</code>                     //删除迭代器指向的元素</li>
+<li><code>erase(const_iterator start, const_iterator end);</code>//删除迭代器从start到end之间的元素</li>
+<li><code>clear();</code>                                                        //删除容器中所有元素</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">v2.<span class="built_in">insert</span>(v2.<span class="built_in">begin</span>()+<span class="number">2</span>,<span class="number">9</span>);<span class="comment">//即在v2的第二个位置上插入9</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="数据存取"><a href="#数据存取" class="headerlink" title="数据存取"></a>数据存取</h2><ul>
+<li><code>at(int idx); </code>     //返回索引idx所指的数据</li>
+<li><code>operator[]; </code>       //返回索引idx所指的数据</li>
+<li><code>front(); </code>            //返回容器中第一个数据元素</li>
+<li><code>back();</code>              //返回容器中最后一个数据元素</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cout &lt;&lt; v2[<span class="number">3</span>];</span><br><span class="line">cout &lt;&lt; v2.<span class="built_in">at</span>(<span class="number">4</span>);</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="互换"><a href="#互换" class="headerlink" title="互换"></a>互换</h2><p><code>swap(vec);</code>  // 将vec与本身的元素互换</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">v1.<span class="built_in">swap</span>(v2);</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="预留空间"><a href="#预留空间" class="headerlink" title="预留空间"></a>预留空间</h2><p><code>reserve(int len);</code>//容器预留len个元素长度，预留位置不初始化，元素不可访问。</p>
+<p>每次vector扩展空间都是拷贝原值到新空间，再释放旧空间，当数据量较大时可提前预留空间，减少扩展空间的次数。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;<span class="type">int</span>&gt; v;</span><br><span class="line"></span><br><span class="line"><span class="comment">//预留空间</span></span><br><span class="line">v.<span class="built_in">reserve</span>(<span class="number">100000</span>);    <span class="comment">//预留了空间，扩展空间次数为0</span></span><br><span class="line">					<span class="comment">//不预留，18次</span></span><br><span class="line"><span class="type">int</span> num = <span class="number">0</span>;</span><br><span class="line"><span class="type">int</span>* p = &amp;v[<span class="number">0</span>];</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">100000</span>; i++) &#123;</span><br><span class="line">    v.<span class="built_in">push_back</span>(i);</span><br><span class="line">    <span class="keyword">if</span> (p != &amp;v[<span class="number">0</span>]) &#123;</span><br><span class="line">        p = &amp;v[<span class="number">0</span>];</span><br><span class="line">        num++;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">cout &lt;&lt; <span class="string">&quot;num:&quot;</span> &lt;&lt; num &lt;&lt; endl;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/09/25/STL%E5%AE%B9%E5%99%A8%E4%B9%8Bvector/" data-id="cl8iflzpp0000qcuydaj52xft" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/09/26/%E5%8A%9B%E6%89%A3-%E9%9D%A2%E8%AF%95%E9%A2%9817-19/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          力扣#面试题17.19
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/09/24/kaggle-co-lab-01/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">kaggle&amp;co-lab 01</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/co-lab/" rel="tag">co-lab</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%9B%E6%89%A3/" rel="tag">力扣</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/C/" style="font-size: 10px;">C++</a> <a href="/tags/co-lab/" style="font-size: 10px;">co-lab</a> <a href="/tags/%E5%8A%9B%E6%89%A3/" style="font-size: 20px;">力扣</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/09/26/%E5%8A%9B%E6%89%A3-%E9%9D%A2%E8%AF%95%E9%A2%9817-19/">力扣#面试题17.19</a>
+          </li>
+        
+          <li>
+            <a href="/2022/09/25/STL%E5%AE%B9%E5%99%A8%E4%B9%8Bvector/">STL容器之vector</a>
+          </li>
+        
+          <li>
+            <a href="/2022/09/24/kaggle-co-lab-01/">kaggle&amp;co-lab 01</a>
+          </li>
+        
+          <li>
+            <a href="/2022/09/24/%E5%8A%9B%E6%89%A31640/">力扣1640</a>
+          </li>
+        
+          <li>
+            <a href="/2022/09/24/%E5%8A%9B%E6%89%A32224/">力扣2224</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 思遥Yao<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
