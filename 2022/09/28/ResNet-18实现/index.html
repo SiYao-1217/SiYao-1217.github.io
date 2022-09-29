@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="力扣," />
+  <meta name="keywords" content="CNN," />
 
 
 
@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="能否连接形成数组给你一个整数数组 arr ，数组中的每个整数 互不相同 。另有一个由整数数组构成的数组 pieces，其中的整数也 互不相同 。请你以 任意顺序 连接 pieces 中的数组以形成 arr 。但是，不允许 对每个数组 pieces[i] 中的整数重新排序。 如果可以连接 pieces 中的数组形成 arr ，返回 true ；否则，返回 false 。">
+<meta name="description" content="一个残差块的实现每个残差块含有两个输出通道相同的3x3卷积层（默认步幅1，填充1，如果需要改变输出图像大小，则修改第一个卷积层的步长），每个卷积层后接一个BN层和ReLU层。输入将跨过这个残差块，直接加在第二个卷积层的ReLU层之前。 如果不改变输入输出的大小和通道，可以直接用输入相加，否则需要让输入通过一个1x1的卷积层（步幅与第一个卷积层一致，填充为0）调整通道和大小。 ······">
 <meta property="og:type" content="article">
-<meta property="og:title" content="力扣1640">
-<meta property="og:url" content="http://example.com/2022/09/24/%E5%8A%9B%E6%89%A31640/index.html">
+<meta property="og:title" content="ResNet-18实现">
+<meta property="og:url" content="http://example.com/2022/09/28/ResNet-18%E5%AE%9E%E7%8E%B0/index.html">
 <meta property="og:site_name" content="YAO">
-<meta property="og:description" content="能否连接形成数组给你一个整数数组 arr ，数组中的每个整数 互不相同 。另有一个由整数数组构成的数组 pieces，其中的整数也 互不相同 。请你以 任意顺序 连接 pieces 中的数组以形成 arr 。但是，不允许 对每个数组 pieces[i] 中的整数重新排序。 如果可以连接 pieces 中的数组形成 arr ，返回 true ；否则，返回 false 。">
+<meta property="og:description" content="一个残差块的实现每个残差块含有两个输出通道相同的3x3卷积层（默认步幅1，填充1，如果需要改变输出图像大小，则修改第一个卷积层的步长），每个卷积层后接一个BN层和ReLU层。输入将跨过这个残差块，直接加在第二个卷积层的ReLU层之前。 如果不改变输入输出的大小和通道，可以直接用输入相加，否则需要让输入通过一个1x1的卷积层（步幅与第一个卷积层一致，填充为0）调整通道和大小。 ······">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-09-24T15:57:51.000Z">
-<meta property="article:modified_time" content="2022-09-26T07:27:17.198Z">
+<meta property="article:published_time" content="2022-09-28T04:35:53.000Z">
+<meta property="article:modified_time" content="2022-09-29T11:48:17.780Z">
 <meta property="article:author" content="思遥Yao">
-<meta property="article:tag" content="力扣">
+<meta property="article:tag" content="CNN">
 <meta name="twitter:card" content="summary">
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://example.com/2022/09/24/力扣1640/"/>
+  <link rel="canonical" href="http://example.com/2022/09/28/ResNet-18实现/"/>
 
 
 
 
 
-  <title>力扣1640 | YAO</title>
+  <title>ResNet-18实现 | YAO</title>
   
 
 
@@ -253,7 +253,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/09/24/%E5%8A%9B%E6%89%A31640/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/09/28/ResNet-18%E5%AE%9E%E7%8E%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -270,7 +270,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">力扣1640</h1>
+          <h1 class="post-title" itemprop="name headline">ResNet-18实现</h1>
         
 
         <div class="post-meta">
@@ -282,8 +282,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-09-24T23:57:51+08:00">
-                2022-09-24
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-09-28T12:35:53+08:00">
+                2022-09-28
               </time>
             
 
@@ -320,13 +320,45 @@
       
 
       
-        <h1 id="能否连接形成数组"><a href="#能否连接形成数组" class="headerlink" title="能否连接形成数组"></a>能否连接形成数组</h1><p>给你一个整数数组 arr ，数组中的每个整数 互不相同 。另有一个由整数数组构成的数组 pieces，其中的整数也 互不相同 。请你以 任意顺序 连接 pieces 中的数组以形成 arr 。但是，不允许 对每个数组 pieces[i] 中的整数重新排序。</p>
-<p>如果可以连接 pieces 中的数组形成 arr ，返回 true ；否则，返回 false 。</p>
+        <h1 id="一个残差块的实现"><a href="#一个残差块的实现" class="headerlink" title="一个残差块的实现"></a>一个残差块的实现</h1><p>每个残差块含有<strong>两个</strong>输出通道相同的3x3卷积层（默认步幅1，填充1，如果需要改变输出图像大小，则修改第一个卷积层的步长），每个卷积层后接一个BN层和ReLU层。输入将跨过这个残差块，直接加在第二个卷积层的ReLU层之前。</p>
+<p><strong>如果不改变输入输出的大小和通道，可以直接用输入相加，否则需要让输入通过一个<em>1x1的卷积层（步幅与第一个卷积层一致，填充为0）</em>调整通道和大小。</strong></p>
+<p>······</p>
 <span id="more"></span>
 
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">canFormArray</span>(<span class="params">self, arr: <span class="type">List</span>[<span class="built_in">int</span>], pieces: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]</span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> pieces:</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">len</span>(i) == <span class="number">1</span>:    <span class="comment"># 小数组只含1个数字时 仅需判断该数字是否在arr</span></span><br><span class="line">                <span class="keyword">if</span> i[<span class="number">0</span>] <span class="keyword">not</span> <span class="keyword">in</span> arr:  </span><br><span class="line">                    <span class="comment"># print(1)</span></span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    <span class="keyword">pass</span></span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">len</span>(i) &gt; <span class="number">1</span>: </span><br><span class="line">                <span class="comment"># 小数组中含有多个数字，找到首个数字在arr中的index，然后向后遍历</span></span><br><span class="line">                <span class="comment"># arr，在小数组长度上是否对应相等</span></span><br><span class="line">                first_num = i[<span class="number">0</span>]</span><br><span class="line">                <span class="keyword">if</span> first_num <span class="keyword">not</span> <span class="keyword">in</span> arr:</span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">                arr_loc = arr.index(first_num)</span><br><span class="line">                <span class="keyword">if</span> arr_loc+<span class="built_in">len</span>(i) &gt; <span class="built_in">len</span>(arr):</span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">                <span class="keyword">for</span> j <span class="keyword">in</span> i: <span class="comment"># 遍历小数组</span></span><br><span class="line">                    <span class="keyword">if</span> arr[arr_loc] != j:</span><br><span class="line">                        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">                    <span class="keyword">if</span> arr[arr_loc] == j:</span><br><span class="line">                        arr_loc += <span class="number">1</span></span><br><span class="line">                        <span class="keyword">continue</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br></pre></td></tr></table></figure>
+<p>代码实现：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Residual</span>(nn.Module):</span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, input_c, num_c, use_1x1=<span class="literal">False</span>, stride=<span class="number">1</span></span>):</span><br><span class="line">    <span class="built_in">super</span>().__init__()</span><br><span class="line">    self.conv1 = nn.Conv2d(input_c, num_c, <span class="number">3</span>, stride=stride, padding=<span class="number">1</span>)</span><br><span class="line">    self.conv2 = nn.Conv2d(num_c, num_c, <span class="number">3</span>, stride=<span class="number">1</span>, padding=<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">if</span> use_1x1:</span><br><span class="line">        self.conv3 = nn.Conv2d(input_c, num_c, <span class="number">1</span>, stride=stride)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        self.conv3 = <span class="literal">None</span></span><br><span class="line">    self.bn1 = nn.BatchNorm2d(num_c)</span><br><span class="line">    self.bn2 = nn.BatchNorm2d(num_c)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, x</span>):</span><br><span class="line">    y = F.relu(self.bn1(self.conv1(x)))</span><br><span class="line">    y = self.bn2(self.conv2(y))</span><br><span class="line">    <span class="keyword">if</span> self.conv3:</span><br><span class="line">        x = self.conv3(x)</span><br><span class="line">    y += x</span><br><span class="line">    <span class="keyword">return</span> F.relu(y)</span><br></pre></td></tr></table></figure>
 
-<p>执行用时: 32 ms<br>内存消耗: 14.8 MB</p>
+
+
+<h1 id="ResNet-18模型搭建"><a href="#ResNet-18模型搭建" class="headerlink" title="ResNet-18模型搭建"></a>ResNet-18模型搭建</h1><h2 id="模块1"><a href="#模块1" class="headerlink" title="模块1"></a>模块1</h2><p>卷积层：</p>
+<ul>
+<li>输出通道：64；输入通道：灰度图为1，rgb为3</li>
+<li>步幅：2</li>
+<li>填充：3</li>
+<li>大小：7x7</li>
+</ul>
+<p>BN层+ReLU层</p>
+<p>最大池化层：</p>
+<ul>
+<li>大小：3x3</li>
+<li>步幅：2</li>
+<li>填充：1</li>
+</ul>
+<p>代码实现：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">b1 = nn.Sequential(</span><br><span class="line">    nn.Conv2d(<span class="number">1</span>, <span class="number">64</span>, <span class="number">7</span>, <span class="number">2</span>, <span class="number">3</span>),</span><br><span class="line">    nn.BatchNorm2d(<span class="number">64</span>),</span><br><span class="line">    nn.ReLU(),</span><br><span class="line">    nn.MaxPool2d(<span class="number">3</span>, <span class="number">2</span>, <span class="number">1</span>)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="模块2"><a href="#模块2" class="headerlink" title="模块2"></a>模块2</h2><p>4个包含两个小Residual的大残差块组成，其中第1个残差块的输出通道与输入通道一致，输出大小不变。剩下的残差块输出通道翻倍，输出宽高缩小一倍。</p>
+<p>每个大残差块中的第一个Residual步幅为2，且使用1x1卷积；后一个Residual输入输出通道均为第一个Residual的输出通道。</p>
+<p>代码实现：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">b2 = nn.Sequential(</span><br><span class="line">    <span class="comment"># 1</span></span><br><span class="line">    Residual(<span class="number">64</span>, <span class="number">64</span>),</span><br><span class="line">    Residual(<span class="number">64</span>, <span class="number">64</span>), </span><br><span class="line">    <span class="comment"># 2</span></span><br><span class="line">    Residual(<span class="number">64</span>, <span class="number">128</span>, <span class="literal">True</span>, <span class="number">2</span>),</span><br><span class="line">    Residual(<span class="number">128</span>, <span class="number">128</span>),</span><br><span class="line">    <span class="comment"># 3</span></span><br><span class="line">    Residual(<span class="number">128</span>, <span class="number">256</span>, <span class="literal">True</span>, <span class="number">2</span>),</span><br><span class="line">    Residual(<span class="number">256</span>, <span class="number">256</span>),</span><br><span class="line">    <span class="comment"># 4</span></span><br><span class="line">    Residual(<span class="number">256</span>, <span class="number">512</span>, <span class="literal">True</span>, <span class="number">2</span>),</span><br><span class="line">    Residual(<span class="number">512</span>, <span class="number">512</span>)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="组合"><a href="#组合" class="headerlink" title="组合"></a>组合</h2><p>模块1，模块2组合后，通过平均池化，使输出宽高为1，然后flatten展平，通过线性层输出。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">net = nn.Sequential(</span><br><span class="line">    b1,</span><br><span class="line">    b2,</span><br><span class="line">    nn.AdaptiveAvgPool2d((<span class="number">1</span>, <span class="number">1</span>)),</span><br><span class="line">    nn.Flatten(),</span><br><span class="line">    nn.Linear(<span class="number">512</span>, <span class="number">10</span>)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
 
       
     </div>
@@ -344,7 +376,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/%E5%8A%9B%E6%89%A3/" rel="tag"># 力扣</a>
+            <a href="/tags/CNN/" rel="tag"># CNN</a>
           
         </div>
       
@@ -357,8 +389,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2022/09/24/%E5%8A%9B%E6%89%A32224/" rel="next" title="力扣2224">
-                <i class="fa fa-chevron-left"></i> 力扣2224
+              <a href="/2022/09/27/%E5%8A%9B%E6%89%A3-%E9%9D%A2%E8%AF%95%E9%A2%9801-02/" rel="next" title="力扣#面试题01.02">
+                <i class="fa fa-chevron-left"></i> 力扣#面试题01.02
               </a>
             
           </div>
@@ -366,10 +398,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2022/09/24/kaggle-co-lab-01/" rel="prev" title="kaggle&co-lab 01">
-                kaggle&co-lab 01 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -496,7 +524,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%83%BD%E5%90%A6%E8%BF%9E%E6%8E%A5%E5%BD%A2%E6%88%90%E6%95%B0%E7%BB%84"><span class="nav-number">1.</span> <span class="nav-text">能否连接形成数组</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E4%B8%AA%E6%AE%8B%E5%B7%AE%E5%9D%97%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.</span> <span class="nav-text">一个残差块的实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ResNet-18%E6%A8%A1%E5%9E%8B%E6%90%AD%E5%BB%BA"><span class="nav-number">2.</span> <span class="nav-text">ResNet-18模型搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E5%9D%971"><span class="nav-number">2.1.</span> <span class="nav-text">模块1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E5%9D%972"><span class="nav-number">2.2.</span> <span class="nav-text">模块2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%84%E5%90%88"><span class="nav-number">2.3.</span> <span class="nav-text">组合</span></a></li></ol></li></ol></div>
             
 
           </div>
