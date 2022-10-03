@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="co-lab," />
+  <meta name="keywords" content="CNN," />
 
 
 
@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="co-lab中挂载kaggle数据集（解压缩）">
+<meta name="description" content="DenseNet实现稠密块： 单个卷积块：采用“BN-激活-卷积”架构 一个稠密块由多个卷积块组成，每个卷积块的输出通道数相同，输入通道数&#x3D;第一个卷积块的输入通道数+当前卷积块数 * 输出通道数（即增长率），3x3，padding&#x3D;1，在前向转播中，每个卷积块的输入和输出在通道维度上连结（torch.cat((input, output), dim&#x3D;1)）。 过渡层： 用于减少通道数（1x1卷积）">
 <meta property="og:type" content="article">
-<meta property="og:title" content="kaggle&amp;co-lab 01">
-<meta property="og:url" content="http://example.com/2022/09/24/kaggle-co-lab-01/index.html">
+<meta property="og:title" content="DenseNet">
+<meta property="og:url" content="http://example.com/2022/10/03/DenseNet/index.html">
 <meta property="og:site_name" content="YAO">
-<meta property="og:description" content="co-lab中挂载kaggle数据集（解压缩）">
+<meta property="og:description" content="DenseNet实现稠密块： 单个卷积块：采用“BN-激活-卷积”架构 一个稠密块由多个卷积块组成，每个卷积块的输出通道数相同，输入通道数&#x3D;第一个卷积块的输入通道数+当前卷积块数 * 输出通道数（即增长率），3x3，padding&#x3D;1，在前向转播中，每个卷积块的输入和输出在通道维度上连结（torch.cat((input, output), dim&#x3D;1)）。 过渡层： 用于减少通道数（1x1卷积）">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-09-24T15:59:15.000Z">
-<meta property="article:modified_time" content="2022-09-26T07:29:03.056Z">
+<meta property="article:published_time" content="2022-10-03T09:21:07.000Z">
+<meta property="article:modified_time" content="2022-10-03T14:10:20.073Z">
 <meta property="article:author" content="思遥Yao">
-<meta property="article:tag" content="co-lab">
+<meta property="article:tag" content="CNN">
 <meta name="twitter:card" content="summary">
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://example.com/2022/09/24/kaggle-co-lab-01/"/>
+  <link rel="canonical" href="http://example.com/2022/10/03/DenseNet/"/>
 
 
 
 
 
-  <title>kaggle&co-lab 01 | YAO</title>
+  <title>DenseNet | YAO</title>
   
 
 
@@ -253,7 +253,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/09/24/kaggle-co-lab-01/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/10/03/DenseNet/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -270,7 +270,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">kaggle&co-lab 01</h1>
+          <h1 class="post-title" itemprop="name headline">DenseNet</h1>
         
 
         <div class="post-meta">
@@ -282,8 +282,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-09-24T23:59:15+08:00">
-                2022-09-24
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-10-03T17:21:07+08:00">
+                2022-10-03
               </time>
             
 
@@ -320,16 +320,15 @@
       
 
       
-        <h1 id="co-lab中挂载kaggle数据集（解压缩）"><a href="#co-lab中挂载kaggle数据集（解压缩）" class="headerlink" title="co-lab中挂载kaggle数据集（解压缩）"></a>co-lab中挂载kaggle数据集（解压缩）</h1><span id="more"></span>
-
-<h2 id="加载kaggle环境"><a href="#加载kaggle环境" class="headerlink" title="加载kaggle环境"></a>加载kaggle环境</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">! pip install kaggle</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line">os.environ[<span class="string">&#x27;KAGGLE_CONFIG_DIR&#x27;</span>] = <span class="string">&#x27;/kaggle&#x27;</span></span><br><span class="line"><span class="comment"># kaggle文件夹中存放个人API token</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="下载数据集"><a href="#下载数据集" class="headerlink" title="下载数据集"></a>下载数据集</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">! kaggle competitions download -c cifar-10</span><br></pre></td></tr></table></figure>
-
-<h2 id="解压zip"><a href="#解压zip" class="headerlink" title="解压zip"></a>解压zip</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">! unzip xxx.<span class="built_in">zip</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="解压7z"><a href="#解压7z" class="headerlink" title="解压7z"></a>解压7z</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">! pip install py7zr</span><br><span class="line"><span class="keyword">from</span> py7zr <span class="keyword">import</span> unpack_7zarchive</span><br><span class="line"><span class="keyword">import</span> shutil</span><br><span class="line">shutil.register_unpack_format(<span class="string">&#x27;7zip&#x27;</span>,[<span class="string">&#x27;.7z&#x27;</span>],unpack_7zarchive)</span><br><span class="line">shutil.unpack_archive(<span class="string">&#x27;源路径&#x27;</span>, <span class="string">&#x27;目标路径&#x27;</span>) </span><br></pre></td></tr></table></figure>
-
+        <h1 id="DenseNet实现"><a href="#DenseNet实现" class="headerlink" title="DenseNet实现"></a>DenseNet实现</h1><p>稠密块：</p>
+<p>单个卷积块：采用“BN-激活-卷积”架构</p>
+<p>一个稠密块由多个卷积块组成，每个卷积块的输出通道数相同，输入通道数=第一个卷积块的输入通道数+当前卷积块数 * 输出通道数（即增长率），3x3，padding=1，在前向转播中，每个卷积块的输入和输出在通道维度上连结（torch.cat(<em>(input, output)</em>, dim=1)）。</p>
+<p>过渡层：</p>
+<p>用于减少通道数（1x1卷积），减半宽高（2x2平均池化层，stride=2），降低复杂度。</p>
+<p>架构：BN+ReLU+1x1卷积+2x2平均池化</p>
+<h1 id="DenseNet模型"><a href="#DenseNet模型" class="headerlink" title="DenseNet模型"></a>DenseNet模型</h1><p>b1：7x7卷积（1输入，64输出，2步幅，3填充）+BN+ReLU+3x3最大池化（2步幅，1填充）</p>
+<p>4个稠密块，每个包含4个卷积块，增长率设置为32，初始输入通道数为64，通过稠密块后通道数将更新为增长率 * 卷积块数，稠密块之间有一个过渡层，使得输出通道数减半。（每次对通道数操作后需要更新初始输入通道的变量）</p>
+<p>FC：BN+ReLU+1x1平均池化+flatten+线性</p>
 
       
     </div>
@@ -347,7 +346,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/co-lab/" rel="tag"># co-lab</a>
+            <a href="/tags/CNN/" rel="tag"># CNN</a>
           
         </div>
       
@@ -360,8 +359,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2022/09/24/%E5%8A%9B%E6%89%A31640/" rel="next" title="力扣1640">
-                <i class="fa fa-chevron-left"></i> 力扣1640
+              <a href="/2022/10/03/%E5%8A%9B%E6%89%A3-1784/" rel="next" title="力扣#1784">
+                <i class="fa fa-chevron-left"></i> 力扣#1784
               </a>
             
           </div>
@@ -369,10 +368,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2022/09/25/STL%E5%AE%B9%E5%99%A8%E4%B9%8Bvector/" rel="prev" title="STL容器之vector">
-                STL容器之vector <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -499,7 +494,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#co-lab%E4%B8%AD%E6%8C%82%E8%BD%BDkaggle%E6%95%B0%E6%8D%AE%E9%9B%86%EF%BC%88%E8%A7%A3%E5%8E%8B%E7%BC%A9%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">co-lab中挂载kaggle数据集（解压缩）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A0%E8%BD%BDkaggle%E7%8E%AF%E5%A2%83"><span class="nav-number">1.1.</span> <span class="nav-text">加载kaggle环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="nav-number">1.2.</span> <span class="nav-text">下载数据集</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E5%8E%8Bzip"><span class="nav-number">1.3.</span> <span class="nav-text">解压zip</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E5%8E%8B7z"><span class="nav-number">1.4.</span> <span class="nav-text">解压7z</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#DenseNet%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.</span> <span class="nav-text">DenseNet实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DenseNet%E6%A8%A1%E5%9E%8B"><span class="nav-number">2.</span> <span class="nav-text">DenseNet模型</span></a></li></ol></div>
             
 
           </div>

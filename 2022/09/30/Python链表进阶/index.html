@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="co-lab," />
+  <meta name="keywords" content="数据结构,Python," />
 
 
 
@@ -79,17 +79,18 @@
 
 
 
-<meta name="description" content="co-lab中挂载kaggle数据集（解压缩）">
+<meta name="description" content="链表的双指针、双链表等经典问题">
 <meta property="og:type" content="article">
-<meta property="og:title" content="kaggle&amp;co-lab 01">
-<meta property="og:url" content="http://example.com/2022/09/24/kaggle-co-lab-01/index.html">
+<meta property="og:title" content="Python链表进阶">
+<meta property="og:url" content="http://example.com/2022/09/30/Python%E9%93%BE%E8%A1%A8%E8%BF%9B%E9%98%B6/index.html">
 <meta property="og:site_name" content="YAO">
-<meta property="og:description" content="co-lab中挂载kaggle数据集（解压缩）">
+<meta property="og:description" content="链表的双指针、双链表等经典问题">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-09-24T15:59:15.000Z">
-<meta property="article:modified_time" content="2022-09-26T07:29:03.056Z">
+<meta property="article:published_time" content="2022-09-30T13:55:38.000Z">
+<meta property="article:modified_time" content="2022-09-30T15:02:46.325Z">
 <meta property="article:author" content="思遥Yao">
-<meta property="article:tag" content="co-lab">
+<meta property="article:tag" content="数据结构">
+<meta property="article:tag" content="Python">
 <meta name="twitter:card" content="summary">
 
 
@@ -120,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="http://example.com/2022/09/24/kaggle-co-lab-01/"/>
+  <link rel="canonical" href="http://example.com/2022/09/30/Python链表进阶/"/>
 
 
 
 
 
-  <title>kaggle&co-lab 01 | YAO</title>
+  <title>Python链表进阶 | YAO</title>
   
 
 
@@ -253,7 +254,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/09/24/kaggle-co-lab-01/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/09/30/Python%E9%93%BE%E8%A1%A8%E8%BF%9B%E9%98%B6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -270,7 +271,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">kaggle&co-lab 01</h1>
+          <h1 class="post-title" itemprop="name headline">Python链表进阶</h1>
         
 
         <div class="post-meta">
@@ -282,8 +283,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-09-24T23:59:15+08:00">
-                2022-09-24
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-09-30T21:55:38+08:00">
+                2022-09-30
               </time>
             
 
@@ -320,17 +321,10 @@
       
 
       
-        <h1 id="co-lab中挂载kaggle数据集（解压缩）"><a href="#co-lab中挂载kaggle数据集（解压缩）" class="headerlink" title="co-lab中挂载kaggle数据集（解压缩）"></a>co-lab中挂载kaggle数据集（解压缩）</h1><span id="more"></span>
+        <p>链表的双指针、双链表等经典问题</p>
+<span id="more"></span>
 
-<h2 id="加载kaggle环境"><a href="#加载kaggle环境" class="headerlink" title="加载kaggle环境"></a>加载kaggle环境</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">! pip install kaggle</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line">os.environ[<span class="string">&#x27;KAGGLE_CONFIG_DIR&#x27;</span>] = <span class="string">&#x27;/kaggle&#x27;</span></span><br><span class="line"><span class="comment"># kaggle文件夹中存放个人API token</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="下载数据集"><a href="#下载数据集" class="headerlink" title="下载数据集"></a>下载数据集</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">! kaggle competitions download -c cifar-10</span><br></pre></td></tr></table></figure>
-
-<h2 id="解压zip"><a href="#解压zip" class="headerlink" title="解压zip"></a>解压zip</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">! unzip xxx.<span class="built_in">zip</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="解压7z"><a href="#解压7z" class="headerlink" title="解压7z"></a>解压7z</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">! pip install py7zr</span><br><span class="line"><span class="keyword">from</span> py7zr <span class="keyword">import</span> unpack_7zarchive</span><br><span class="line"><span class="keyword">import</span> shutil</span><br><span class="line">shutil.register_unpack_format(<span class="string">&#x27;7zip&#x27;</span>,[<span class="string">&#x27;.7z&#x27;</span>],unpack_7zarchive)</span><br><span class="line">shutil.unpack_archive(<span class="string">&#x27;源路径&#x27;</span>, <span class="string">&#x27;目标路径&#x27;</span>) </span><br></pre></td></tr></table></figure>
-
-
+<h1 id="反转链表"><a href="#反转链表" class="headerlink" title="反转链表"></a>反转链表</h1>
       
     </div>
     
@@ -347,7 +341,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/co-lab/" rel="tag"># co-lab</a>
+            <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag"># 数据结构</a>
+          
+            <a href="/tags/Python/" rel="tag"># Python</a>
           
         </div>
       
@@ -360,8 +356,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2022/09/24/%E5%8A%9B%E6%89%A31640/" rel="next" title="力扣1640">
-                <i class="fa fa-chevron-left"></i> 力扣1640
+              <a href="/2022/09/30/%E5%8A%9B%E6%89%A3-%E9%9D%A2%E8%AF%95%E9%A2%9801-08/" rel="next" title="力扣#面试题01.08">
+                <i class="fa fa-chevron-left"></i> 力扣#面试题01.08
               </a>
             
           </div>
@@ -370,8 +366,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2022/09/25/STL%E5%AE%B9%E5%99%A8%E4%B9%8Bvector/" rel="prev" title="STL容器之vector">
-                STL容器之vector <i class="fa fa-chevron-right"></i>
+              <a href="/2022/10/02/%E5%8A%9B%E6%89%A3-777/" rel="prev" title="力扣#777">
+                力扣#777 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -499,7 +495,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#co-lab%E4%B8%AD%E6%8C%82%E8%BD%BDkaggle%E6%95%B0%E6%8D%AE%E9%9B%86%EF%BC%88%E8%A7%A3%E5%8E%8B%E7%BC%A9%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">co-lab中挂载kaggle数据集（解压缩）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A0%E8%BD%BDkaggle%E7%8E%AF%E5%A2%83"><span class="nav-number">1.1.</span> <span class="nav-text">加载kaggle环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="nav-number">1.2.</span> <span class="nav-text">下载数据集</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E5%8E%8Bzip"><span class="nav-number">1.3.</span> <span class="nav-text">解压zip</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E5%8E%8B7z"><span class="nav-number">1.4.</span> <span class="nav-text">解压7z</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8"><span class="nav-number">1.</span> <span class="nav-text">反转链表</span></a></li></ol></div>
             
 
           </div>
