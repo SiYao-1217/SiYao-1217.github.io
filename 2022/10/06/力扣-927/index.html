@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="力扣," />
 
 
 
@@ -79,16 +79,17 @@
 
 
 
-<meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.">
+<meta name="description" content="三等分(Hard)给定一个由 0 和 1 组成的数组 arr ，将数组分成  3 个非空的部分 ，使得所有这些部分表示相同的二进制值。 如果可以做到，请返回任何 [i, j]，其中 i+1 &lt; j，这样一来： arr[0], arr[1], …, arr[i] 为第一部分；arr[i + 1], arr[i + 2], …, arr[j - 1] 为第二部分；arr[j], arr[j +">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://example.com/2022/09/22/hello-world/index.html">
+<meta property="og:title" content="力扣#927">
+<meta property="og:url" content="http://example.com/2022/10/06/%E5%8A%9B%E6%89%A3-927/index.html">
 <meta property="og:site_name" content="YAO">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.">
+<meta property="og:description" content="三等分(Hard)给定一个由 0 和 1 组成的数组 arr ，将数组分成  3 个非空的部分 ，使得所有这些部分表示相同的二进制值。 如果可以做到，请返回任何 [i, j]，其中 i+1 &lt; j，这样一来： arr[0], arr[1], …, arr[i] 为第一部分；arr[i + 1], arr[i + 2], …, arr[j - 1] 为第二部分；arr[j], arr[j +">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-09-22T07:21:23.596Z">
-<meta property="article:modified_time" content="2022-09-26T07:29:12.285Z">
+<meta property="article:published_time" content="2022-10-06T06:58:22.000Z">
+<meta property="article:modified_time" content="2022-10-06T07:01:22.666Z">
 <meta property="article:author" content="思遥Yao">
+<meta property="article:tag" content="力扣">
 <meta name="twitter:card" content="summary">
 
 
@@ -119,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://example.com/2022/09/22/hello-world/"/>
+  <link rel="canonical" href="http://example.com/2022/10/06/力扣-927/"/>
 
 
 
 
 
-  <title>Hello World | YAO</title>
+  <title>力扣#927 | YAO</title>
   
 
 
@@ -252,7 +253,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/09/22/hello-world/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/10/06/%E5%8A%9B%E6%89%A3-927/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -269,7 +270,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Hello World</h1>
+          <h1 class="post-title" itemprop="name headline">力扣#927</h1>
         
 
         <div class="post-meta">
@@ -281,8 +282,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-09-22T15:21:23+08:00">
-                2022-09-22
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-10-06T14:58:22+08:00">
+                2022-10-06
               </time>
             
 
@@ -319,21 +320,15 @@
       
 
       
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+        <h1 id="三等分-Hard"><a href="#三等分-Hard" class="headerlink" title="三等分(Hard)"></a>三等分(Hard)</h1><p>给定一个由 0 和 1 组成的数组 arr ，将数组分成  3 个非空的部分 ，使得所有这些部分表示相同的二进制值。</p>
+<p>如果可以做到，请返回任何 [i, j]，其中 i+1 &lt; j，这样一来：</p>
+<p>arr[0], arr[1], …, arr[i] 为第一部分；<br>arr[i + 1], arr[i + 2], …, arr[j - 1] 为第二部分；<br>arr[j], arr[j + 1], …, arr[arr.length - 1] 为第三部分。<br>这三个部分所表示的二进制值相等。<br>如果无法做到，就返回 [-1, -1]。</p>
+<p>注意，在考虑每个部分所表示的二进制时，应当将其看作一个整体。例如，[1,1,0] 表示十进制中的 6，而不会是 3。此外，前导零也是被允许的，所以 [0,1,1] 和 [1,1] 表示相同的值。</p>
 <span id="more"></span>
 
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">threeEqualParts</span>(<span class="params">self, arr: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="type">List</span>[<span class="built_in">int</span>]:</span><br><span class="line">        <span class="keyword">if</span> arr.count(<span class="number">1</span>) == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span>[<span class="number">0</span>,<span class="built_in">len</span>(arr)-<span class="number">1</span>]</span><br><span class="line">        <span class="keyword">if</span> arr.count(<span class="number">1</span>) % <span class="number">3</span> != <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> [-<span class="number">1</span>,-<span class="number">1</span>]</span><br><span class="line">        <span class="comment"># 每一部分含1的个数</span></span><br><span class="line">        num_1 = arr.count(<span class="number">1</span>) // <span class="number">3</span></span><br><span class="line">        cnt = <span class="number">0</span></span><br><span class="line">        pos_1 = []</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(arr)):</span><br><span class="line">            <span class="keyword">if</span> arr[i] == <span class="number">1</span>:</span><br><span class="line">                cnt += <span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> arr[i] == <span class="number">1</span> <span class="keyword">and</span> (cnt == num_1 <span class="keyword">or</span> cnt == num_1 + <span class="number">1</span> <span class="keyword">or</span> cnt == <span class="number">2</span> * num_1 <span class="keyword">or</span> cnt == <span class="number">2</span> * num_1 + <span class="number">1</span> <span class="keyword">or</span> cnt == <span class="number">3</span> * num_1):</span><br><span class="line">                </span><br><span class="line">                pos_1.append(i)</span><br><span class="line">        <span class="comment">#print(pos_1)</span></span><br><span class="line">        k = <span class="built_in">len</span>(arr) - <span class="number">1</span> - pos_1[-<span class="number">1</span>]</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(pos_1) == <span class="number">3</span>:</span><br><span class="line">            <span class="keyword">if</span> pos_1[<span class="number">0</span>] + k &lt; pos_1[<span class="number">1</span>] <span class="keyword">and</span> pos_1[<span class="number">1</span>] + k &lt; pos_1[<span class="number">2</span>]:</span><br><span class="line">                <span class="keyword">return</span> [pos_1[<span class="number">0</span>] + k,pos_1[<span class="number">1</span>] + k + <span class="number">1</span>]</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">return</span> [-<span class="number">1</span>,-<span class="number">1</span>]</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(pos_1) &gt; <span class="number">3</span>:</span><br><span class="line">            <span class="keyword">if</span> pos_1[<span class="number">0</span>] + k &lt; pos_1[<span class="number">1</span>] <span class="keyword">and</span> pos_1[<span class="number">2</span>] + k &lt; pos_1[<span class="number">3</span>]:</span><br><span class="line">                sec1 = arr[:pos_1[<span class="number">0</span>] + k + <span class="number">1</span>]</span><br><span class="line">                sec2 = arr[pos_1[<span class="number">0</span>] + k + <span class="number">1</span>:pos_1[<span class="number">2</span>] + k + <span class="number">1</span>]</span><br><span class="line">                sec3 = arr[pos_1[<span class="number">2</span>] + k + <span class="number">1</span>:]</span><br><span class="line">                <span class="comment">#print(sec1,sec2,sec3)</span></span><br><span class="line">                <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">min</span>(<span class="built_in">len</span>(sec1),<span class="built_in">len</span>(sec2),<span class="built_in">len</span>(sec3))):</span><br><span class="line">                    <span class="keyword">if</span> <span class="keyword">not</span> (sec1[::-<span class="number">1</span>][i]==sec2[::-<span class="number">1</span>][i]==sec3[::-<span class="number">1</span>][i]):</span><br><span class="line">                        <span class="keyword">return</span> [-<span class="number">1</span>,-<span class="number">1</span>]</span><br><span class="line">                <span class="keyword">return</span> [pos_1[<span class="number">0</span>] + k,pos_1[<span class="number">2</span>] + k +<span class="number">1</span>]</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">return</span> [-<span class="number">1</span>,-<span class="number">1</span>]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<p>居然跑了6000+ms，差点超时了</p>
 
       
     </div>
@@ -349,6 +344,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/%E5%8A%9B%E6%89%A3/" rel="tag"># 力扣</a>
+          
+        </div>
+      
 
       
       
@@ -358,14 +359,18 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2022/10/05/%E5%8A%9B%E6%89%A3-811/" rel="next" title="力扣#811">
+                <i class="fa fa-chevron-left"></i> 力扣#811
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2022/09/24/%E5%8A%9B%E6%89%A31636/" rel="prev" title="力扣1636">
-                力扣1636 <i class="fa fa-chevron-right"></i>
+              <a href="/2022/10/06/f%E5%AD%97%E7%AC%A6%E4%B8%B2/" rel="prev" title="f字符串">
+                f字符串 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -493,7 +498,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E7%AD%89%E5%88%86-Hard"><span class="nav-number">1.</span> <span class="nav-text">三等分(Hard)</span></a></li></ol></div>
             
 
           </div>
