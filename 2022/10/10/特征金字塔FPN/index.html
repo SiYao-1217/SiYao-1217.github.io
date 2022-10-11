@@ -79,20 +79,22 @@
 
 
 
-<meta name="description" content="FPN">
+<meta name="description" content="FPN用于检测不同尺寸的物体，这里介绍一种利用深度卷积网络的多尺度金字塔层级结构构建的 具有横向连接的自顶向下  的结构">
 <meta property="og:type" content="article">
 <meta property="og:title" content="特征金字塔FPN">
 <meta property="og:url" content="http://example.com/2022/10/10/%E7%89%B9%E5%BE%81%E9%87%91%E5%AD%97%E5%A1%94FPN/index.html">
 <meta property="og:site_name" content="YAO">
-<meta property="og:description" content="FPN">
+<meta property="og:description" content="FPN用于检测不同尺寸的物体，这里介绍一种利用深度卷积网络的多尺度金字塔层级结构构建的 具有横向连接的自顶向下  的结构">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/images/fip.png">
+<meta property="og:image" content="http://example.com/images/fpn1.png">
+<meta property="og:image" content="http://example.com/images/fpn2.png">
+<meta property="og:image" content="http://example.com/images/fpn3.png">
 <meta property="article:published_time" content="2022-10-10T04:27:27.000Z">
-<meta property="article:modified_time" content="2022-10-10T04:41:42.515Z">
+<meta property="article:modified_time" content="2022-10-11T10:21:09.292Z">
 <meta property="article:author" content="思遥Yao">
 <meta property="article:tag" content="DL">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/images/fip.png">
+<meta name="twitter:image" content="http://example.com/images/fpn1.png">
 
 
 
@@ -322,8 +324,25 @@
       
 
       
-        <h1 id="FPN"><a href="#FPN" class="headerlink" title="FPN"></a>FPN</h1><img src="/images/fip.png">
+        <h1 id="FPN"><a href="#FPN" class="headerlink" title="FPN"></a>FPN</h1><p>用于检测不同尺寸的物体，这里介绍一种利用深度卷积网络的多尺度金字塔层级结构构建的 <em><strong>具有横向连接的自顶向下</strong></em>  的结构</p>
+<img src="/images/fpn1.png">
 
+<span id="more"></span>
+
+<p>图a的特征金字塔，构建在图像金字塔之上，改变图像尺寸以获得不同尺寸的特征图。  计算速度慢</p>
+<p>图b，通过深度卷积网络与降采样，获得不同分辨率的特征图，但包含高级特征的分辨率就会降低</p>
+<p>图c，重复使用不同尺寸的特征图，放弃利用底层特征</p>
+<p>图d，特征金字塔，通过自上而下路径与横向连接，降低/分辨率，高级特征/、/高分辨率，低级特征/的特征图结合</p>
+<img src="/images/fpn2.png">
+
+<p> top-down and skip connections：生成一个高分辨率、高级特征的单一特征图，用于预测</p>
+<p>特征金字塔：结构与top-down and skip connections相似，但每一层都进行预测，可以用所有尺度端到端训练，且在训练/测试时一致使用</p>
+<p>设计思想：用完全卷积的方式，输入任意大小的单个图片，在多个层级（level）输出合适大小的特征图</p>
+<img src="/images/fpn3.png">
+
+<p>结构1：自下而上的通路（Bottom-up pathway）  计算由多个尺度的特征映射组成的特征层次，变换步长为2，所有输出相同大小的映射的层处于同一个网络阶段（network stage），每个阶段为特征金字塔的一个层级。每个阶段的最后一层输出为特征映射参考集（具有最强特征）</p>
+<p>结构2 ：自上而下的通路和横向连接（Top-down pathway and lateral connections）  对高层强特征但低分辨率的特征映射进行上采样（upsample），生成更高分辨率，通过横向连接，合并来自自底向上路径和自顶向下路径的相同空间大小的特征图，使特征增强</p>
+<p>对低分辨率的特征映射，采用空间上的2倍upsample（最近邻），将上采样的映射与相应的自底向上映射(该映射经过1×1卷积层，以减少通道维度)合并，在每个合并的map上附加一个3×3卷积来生成最终的feature map</p>
 
       
     </div>
