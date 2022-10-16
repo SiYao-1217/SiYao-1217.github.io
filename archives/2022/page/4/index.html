@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="CNN," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -79,17 +79,14 @@
 
 
 
-<meta name="description" content="DenseNet实现稠密块： 单个卷积块：采用“BN-激活-卷积”架构 一个稠密块由多个卷积块组成，每个卷积块的输出通道数相同，输入通道数&#x3D;第一个卷积块的输入通道数+当前卷积块数 * 输出通道数（即增长率），3x3，padding&#x3D;1，在前向转播中，每个卷积块的输入和输出在通道维度上连结（torch.cat((input, output), dim&#x3D;1)）。 过渡层： 用于减少通道数（1x1卷积）">
-<meta property="og:type" content="article">
-<meta property="og:title" content="DenseNet">
-<meta property="og:url" content="http://example.com/2022/10/03/DenseNet/index.html">
+<meta name="description" content="保持好奇">
+<meta property="og:type" content="website">
+<meta property="og:title" content="YAO">
+<meta property="og:url" content="http://example.com/archives/2022/page/4/index.html">
 <meta property="og:site_name" content="YAO">
-<meta property="og:description" content="DenseNet实现稠密块： 单个卷积块：采用“BN-激活-卷积”架构 一个稠密块由多个卷积块组成，每个卷积块的输出通道数相同，输入通道数&#x3D;第一个卷积块的输入通道数+当前卷积块数 * 输出通道数（即增长率），3x3，padding&#x3D;1，在前向转播中，每个卷积块的输入和输出在通道维度上连结（torch.cat((input, output), dim&#x3D;1)）。 过渡层： 用于减少通道数（1x1卷积）">
+<meta property="og:description" content="保持好奇">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-10-03T09:21:07.000Z">
-<meta property="article:modified_time" content="2022-10-03T14:10:20.073Z">
 <meta property="article:author" content="思遥Yao">
-<meta property="article:tag" content="CNN">
 <meta name="twitter:card" content="summary">
 
 
@@ -120,13 +117,13 @@
 
 
 
-  <link rel="canonical" href="http://example.com/2022/10/03/DenseNet/"/>
+  <link rel="canonical" href="http://example.com/archives/2022/page/4/"/>
 
 
 
 
 
-  <title>DenseNet | YAO</title>
+  <title>Archive | YAO</title>
   
 
 
@@ -145,7 +142,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <div class="container sidebar-position-left page-archive">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -239,159 +236,151 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-expand">
-    
+  
+  
+  
+  <div class="post-block archive">
+    <div id="posts" class="posts-collapse">
+      <span class="archive-move-on"></span>
 
-  
+      <span class="archive-page-counter">
+        
+        
+         
+        
+        OK! 33 posts in total. Keep on posting.
+      </span>
 
-  
-  
-  
+      
+
+        
+        
+        
+
+        
+          
+          <div class="collection-title">
+            <h1 class="archive-year" id="archive-year-2022">2022</h1>
+          </div>
+        
+        
+
+        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/10/03/DenseNet/">
+    <header class="post-header">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/cat.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="YAO">
-    </span>
-
-    
-      <header class="post-header">
-
+      <h2 class="post-title">
         
-        
-          <h1 class="post-title" itemprop="name headline">DenseNet</h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
+            <a class="post-title-link" href="/2022/09/24/%E5%8A%9B%E6%89%A32224/" itemprop="url">
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span itemprop="name">力扣2224</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-10-03T17:21:07+08:00">
-                2022-10-03
-              </time>
-            
+            </a>
+        
+      </h2>
 
-            
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2022-09-24T23:37:24+08:00"
+              content="2022-09-24" >
+          09-24
+        </time>
+      </div>
 
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <h1 id="DenseNet实现"><a href="#DenseNet实现" class="headerlink" title="DenseNet实现"></a>DenseNet实现</h1><p>稠密块：</p>
-<p>单个卷积块：采用“BN-激活-卷积”架构</p>
-<p>一个稠密块由多个卷积块组成，每个卷积块的输出通道数相同，输入通道数=第一个卷积块的输入通道数+当前卷积块数 * 输出通道数（即增长率），3x3，padding=1，在前向转播中，每个卷积块的输入和输出在通道维度上连结（torch.cat(<em>(input, output)</em>, dim=1)）。</p>
-<p>过渡层：</p>
-<p>用于减少通道数（1x1卷积），减半宽高（2x2平均池化层，stride=2），降低复杂度。</p>
-<p>架构：BN+ReLU+1x1卷积+2x2平均池化</p>
-<h1 id="DenseNet模型"><a href="#DenseNet模型" class="headerlink" title="DenseNet模型"></a>DenseNet模型</h1><p>b1：7x7卷积（1输入，64输出，2步幅，3填充）+BN+ReLU+3x3最大池化（2步幅，1填充）</p>
-<p>4个稠密块，每个包含4个卷积块，增长率设置为32，初始输入通道数为64，通过稠密块后通道数将更新为增长率 * 卷积块数，稠密块之间有一个过渡层，使得输出通道数减半。（每次对通道数操作后需要更新初始输入通道的变量）</p>
-<p>FC：BN+ReLU+1x1平均池化+flatten+线性</p>
-
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/CNN/" rel="tag"># CNN</a>
-          
-        </div>
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2022/10/03/%E5%8A%9B%E6%89%A3-1784/" rel="next" title="力扣#1784">
-                <i class="fa fa-chevron-left"></i> 力扣#1784
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2022/10/04/%E5%8A%9B%E6%89%A3-921/" rel="prev" title="力扣#921">
-                力扣#921 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </div>
-  
-  
-  
+    </header>
   </article>
 
 
 
-    <div class="post-spread">
       
+
+        
+        
+        
+
+        
+        
+
+        
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
+        
+            <a class="post-title-link" href="/2022/09/24/%E5%8A%9B%E6%89%A31636/" itemprop="url">
+              
+                <span itemprop="name">力扣1636</span>
+              
+            </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2022-09-24T23:29:57+08:00"
+              content="2022-09-24" >
+          09-24
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+
+      
+
+        
+        
+        
+
+        
+        
+
+        
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
+        
+            <a class="post-title-link" href="/2022/09/22/hello-world/" itemprop="url">
+              
+                <span itemprop="name">Hello World</span>
+              
+            </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2022-09-22T15:21:23+08:00"
+              content="2022-09-22" >
+          09-22
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+
+      
+
     </div>
   </div>
+  
+  
+  
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/archives/2022/page/3/">&lt;</a><a class="page-number" href="/archives/2022/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/2022/page/3/">3</a><span class="page-number current">4</span>
+  </nav>
+
+
 
 
           </div>
@@ -399,10 +388,6 @@
 
 
           
-
-  
-
-
 
         </div>
         
@@ -423,17 +408,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -488,22 +464,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#DenseNet%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.</span> <span class="nav-text">DenseNet实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DenseNet%E6%A8%A1%E5%9E%8B"><span class="nav-number">2.</span> <span class="nav-text">DenseNet模型</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
        
@@ -668,10 +628,6 @@
 
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
-
-
 
   
 

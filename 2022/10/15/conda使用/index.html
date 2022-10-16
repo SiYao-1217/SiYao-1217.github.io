@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="CNN," />
+  <meta name="keywords" content="conda," />
 
 
 
@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="DenseNet实现稠密块： 单个卷积块：采用“BN-激活-卷积”架构 一个稠密块由多个卷积块组成，每个卷积块的输出通道数相同，输入通道数&#x3D;第一个卷积块的输入通道数+当前卷积块数 * 输出通道数（即增长率），3x3，padding&#x3D;1，在前向转播中，每个卷积块的输入和输出在通道维度上连结（torch.cat((input, output), dim&#x3D;1)）。 过渡层： 用于减少通道数（1x1卷积）">
+<meta name="description" content="miniconda创建环境1conda create -n 环境名 python&#x3D;版本号  进入环境1conda activate 环境名  安装package1conda install 包名  退出环境1conda deactivate  空间清理删除没有环境使用的所有的安装包及cache 12345# 全删conda clean --all -y# 把没用到的包删了conda clean -">
 <meta property="og:type" content="article">
-<meta property="og:title" content="DenseNet">
-<meta property="og:url" content="http://example.com/2022/10/03/DenseNet/index.html">
+<meta property="og:title" content="conda使用">
+<meta property="og:url" content="http://example.com/2022/10/15/conda%E4%BD%BF%E7%94%A8/index.html">
 <meta property="og:site_name" content="YAO">
-<meta property="og:description" content="DenseNet实现稠密块： 单个卷积块：采用“BN-激活-卷积”架构 一个稠密块由多个卷积块组成，每个卷积块的输出通道数相同，输入通道数&#x3D;第一个卷积块的输入通道数+当前卷积块数 * 输出通道数（即增长率），3x3，padding&#x3D;1，在前向转播中，每个卷积块的输入和输出在通道维度上连结（torch.cat((input, output), dim&#x3D;1)）。 过渡层： 用于减少通道数（1x1卷积）">
+<meta property="og:description" content="miniconda创建环境1conda create -n 环境名 python&#x3D;版本号  进入环境1conda activate 环境名  安装package1conda install 包名  退出环境1conda deactivate  空间清理删除没有环境使用的所有的安装包及cache 12345# 全删conda clean --all -y# 把没用到的包删了conda clean -">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-10-03T09:21:07.000Z">
-<meta property="article:modified_time" content="2022-10-03T14:10:20.073Z">
+<meta property="article:published_time" content="2022-10-14T16:07:24.000Z">
+<meta property="article:modified_time" content="2022-10-14T16:19:33.989Z">
 <meta property="article:author" content="思遥Yao">
-<meta property="article:tag" content="CNN">
+<meta property="article:tag" content="conda">
 <meta name="twitter:card" content="summary">
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://example.com/2022/10/03/DenseNet/"/>
+  <link rel="canonical" href="http://example.com/2022/10/15/conda使用/"/>
 
 
 
 
 
-  <title>DenseNet | YAO</title>
+  <title>conda使用 | YAO</title>
   
 
 
@@ -253,7 +253,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/10/03/DenseNet/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/10/15/conda%E4%BD%BF%E7%94%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -270,7 +270,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">DenseNet</h1>
+          <h1 class="post-title" itemprop="name headline">conda使用</h1>
         
 
         <div class="post-meta">
@@ -282,8 +282,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-10-03T17:21:07+08:00">
-                2022-10-03
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-10-15T00:07:24+08:00">
+                2022-10-15
               </time>
             
 
@@ -320,15 +320,20 @@
       
 
       
-        <h1 id="DenseNet实现"><a href="#DenseNet实现" class="headerlink" title="DenseNet实现"></a>DenseNet实现</h1><p>稠密块：</p>
-<p>单个卷积块：采用“BN-激活-卷积”架构</p>
-<p>一个稠密块由多个卷积块组成，每个卷积块的输出通道数相同，输入通道数=第一个卷积块的输入通道数+当前卷积块数 * 输出通道数（即增长率），3x3，padding=1，在前向转播中，每个卷积块的输入和输出在通道维度上连结（torch.cat(<em>(input, output)</em>, dim=1)）。</p>
-<p>过渡层：</p>
-<p>用于减少通道数（1x1卷积），减半宽高（2x2平均池化层，stride=2），降低复杂度。</p>
-<p>架构：BN+ReLU+1x1卷积+2x2平均池化</p>
-<h1 id="DenseNet模型"><a href="#DenseNet模型" class="headerlink" title="DenseNet模型"></a>DenseNet模型</h1><p>b1：7x7卷积（1输入，64输出，2步幅，3填充）+BN+ReLU+3x3最大池化（2步幅，1填充）</p>
-<p>4个稠密块，每个包含4个卷积块，增长率设置为32，初始输入通道数为64，通过稠密块后通道数将更新为增长率 * 卷积块数，稠密块之间有一个过渡层，使得输出通道数减半。（每次对通道数操作后需要更新初始输入通道的变量）</p>
-<p>FC：BN+ReLU+1x1平均池化+flatten+线性</p>
+        <h1 id="miniconda"><a href="#miniconda" class="headerlink" title="miniconda"></a>miniconda</h1><h2 id="创建环境"><a href="#创建环境" class="headerlink" title="创建环境"></a>创建环境</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda create -n 环境名 python=版本号</span><br></pre></td></tr></table></figure>
+
+<h2 id="进入环境"><a href="#进入环境" class="headerlink" title="进入环境"></a>进入环境</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda activate 环境名</span><br></pre></td></tr></table></figure>
+
+<h2 id="安装package"><a href="#安装package" class="headerlink" title="安装package"></a>安装package</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda install 包名</span><br></pre></td></tr></table></figure>
+
+<h2 id="退出环境"><a href="#退出环境" class="headerlink" title="退出环境"></a>退出环境</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda deactivate</span><br></pre></td></tr></table></figure>
+
+<h2 id="空间清理"><a href="#空间清理" class="headerlink" title="空间清理"></a>空间清理</h2><p>删除没有环境使用的所有的安装包及cache</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 全删</span><br><span class="line">conda clean --all -y</span><br><span class="line"></span><br><span class="line"># 把没用到的包删了</span><br><span class="line">conda clean -p</span><br></pre></td></tr></table></figure>
+
+
+
+<p>当计算机中存在原版python时，需要将原版python位置及scripts文件夹位置添加到系统环境变量中conda环境变量之前，这样才可以在cmd中使用pip为原来的python安装package。</p>
 
       
     </div>
@@ -346,7 +351,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/CNN/" rel="tag"># CNN</a>
+            <a href="/tags/conda/" rel="tag"># conda</a>
           
         </div>
       
@@ -359,8 +364,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2022/10/03/%E5%8A%9B%E6%89%A3-1784/" rel="next" title="力扣#1784">
-                <i class="fa fa-chevron-left"></i> 力扣#1784
+              <a href="/2022/10/13/%E5%8A%9B%E6%89%A3-817/" rel="next" title="力扣#817">
+                <i class="fa fa-chevron-left"></i> 力扣#817
               </a>
             
           </div>
@@ -369,8 +374,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2022/10/04/%E5%8A%9B%E6%89%A3-921/" rel="prev" title="力扣#921">
-                力扣#921 <i class="fa fa-chevron-right"></i>
+              <a href="/2022/10/16/%E5%8A%9B%E6%89%A3-940/" rel="prev" title="力扣#940">
+                力扣#940 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -498,7 +503,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#DenseNet%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.</span> <span class="nav-text">DenseNet实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DenseNet%E6%A8%A1%E5%9E%8B"><span class="nav-number">2.</span> <span class="nav-text">DenseNet模型</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#miniconda"><span class="nav-number">1.</span> <span class="nav-text">miniconda</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E7%8E%AF%E5%A2%83"><span class="nav-number">1.1.</span> <span class="nav-text">创建环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9B%E5%85%A5%E7%8E%AF%E5%A2%83"><span class="nav-number">1.2.</span> <span class="nav-text">进入环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85package"><span class="nav-number">1.3.</span> <span class="nav-text">安装package</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%80%E5%87%BA%E7%8E%AF%E5%A2%83"><span class="nav-number">1.4.</span> <span class="nav-text">退出环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A9%BA%E9%97%B4%E6%B8%85%E7%90%86"><span class="nav-number">1.5.</span> <span class="nav-text">空间清理</span></a></li></ol></li></ol></div>
             
 
           </div>

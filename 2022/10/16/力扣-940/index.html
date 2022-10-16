@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="CNN," />
+  <meta name="keywords" content="力扣," />
 
 
 
@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="DenseNet实现稠密块： 单个卷积块：采用“BN-激活-卷积”架构 一个稠密块由多个卷积块组成，每个卷积块的输出通道数相同，输入通道数&#x3D;第一个卷积块的输入通道数+当前卷积块数 * 输出通道数（即增长率），3x3，padding&#x3D;1，在前向转播中，每个卷积块的输入和输出在通道维度上连结（torch.cat((input, output), dim&#x3D;1)）。 过渡层： 用于减少通道数（1x1卷积）">
+<meta name="description" content="不同的子序列 II （HARD）给定一个字符串 s，计算 s 的 不同非空子序列 的个数。因为结果可能很大，所以返回答案需要对 10^9 + 7 取余 。 字符串的 子序列 是经由原字符串删除一些（也可能不删除）字符但不改变剩余字符相对位置的一个新字符串。 例如，”ace” 是 “abcde” 的一个子序列，但 “aec” 不是。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="DenseNet">
-<meta property="og:url" content="http://example.com/2022/10/03/DenseNet/index.html">
+<meta property="og:title" content="力扣#940">
+<meta property="og:url" content="http://example.com/2022/10/16/%E5%8A%9B%E6%89%A3-940/index.html">
 <meta property="og:site_name" content="YAO">
-<meta property="og:description" content="DenseNet实现稠密块： 单个卷积块：采用“BN-激活-卷积”架构 一个稠密块由多个卷积块组成，每个卷积块的输出通道数相同，输入通道数&#x3D;第一个卷积块的输入通道数+当前卷积块数 * 输出通道数（即增长率），3x3，padding&#x3D;1，在前向转播中，每个卷积块的输入和输出在通道维度上连结（torch.cat((input, output), dim&#x3D;1)）。 过渡层： 用于减少通道数（1x1卷积）">
+<meta property="og:description" content="不同的子序列 II （HARD）给定一个字符串 s，计算 s 的 不同非空子序列 的个数。因为结果可能很大，所以返回答案需要对 10^9 + 7 取余 。 字符串的 子序列 是经由原字符串删除一些（也可能不删除）字符但不改变剩余字符相对位置的一个新字符串。 例如，”ace” 是 “abcde” 的一个子序列，但 “aec” 不是。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-10-03T09:21:07.000Z">
-<meta property="article:modified_time" content="2022-10-03T14:10:20.073Z">
+<meta property="article:published_time" content="2022-10-16T14:21:09.000Z">
+<meta property="article:modified_time" content="2022-10-16T14:37:54.154Z">
 <meta property="article:author" content="思遥Yao">
-<meta property="article:tag" content="CNN">
+<meta property="article:tag" content="力扣">
 <meta name="twitter:card" content="summary">
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://example.com/2022/10/03/DenseNet/"/>
+  <link rel="canonical" href="http://example.com/2022/10/16/力扣-940/"/>
 
 
 
 
 
-  <title>DenseNet | YAO</title>
+  <title>力扣#940 | YAO</title>
   
 
 
@@ -253,7 +253,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/10/03/DenseNet/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/10/16/%E5%8A%9B%E6%89%A3-940/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -270,7 +270,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">DenseNet</h1>
+          <h1 class="post-title" itemprop="name headline">力扣#940</h1>
         
 
         <div class="post-meta">
@@ -282,8 +282,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-10-03T17:21:07+08:00">
-                2022-10-03
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-10-16T22:21:09+08:00">
+                2022-10-16
               </time>
             
 
@@ -320,15 +320,16 @@
       
 
       
-        <h1 id="DenseNet实现"><a href="#DenseNet实现" class="headerlink" title="DenseNet实现"></a>DenseNet实现</h1><p>稠密块：</p>
-<p>单个卷积块：采用“BN-激活-卷积”架构</p>
-<p>一个稠密块由多个卷积块组成，每个卷积块的输出通道数相同，输入通道数=第一个卷积块的输入通道数+当前卷积块数 * 输出通道数（即增长率），3x3，padding=1，在前向转播中，每个卷积块的输入和输出在通道维度上连结（torch.cat(<em>(input, output)</em>, dim=1)）。</p>
-<p>过渡层：</p>
-<p>用于减少通道数（1x1卷积），减半宽高（2x2平均池化层，stride=2），降低复杂度。</p>
-<p>架构：BN+ReLU+1x1卷积+2x2平均池化</p>
-<h1 id="DenseNet模型"><a href="#DenseNet模型" class="headerlink" title="DenseNet模型"></a>DenseNet模型</h1><p>b1：7x7卷积（1输入，64输出，2步幅，3填充）+BN+ReLU+3x3最大池化（2步幅，1填充）</p>
-<p>4个稠密块，每个包含4个卷积块，增长率设置为32，初始输入通道数为64，通过稠密块后通道数将更新为增长率 * 卷积块数，稠密块之间有一个过渡层，使得输出通道数减半。（每次对通道数操作后需要更新初始输入通道的变量）</p>
-<p>FC：BN+ReLU+1x1平均池化+flatten+线性</p>
+        <h1 id="不同的子序列-II-（HARD）"><a href="#不同的子序列-II-（HARD）" class="headerlink" title="不同的子序列 II （HARD）"></a>不同的子序列 II （HARD）</h1><p>给定一个字符串 s，计算 s 的 不同非空子序列 的个数。因为结果可能很大，所以返回答案需要对 10^9 + 7 取余 。</p>
+<p>字符串的 子序列 是经由原字符串删除一些（也可能不删除）字符但不改变剩余字符相对位置的一个新字符串。</p>
+<p>例如，”ace” 是 “abcde” 的一个子序列，但 “aec” 不是。</p>
+<span id="more"></span>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">distinctSubseqII</span>(<span class="params">self, s: <span class="built_in">str</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        dp = &#123;&#125;</span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">func</span>():</span><br><span class="line">            <span class="keyword">nonlocal</span> dp</span><br><span class="line">            sum_val = <span class="number">0</span></span><br><span class="line">            val = dp.values()</span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> val:</span><br><span class="line">                sum_val += i</span><br><span class="line">            <span class="keyword">return</span> sum_val</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> s:</span><br><span class="line">            dp[i] = <span class="number">1</span> + func()</span><br><span class="line">        mod = <span class="number">7</span> + <span class="number">10</span>**<span class="number">9</span></span><br><span class="line">        <span class="keyword">return</span> func()%mod</span><br></pre></td></tr></table></figure>
+
+<p>看了题解</p>
+<p>构造dp，从首个字符向后构造，每个字符的dp数为1+所有已遍历的不重复字符的dp和，所有子序列个数是字符串中每个不重复字符的dp数之和。</p>
+<p>以abca为例，首先是a，dp[a]=1，dp[b]=1+dp[a]=2，dp[c]=1+dp[a]+dp[b]=4，dp[a]（第二个）=1+dp[a]（第一个）+dp[b]+dp[c]=8，total=dp[a]+dp[b]+dp[c]=14</p>
 
       
     </div>
@@ -346,7 +347,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/CNN/" rel="tag"># CNN</a>
+            <a href="/tags/%E5%8A%9B%E6%89%A3/" rel="tag"># 力扣</a>
           
         </div>
       
@@ -359,8 +360,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2022/10/03/%E5%8A%9B%E6%89%A3-1784/" rel="next" title="力扣#1784">
-                <i class="fa fa-chevron-left"></i> 力扣#1784
+              <a href="/2022/10/15/conda%E4%BD%BF%E7%94%A8/" rel="next" title="conda使用">
+                <i class="fa fa-chevron-left"></i> conda使用
               </a>
             
           </div>
@@ -369,8 +370,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2022/10/04/%E5%8A%9B%E6%89%A3-921/" rel="prev" title="力扣#921">
-                力扣#921 <i class="fa fa-chevron-right"></i>
+              <a href="/2022/10/16/%E5%8A%9B%E6%89%A3-1441/" rel="prev" title="力扣#1441">
+                力扣#1441 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -498,7 +499,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#DenseNet%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.</span> <span class="nav-text">DenseNet实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DenseNet%E6%A8%A1%E5%9E%8B"><span class="nav-number">2.</span> <span class="nav-text">DenseNet模型</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%8D%E5%90%8C%E7%9A%84%E5%AD%90%E5%BA%8F%E5%88%97-II-%EF%BC%88HARD%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">不同的子序列 II （HARD）</span></a></li></ol></div>
             
 
           </div>
