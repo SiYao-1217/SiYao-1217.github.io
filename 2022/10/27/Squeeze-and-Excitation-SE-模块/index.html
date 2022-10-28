@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="conda," />
+  <meta name="keywords" content="DL," />
 
 
 
@@ -79,18 +79,23 @@
 
 
 
-<meta name="description" content="miniconda创建环境1conda create -n 环境名 python&#x3D;版本号  进入环境1conda activate 环境名  安装package1conda install 包名  退出环境1conda deactivate  空间清理删除没有环境使用的所有的安装包及cache 12345# 全删conda clean --all -y# 把没用到的包删了conda clean -">
+<meta name="description" content="SE">
 <meta property="og:type" content="article">
-<meta property="og:title" content="conda使用">
-<meta property="og:url" content="http://example.com/2022/10/15/conda%E4%BD%BF%E7%94%A8/index.html">
+<meta property="og:title" content="Squeeze-and-Excitation(SE)模块">
+<meta property="og:url" content="http://example.com/2022/10/27/Squeeze-and-Excitation-SE-%E6%A8%A1%E5%9D%97/index.html">
 <meta property="og:site_name" content="YAO">
-<meta property="og:description" content="miniconda创建环境1conda create -n 环境名 python&#x3D;版本号  进入环境1conda activate 环境名  安装package1conda install 包名  退出环境1conda deactivate  空间清理删除没有环境使用的所有的安装包及cache 12345# 全删conda clean --all -y# 把没用到的包删了conda clean -">
+<meta property="og:description" content="SE">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-10-14T16:07:24.000Z">
-<meta property="article:modified_time" content="2022-10-14T16:19:33.989Z">
+<meta property="og:image" content="http://example.com/images/SE.png">
+<meta property="og:image" content="http://example.com/images/SE2.png">
+<meta property="og:image" content="http://example.com/images/SES.png">
+<meta property="og:image" content="http://example.com/images/SEE.png">
+<meta property="article:published_time" content="2022-10-27T12:09:22.000Z">
+<meta property="article:modified_time" content="2022-10-27T14:24:36.655Z">
 <meta property="article:author" content="思遥Yao">
-<meta property="article:tag" content="conda">
+<meta property="article:tag" content="DL">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/SE.png">
 
 
 
@@ -120,13 +125,13 @@
 
 
 
-  <link rel="canonical" href="http://example.com/2022/10/15/conda使用/"/>
+  <link rel="canonical" href="http://example.com/2022/10/27/Squeeze-and-Excitation-SE-模块/"/>
 
 
 
 
 
-  <title>conda使用 | YAO</title>
+  <title>Squeeze-and-Excitation(SE)模块 | YAO</title>
   
 
 
@@ -253,7 +258,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/10/15/conda%E4%BD%BF%E7%94%A8/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/10/27/Squeeze-and-Excitation-SE-%E6%A8%A1%E5%9D%97/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -270,7 +275,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">conda使用</h1>
+          <h1 class="post-title" itemprop="name headline">Squeeze-and-Excitation(SE)模块</h1>
         
 
         <div class="post-meta">
@@ -282,8 +287,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-10-15T00:07:24+08:00">
-                2022-10-15
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-10-27T20:09:22+08:00">
+                2022-10-27
               </time>
             
 
@@ -320,20 +325,40 @@
       
 
       
-        <h1 id="miniconda"><a href="#miniconda" class="headerlink" title="miniconda"></a>miniconda</h1><h2 id="创建环境"><a href="#创建环境" class="headerlink" title="创建环境"></a>创建环境</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda create -n 环境名 python=版本号</span><br></pre></td></tr></table></figure>
+        <h1 id="SE"><a href="#SE" class="headerlink" title="SE"></a>SE</h1><img src="/images/SE.png">
 
-<h2 id="进入环境"><a href="#进入环境" class="headerlink" title="进入环境"></a>进入环境</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda activate 环境名</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
 
-<h2 id="安装package"><a href="#安装package" class="headerlink" title="安装package"></a>安装package</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda install 包名</span><br></pre></td></tr></table></figure>
+<h2 id="1、采样与池化"><a href="#1、采样与池化" class="headerlink" title="1、采样与池化"></a>1、采样与池化</h2><p>上采样（upsampling）：又名放大图像、图像插值；</p>
+<p>主要目的是放大原图像,从而可以显示在更高分辨率的显示设备上；</p>
+<p>上采样有3种常见的方法：双线性插值(bilinear)，反卷积(Transposed Convolution)，反池化(Unpooling)；</p>
+<p>下采样 概念 下采样（subsampled）：又名降采样、缩小图像；</p>
+<p>主要目的有两个：1、使得图像符合显示区域的大小；2、生成对应图像的缩略图；</p>
+<p>其实下采样就是池化；</p>
+<p>池化（保留哪些特征，这些特征是最重要的） 池化最直观的作用便是降维，常见的池化有最大池化、平均池化和随机池化；池化层不需要训练参数；</p>
+<p>最大池化可以<strong>获取局部信息，可以更好保留纹理上的特征</strong>；如果不用观察物体在图片中的具体位置，只关心其是否出现，则使用最大池化效果比较好。 </p>
+<p>平均池化往往能<strong>保留整体数据的特征，能凸出背景的信息</strong>。</p>
+<p> 随机池化中元素值大的被选中的概率也大，但不是像最大池化总是取最大值。随机池化一方面最大化地保证了Max值的取值，一方面又确保了不会完全是max值起作用，造成过度失真；除此之外，其可以在一定程度上避免过拟合。</p>
+<h2 id="2、Squeeze-and-Excitation"><a href="#2、Squeeze-and-Excitation" class="headerlink" title="2、Squeeze-and-Excitation"></a>2、Squeeze-and-Excitation</h2><p>Squeeze部分。即为压缩部分，原始feature map的维度为H * W * C，其中H是高度（Height），W是宽度（width），C是通道数（channel）。Squeeze做的事情是把HWC压缩为1 * 1 * C，相当于把H * W压缩成一维了，实际中一般是用global average pooling实现的。H * W压缩成一维后，相当于这一维参数获得了之前H * W全局的视野，感受区域更广。</p>
+<p>Excitation部分。得到Squeeze的1 * 1 * C的表示后，加入一个FC全连接层（Fully Connected），对每个通道的重要性进行预测，得到不同channel的重要性大小后再作用（激励）到之前的feature map的对应channel上，再进行后续操作。</p>
+<p>给定一个输入 x，其特征通道数为 c_1，通过一系列卷积等一般变换后得到一个特征通道数为 c_2 的特征。与传统的 CNN 不一样的是，接下来我们通过三个操作来重标定前面得到的特征。</p>
+<p>首先是 Squeeze 操作，我们顺着空间维度来进行特征压缩，将每个二维的特征通道变成一个实数，这个实数某种程度上具有全局的感受野，并且输出的维度和输入的特征通道数相匹配。它表征着在特征通道上响应的全局分布，而且使得靠近输入的层也可以获得全局的感受野，这一点在很多任务中都是非常有用的。</p>
+<p>其次是 Excitation 操作，它是一个类似于循环神经网络中门的机制。通过参数 w 来为每个特征通道生成权重，其中参数 w 被学习用来显式地建模特征通道间的相关性。</p>
+<p>最后是一个 Reweight 的操作，我们将 Excitation 的输出的权重看做是进过特征选择后的每个特征通道的重要性，然后通过乘法逐通道加权到先前的特征上，完成在通道维度上的对原始特征的重标定。</p>
+<img src="/images/SE2.png">
 
-<h2 id="退出环境"><a href="#退出环境" class="headerlink" title="退出环境"></a>退出环境</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda deactivate</span><br></pre></td></tr></table></figure>
+<h2 id="3、压缩"><a href="#3、压缩" class="headerlink" title="3、压缩"></a>3、压缩</h2><img src="/images/SES.png">
 
-<h2 id="空间清理"><a href="#空间清理" class="headerlink" title="空间清理"></a>空间清理</h2><p>删除没有环境使用的所有的安装包及cache</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 全删</span><br><span class="line">conda clean --all -y</span><br><span class="line"></span><br><span class="line"># 把没用到的包删了</span><br><span class="line">conda clean -p</span><br></pre></td></tr></table></figure>
+<p>这个操作就是一个全局平均池化（global average pooling）。经过压缩操作后特征图被压缩为1×1×C向量。</p>
+<h2 id="4、激励"><a href="#4、激励" class="headerlink" title="4、激励"></a>4、激励</h2><img src="/images/SEE.png">
+
+<p>由两个全连接层组成，其中SERatio是一个缩放参数，这个参数的目的是为了减少通道个数从而<strong>降低计算量。</strong> 第一个全连接层有C*SERatio个神经元，输入为1×1×C，输出1×1×C×SERadio。 第二个全连接层有C个神经元，输入为1×1×C×SERadio，输出为1×1×C。</p>
+<h2 id="5、scale操作"><a href="#5、scale操作" class="headerlink" title="5、scale操作"></a>5、scale操作</h2><p>最后是scale操作，在得到1×1×C向量之后，就可以对原来的特征图进行scale操作了。很简单，<strong>就是通道权重相乘，</strong>原有特征向量为W×H×C，<strong>将SE模块计算出来的各通道权重值分别和原特征图对应通道的二维矩阵相乘</strong>，得出的结果输出。 这里我们可以得出SE模块的属性： 参数量 = 2×C×C×SERatio 计算量 = 2×C×C×SERatio <strong>总体来讲SE模块会增加网络的总参数量，总计算量，因为使用的是全连接层计算量相比卷积层并不大，但是参数量会有明显上升</strong>，所以MobileNetV3-Large中的总参数量比MobileNetV2多了2M。</p>
+<h2 id="SE模块代码实现"><a href="#SE模块代码实现" class="headerlink" title="SE模块代码实现"></a>SE模块代码实现</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">SELayer</span>(nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, channel, reduction=<span class="number">16</span></span>):</span><br><span class="line">        <span class="built_in">super</span>(SELayer, self).__init__()</span><br><span class="line">        self.avg_pool = nn.AdaptiveAvgPool2d(<span class="number">1</span>)</span><br><span class="line">        self.fc = nn.Sequential(</span><br><span class="line">            nn.Linear(channel, channel // reduction, bias=<span class="literal">False</span>),</span><br><span class="line">            nn.ReLU(inplace=<span class="literal">True</span>),</span><br><span class="line">            nn.Linear(channel // reduction, channel, bias=<span class="literal">False</span>),</span><br><span class="line">            nn.Sigmoid()</span><br><span class="line">        )</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, x</span>):</span><br><span class="line">        b, c, _, _ = x.size()</span><br><span class="line">        y = self.avg_pool(x).view(b, c)  <span class="comment"># view：相当于numpy的resize</span></span><br><span class="line">        y = self.fc(y).view(b, c, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">        <span class="keyword">return</span> x * y.expand_as(x)   <span class="comment"># 将x*y扩展为和x一样大小</span></span><br></pre></td></tr></table></figure>
 
 
 
-<p>当计算机中存在原版python时，需要将原版python位置及scripts文件夹位置添加到系统环境变量中conda环境变量之前，这样才可以在cmd中使用pip为原来的python安装package。</p>
+<p>参考：<a target="_blank" rel="noopener" href="https://www.ebaina.com/articles/140000012469">【深度学习】Squeeze-and-Excitation (SE) 模块优势解读_专栏_易百纳技术社区 (ebaina.com)</a></p>
 
       
     </div>
@@ -351,7 +376,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/conda/" rel="tag"># conda</a>
+            <a href="/tags/DL/" rel="tag"># DL</a>
           
         </div>
       
@@ -364,8 +389,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2022/10/13/%E5%8A%9B%E6%89%A3-817/" rel="next" title="力扣#817">
-                <i class="fa fa-chevron-left"></i> 力扣#817
+              <a href="/2022/10/27/STL%E5%AE%B9%E5%99%A8%E4%B9%8Bdeque/" rel="next" title="STL之deque">
+                <i class="fa fa-chevron-left"></i> STL之deque
               </a>
             
           </div>
@@ -373,10 +398,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2022/10/16/%E5%8A%9B%E6%89%A3-940/" rel="prev" title="力扣#940">
-                力扣#940 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -503,7 +524,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#miniconda"><span class="nav-number">1.</span> <span class="nav-text">miniconda</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E7%8E%AF%E5%A2%83"><span class="nav-number">1.1.</span> <span class="nav-text">创建环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9B%E5%85%A5%E7%8E%AF%E5%A2%83"><span class="nav-number">1.2.</span> <span class="nav-text">进入环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85package"><span class="nav-number">1.3.</span> <span class="nav-text">安装package</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%80%E5%87%BA%E7%8E%AF%E5%A2%83"><span class="nav-number">1.4.</span> <span class="nav-text">退出环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A9%BA%E9%97%B4%E6%B8%85%E7%90%86"><span class="nav-number">1.5.</span> <span class="nav-text">空间清理</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#SE"><span class="nav-number">1.</span> <span class="nav-text">SE</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81%E9%87%87%E6%A0%B7%E4%B8%8E%E6%B1%A0%E5%8C%96"><span class="nav-number">1.1.</span> <span class="nav-text">1、采样与池化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81Squeeze-and-Excitation"><span class="nav-number">1.2.</span> <span class="nav-text">2、Squeeze-and-Excitation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%E3%80%81%E5%8E%8B%E7%BC%A9"><span class="nav-number">1.3.</span> <span class="nav-text">3、压缩</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4%E3%80%81%E6%BF%80%E5%8A%B1"><span class="nav-number">1.4.</span> <span class="nav-text">4、激励</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5%E3%80%81scale%E6%93%8D%E4%BD%9C"><span class="nav-number">1.5.</span> <span class="nav-text">5、scale操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SE%E6%A8%A1%E5%9D%97%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.6.</span> <span class="nav-text">SE模块代码实现</span></a></li></ol></li></ol></div>
             
 
           </div>

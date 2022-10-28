@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="conda," />
+  <meta name="keywords" content="C++," />
 
 
 
@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="miniconda创建环境1conda create -n 环境名 python&#x3D;版本号  进入环境1conda activate 环境名  安装package1conda install 包名  退出环境1conda deactivate  空间清理删除没有环境使用的所有的安装包及cache 12345# 全删conda clean --all -y# 把没用到的包删了conda clean -">
+<meta name="description" content="deque功能：  双端数组，可以对头端进行插入删除操作  deque与vector区别：  vector对于头部的插入删除效率低，数据量越大，效率越低 deque相对而言，对头部的插入删除速度回比vector快 vector访问元素时的速度会比deque快,这和两者内部实现有关  deque容器的迭代器也是支持随机访问的 操作方法和vector差不多">
 <meta property="og:type" content="article">
-<meta property="og:title" content="conda使用">
-<meta property="og:url" content="http://example.com/2022/10/15/conda%E4%BD%BF%E7%94%A8/index.html">
+<meta property="og:title" content="STL之deque">
+<meta property="og:url" content="http://example.com/2022/10/27/STL%E5%AE%B9%E5%99%A8%E4%B9%8Bdeque/index.html">
 <meta property="og:site_name" content="YAO">
-<meta property="og:description" content="miniconda创建环境1conda create -n 环境名 python&#x3D;版本号  进入环境1conda activate 环境名  安装package1conda install 包名  退出环境1conda deactivate  空间清理删除没有环境使用的所有的安装包及cache 12345# 全删conda clean --all -y# 把没用到的包删了conda clean -">
+<meta property="og:description" content="deque功能：  双端数组，可以对头端进行插入删除操作  deque与vector区别：  vector对于头部的插入删除效率低，数据量越大，效率越低 deque相对而言，对头部的插入删除速度回比vector快 vector访问元素时的速度会比deque快,这和两者内部实现有关  deque容器的迭代器也是支持随机访问的 操作方法和vector差不多">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-10-14T16:07:24.000Z">
-<meta property="article:modified_time" content="2022-10-14T16:19:33.989Z">
+<meta property="article:published_time" content="2022-10-27T09:30:33.000Z">
+<meta property="article:modified_time" content="2022-10-27T15:32:49.283Z">
 <meta property="article:author" content="思遥Yao">
-<meta property="article:tag" content="conda">
+<meta property="article:tag" content="C++">
 <meta name="twitter:card" content="summary">
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://example.com/2022/10/15/conda使用/"/>
+  <link rel="canonical" href="http://example.com/2022/10/27/STL容器之deque/"/>
 
 
 
 
 
-  <title>conda使用 | YAO</title>
+  <title>STL之deque | YAO</title>
   
 
 
@@ -253,7 +253,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/10/15/conda%E4%BD%BF%E7%94%A8/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/10/27/STL%E5%AE%B9%E5%99%A8%E4%B9%8Bdeque/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -270,7 +270,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">conda使用</h1>
+          <h1 class="post-title" itemprop="name headline">STL之deque</h1>
         
 
         <div class="post-meta">
@@ -282,8 +282,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-10-15T00:07:24+08:00">
-                2022-10-15
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-10-27T17:30:33+08:00">
+                2022-10-27
               </time>
             
 
@@ -320,20 +320,76 @@
       
 
       
-        <h1 id="miniconda"><a href="#miniconda" class="headerlink" title="miniconda"></a>miniconda</h1><h2 id="创建环境"><a href="#创建环境" class="headerlink" title="创建环境"></a>创建环境</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda create -n 环境名 python=版本号</span><br></pre></td></tr></table></figure>
+        <h1 id="deque"><a href="#deque" class="headerlink" title="deque"></a>deque</h1><p><strong>功能：</strong></p>
+<ul>
+<li>双端数组，可以对头端进行插入删除操作</li>
+</ul>
+<p><strong>deque与vector区别：</strong></p>
+<ul>
+<li>vector对于头部的插入删除效率低，数据量越大，效率越低</li>
+<li>deque相对而言，对头部的插入删除速度回比vector快</li>
+<li>vector访问元素时的速度会比deque快,这和两者内部实现有关</li>
+</ul>
+<p><em><strong>deque容器的迭代器也是支持随机访问的</strong></em></p>
+<p>操作方法和vector差不多</p>
+<span id="more"></span>
 
-<h2 id="进入环境"><a href="#进入环境" class="headerlink" title="进入环境"></a>进入环境</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda activate 环境名</span><br></pre></td></tr></table></figure>
+<h2 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h2><ul>
+<li><code>deque&lt;T&gt;</code> deqT;                      //默认构造形式</li>
+<li><code>deque(beg, end);</code>                  //构造函数将[beg, end)区间中的元素拷贝给本身。</li>
+<li><code>deque(n, elem);</code>                    //构造函数将n个elem拷贝给本身。</li>
+<li><code>deque(const deque &amp;deq);</code>   //拷贝构造函数</li>
+</ul>
+<h2 id="赋值操作"><a href="#赋值操作" class="headerlink" title="赋值操作"></a>赋值操作</h2><ul>
+<li><p><code>deque&amp; operator=(const deque &amp;deq); </code>         //重载等号操作符</p>
+</li>
+<li><p><code>assign(beg, end);</code>                                           //将[beg, end)区间中的数据拷贝赋值给本身。</p>
+</li>
+<li><p><code>assign(n, elem);</code>                                             //将n个elem拷贝赋值给本身。</p>
+</li>
+</ul>
+<h2 id="容量和大小"><a href="#容量和大小" class="headerlink" title="容量和大小"></a>容量和大小</h2><ul>
+<li><p><code>deque.empty();</code>                       //判断容器是否为空</p>
+</li>
+<li><p><code>deque.size();</code>                         //返回容器中元素的个数</p>
+</li>
+<li><p><code>deque.resize(num);</code>                //重新指定容器的长度为num,若容器变长，则以默认值填充新位置。</p>
+<p>​                                         //如果容器变短，则末尾超出容器长度的元素被删除。</p>
+</li>
+<li><p><code>deque.resize(num, elem);</code>     //重新指定容器的长度为num,若容器变长，则以elem值填充新位置。</p>
+<p>​                                                     //如果容器变短，则末尾超出容器长度的元素被删除。</p>
+</li>
+</ul>
+<h2 id="插入和删除"><a href="#插入和删除" class="headerlink" title="插入和删除"></a>插入和删除</h2><p>两端插入操作：</p>
+<ul>
+<li><code>push_back(elem);</code>          //在容器尾部添加一个数据</li>
+<li><code>push_front(elem);</code>        //在容器头部插入一个数据</li>
+<li><code>pop_back();</code>                   //删除容器最后一个数据</li>
+<li><code>pop_front();</code>                 //删除容器第一个数据</li>
+</ul>
+<p>指定位置操作：</p>
+<ul>
+<li><code>insert(pos,elem);</code>         //在pos位置插入一个elem元素的拷贝，返回新数据的位置。</li>
+<li><code>insert(pos,n,elem);</code>     //在pos位置插入n个elem数据，无返回值。</li>
+<li><code>insert(pos,beg,end);</code>    //在pos位置插入[beg,end)区间的数据，无返回值。</li>
+<li><code>clear();</code>                           //清空容器的所有数据</li>
+<li><code>erase(beg,end);</code>             //删除[beg,end)区间的数据，返回下一个数据的位置。</li>
+<li><code>erase(pos);</code>                    //删除pos位置的数据，返回下一个数据的位置。</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 因为迭代器支持随机访问的，所以下面这种操作是允许的</span></span><br><span class="line">d1.<span class="built_in">insert</span>(d1.<span class="built_in">begin</span>()+<span class="number">2</span>,<span class="number">999</span>);</span><br><span class="line"></span><br><span class="line">deque&lt;<span class="type">int</span>&gt;::const_iterator it = d1.<span class="built_in">begin</span>();</span><br><span class="line">it += <span class="number">3</span>;</span><br><span class="line">d1.<span class="built_in">insert</span>(it, <span class="number">777</span>);</span><br><span class="line"><span class="built_in">printDeque</span>(d1);</span><br><span class="line">d1.<span class="built_in">insert</span>(it, <span class="number">888</span>);</span><br><span class="line"><span class="built_in">printDeque</span>(d1);</span><br></pre></td></tr></table></figure>
 
-<h2 id="安装package"><a href="#安装package" class="headerlink" title="安装package"></a>安装package</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda install 包名</span><br></pre></td></tr></table></figure>
-
-<h2 id="退出环境"><a href="#退出环境" class="headerlink" title="退出环境"></a>退出环境</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda deactivate</span><br></pre></td></tr></table></figure>
-
-<h2 id="空间清理"><a href="#空间清理" class="headerlink" title="空间清理"></a>空间清理</h2><p>删除没有环境使用的所有的安装包及cache</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 全删</span><br><span class="line">conda clean --all -y</span><br><span class="line"></span><br><span class="line"># 把没用到的包删了</span><br><span class="line">conda clean -p</span><br></pre></td></tr></table></figure>
 
 
+<h2 id="数据存取"><a href="#数据存取" class="headerlink" title="数据存取"></a>数据存取</h2><ul>
+<li><code>at(int idx); </code>     //返回索引idx所指的数据</li>
+<li><code>operator[]; </code>      //返回索引idx所指的数据</li>
+<li><code>front(); </code>            //返回容器中第一个数据元素</li>
+<li><code>back();</code>              //返回容器中最后一个数据元素</li>
+</ul>
+<h2 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h2><p>需要头文件algorithm</p>
+<p><code>sort(iterator beg, iterator end)</code>  //对beg和end区间内元素进行排序</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># <span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="built_in">sort</span>(d1.<span class="built_in">begin</span>(),d1.<span class="built_in">end</span>());</span><br></pre></td></tr></table></figure>
 
-<p>当计算机中存在原版python时，需要将原版python位置及scripts文件夹位置添加到系统环境变量中conda环境变量之前，这样才可以在cmd中使用pip为原来的python安装package。</p>
 
       
     </div>
@@ -351,7 +407,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/conda/" rel="tag"># conda</a>
+            <a href="/tags/C/" rel="tag"># C++</a>
           
         </div>
       
@@ -364,8 +420,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2022/10/13/%E5%8A%9B%E6%89%A3-817/" rel="next" title="力扣#817">
-                <i class="fa fa-chevron-left"></i> 力扣#817
+              <a href="/2022/10/26/STL%E5%AE%B9%E5%99%A8%E4%B9%8Blist/" rel="next" title="STL容器之list">
+                <i class="fa fa-chevron-left"></i> STL容器之list
               </a>
             
           </div>
@@ -374,8 +430,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2022/10/16/%E5%8A%9B%E6%89%A3-940/" rel="prev" title="力扣#940">
-                力扣#940 <i class="fa fa-chevron-right"></i>
+              <a href="/2022/10/27/Squeeze-and-Excitation-SE-%E6%A8%A1%E5%9D%97/" rel="prev" title="Squeeze-and-Excitation(SE)模块">
+                Squeeze-and-Excitation(SE)模块 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -503,7 +559,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#miniconda"><span class="nav-number">1.</span> <span class="nav-text">miniconda</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E7%8E%AF%E5%A2%83"><span class="nav-number">1.1.</span> <span class="nav-text">创建环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9B%E5%85%A5%E7%8E%AF%E5%A2%83"><span class="nav-number">1.2.</span> <span class="nav-text">进入环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85package"><span class="nav-number">1.3.</span> <span class="nav-text">安装package</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%80%E5%87%BA%E7%8E%AF%E5%A2%83"><span class="nav-number">1.4.</span> <span class="nav-text">退出环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A9%BA%E9%97%B4%E6%B8%85%E7%90%86"><span class="nav-number">1.5.</span> <span class="nav-text">空间清理</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#deque"><span class="nav-number">1.</span> <span class="nav-text">deque</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="nav-number">1.1.</span> <span class="nav-text">构造函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B5%8B%E5%80%BC%E6%93%8D%E4%BD%9C"><span class="nav-number">1.2.</span> <span class="nav-text">赋值操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%B9%E9%87%8F%E5%92%8C%E5%A4%A7%E5%B0%8F"><span class="nav-number">1.3.</span> <span class="nav-text">容量和大小</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%92%E5%85%A5%E5%92%8C%E5%88%A0%E9%99%A4"><span class="nav-number">1.4.</span> <span class="nav-text">插入和删除</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%AD%98%E5%8F%96"><span class="nav-number">1.5.</span> <span class="nav-text">数据存取</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%92%E5%BA%8F"><span class="nav-number">1.6.</span> <span class="nav-text">排序</span></a></li></ol></li></ol></div>
             
 
           </div>
