@@ -322,27 +322,15 @@
       
         <h1 id="Vector"><a href="#Vector" class="headerlink" title="Vector"></a>Vector</h1><p>头文件：#include <vector></p>
 <span id="more"></span>
-
 <h2 id="存放内置数据类型"><a href="#存放内置数据类型" class="headerlink" title="存放内置数据类型"></a>存放内置数据类型</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">// 创建vector对象，通过模板参数指定存放的数据类型</span></span><br><span class="line">    vector&lt;<span class="type">int</span>&gt;v;</span><br><span class="line">    <span class="comment">// 放入数据</span></span><br><span class="line">    v.<span class="built_in">push_back</span>(<span class="number">1</span>);</span><br><span class="line">    v.<span class="built_in">push_back</span>(<span class="number">2</span>);</span><br><span class="line">    v.<span class="built_in">push_back</span>(<span class="number">3</span>);</span><br><span class="line">    <span class="comment">// v.begin()返回迭代器，这个迭代器指向容器中第一个数据</span></span><br><span class="line">	<span class="comment">// v.end()返回迭代器，这个迭代器指向容器元素的最后一个元素的 下一个位置</span></span><br><span class="line">	<span class="comment">// vector&lt;int&gt;::iterator 拿到vector&lt;int&gt;这种容器的迭代器类型</span></span><br><span class="line">    vector&lt;<span class="type">int</span>&gt;::iterator pbegin = v.<span class="built_in">begin</span>();</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt;::iterator pend = v.<span class="built_in">end</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (pbegin != pend)</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; * pbegin &lt;&lt; endl;</span><br><span class="line">        pbegin ++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">输出：</span></span><br><span class="line"><span class="comment">1</span></span><br><span class="line"><span class="comment">2</span></span><br><span class="line"><span class="comment">3</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
-
-
-
 <h2 id="存放自定义数据类型"><a href="#存放自定义数据类型" class="headerlink" title="存放自定义数据类型"></a>存放自定义数据类型</h2><p>自定义类person：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">person</span>&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">string name;</span><br><span class="line"><span class="type">int</span> age;</span><br><span class="line">    <span class="built_in">person</span>(string n,<span class="type">int</span> a)&#123;</span><br><span class="line">        name = n;</span><br><span class="line">        age = a;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
 <h3 id="方法1：创建vector存放person类型数据"><a href="#方法1：创建vector存放person类型数据" class="headerlink" title="方法1：创建vector存放person类型数据"></a>方法1：创建vector存放person类型数据</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;person&gt;v;</span><br><span class="line"><span class="comment">// 放入数据</span></span><br><span class="line"><span class="function">person <span class="title">p1</span><span class="params">(<span class="string">&quot;a&quot;</span>,<span class="number">1</span>)</span></span>;</span><br><span class="line"><span class="function">person <span class="title">p2</span><span class="params">(<span class="string">&quot;b&quot;</span>,<span class="number">2</span>)</span></span>;</span><br><span class="line"><span class="function">person <span class="title">p3</span><span class="params">(<span class="string">&quot;c&quot;</span>,<span class="number">3</span>)</span></span>;</span><br><span class="line">v.<span class="built_in">push_back</span>(p1);</span><br><span class="line">v.<span class="built_in">push_back</span>(p2);</span><br><span class="line">v.<span class="built_in">push_back</span>(p3);</span><br><span class="line"></span><br><span class="line">vector&lt;person&gt;::iterator pbegin = v.<span class="built_in">begin</span>();</span><br><span class="line"><span class="comment">//pbegin是指向v中第一个元素的指针，即pbegin是指向p1的指针</span></span><br><span class="line">vector&lt;person&gt;::iterator pend = v.<span class="built_in">end</span>();</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> (pbegin != pend)</span><br><span class="line">&#123;</span><br><span class="line">    cout &lt;&lt; (*pbegin).name &lt;&lt; (*pbegin).age &lt;&lt; endl;</span><br><span class="line">    pbegin ++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <h3 id="方法2：创建vector存放person类的指针数据"><a href="#方法2：创建vector存放person类的指针数据" class="headerlink" title="方法2：创建vector存放person类的指针数据"></a>方法2：创建vector存放person类的指针数据</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;person*&gt;v;</span><br><span class="line">    <span class="comment">// 放入数据</span></span><br><span class="line">    <span class="function">person <span class="title">p1</span><span class="params">(<span class="string">&quot;a&quot;</span>,<span class="number">1</span>)</span></span>;</span><br><span class="line">    <span class="function">person <span class="title">p2</span><span class="params">(<span class="string">&quot;b&quot;</span>,<span class="number">2</span>)</span></span>;</span><br><span class="line">    <span class="function">person <span class="title">p3</span><span class="params">(<span class="string">&quot;c&quot;</span>,<span class="number">3</span>)</span></span>;</span><br><span class="line">    v.<span class="built_in">push_back</span>(&amp;p1);</span><br><span class="line">    v.<span class="built_in">push_back</span>(&amp;p2);</span><br><span class="line">    v.<span class="built_in">push_back</span>(&amp;p3);</span><br><span class="line">   	<span class="comment">//v中存放的是指向p1 p2 p3的指针</span></span><br><span class="line">    vector&lt;person*&gt;::iterator pbegin = v.<span class="built_in">begin</span>();</span><br><span class="line">	<span class="comment">//pbegin是指向指针的指针</span></span><br><span class="line">    vector&lt;person*&gt;::iterator pend = v.<span class="built_in">end</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (pbegin != pend)</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; (*pbegin)-&gt;name &lt;&lt; (*pbegin)-&gt;age &lt;&lt; endl;</span><br><span class="line">        pbegin ++;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-
-
 <h2 id="vector嵌套"><a href="#vector嵌套" class="headerlink" title="vector嵌套"></a>vector嵌套</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;<span class="type">int</span>&gt;v1;</span><br><span class="line">vector&lt;<span class="type">int</span>&gt;v2;</span><br><span class="line">vector&lt;<span class="type">int</span>&gt;v3;</span><br><span class="line">vector&lt;vector&lt;<span class="type">int</span>&gt;&gt;v;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>;i&lt;<span class="number">4</span>;i++)&#123;</span><br><span class="line">    v1.<span class="built_in">push_back</span>(i);</span><br><span class="line">    v2.<span class="built_in">push_back</span>(i*<span class="number">2</span>);</span><br><span class="line">    v3.<span class="built_in">push_back</span>(i*<span class="number">3</span>);</span><br><span class="line">&#125;</span><br><span class="line">v.<span class="built_in">push_back</span>(v1);</span><br><span class="line">v.<span class="built_in">push_back</span>(v2);</span><br><span class="line">v.<span class="built_in">push_back</span>(v3);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (vector&lt;vector&lt;<span class="type">int</span>&gt;&gt;::iterator it = v.<span class="built_in">begin</span>(); it != v.<span class="built_in">end</span>(); it++)&#123;</span><br><span class="line">    <span class="keyword">for</span> (vector&lt;<span class="type">int</span>&gt;::iterator itt = (*it).<span class="built_in">begin</span>(); itt != (*it).<span class="built_in">end</span>(); itt++)&#123;</span><br><span class="line">        cout &lt;&lt; *itt &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
 <h2 id="构造vector"><a href="#构造vector" class="headerlink" title="构造vector"></a>构造vector</h2><ul>
-<li><code>vector&lt;T&gt; v; </code>                            //采用模板实现类实现，默认构造函数</li>
-<li><code>vector(v.begin(), v.end());   </code>       //将v[begin(), end())区间中的元素拷贝给本身。</li>
+<li><code>vector&lt;T&gt; v;</code>                            //采用模板实现类实现，默认构造函数</li>
+<li><code>vector(v.begin(), v.end());</code>       //将v[begin(), end())区间中的元素拷贝给本身。</li>
 <li><code>vector(n, elem);</code>                            //构造函数将n个elem拷贝给本身。</li>
 <li><code>vector(const vector &amp;vec);</code>         //拷贝构造函数。</li>
 </ul>
@@ -352,7 +340,7 @@
 <li><code>assign(n, elem);</code>        //将n个elem拷贝赋值给本身。</li>
 </ul>
 <h2 id="容量与大小"><a href="#容量与大小" class="headerlink" title="容量与大小"></a>容量与大小</h2><ul>
-<li><p><code>empty(); </code>                            //判断容器是否为空</p>
+<li><p><code>empty();</code>                            //判断容器是否为空</p>
 </li>
 <li><p><code>capacity();</code>                      //容器的容量</p>
 </li>
@@ -375,28 +363,18 @@
 <li><code>clear();</code>                                                        //删除容器中所有元素</li>
 </ul>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">v2.<span class="built_in">insert</span>(v2.<span class="built_in">begin</span>()+<span class="number">2</span>,<span class="number">9</span>);<span class="comment">//即在v2的第二个位置上插入9</span></span><br></pre></td></tr></table></figure>
-
-
-
 <h2 id="数据存取"><a href="#数据存取" class="headerlink" title="数据存取"></a>数据存取</h2><ul>
-<li><code>at(int idx); </code>     //返回索引idx所指的数据</li>
-<li><code>operator[]; </code>       //返回索引idx所指的数据</li>
-<li><code>front(); </code>            //返回容器中第一个数据元素</li>
+<li><code>at(int idx);</code>     //返回索引idx所指的数据</li>
+<li><code>operator[];</code>       //返回索引idx所指的数据</li>
+<li><code>front();</code>            //返回容器中第一个数据元素</li>
 <li><code>back();</code>              //返回容器中最后一个数据元素</li>
 </ul>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cout &lt;&lt; v2[<span class="number">3</span>];</span><br><span class="line">cout &lt;&lt; v2.<span class="built_in">at</span>(<span class="number">4</span>);</span><br></pre></td></tr></table></figure>
-
-
-
 <h2 id="互换"><a href="#互换" class="headerlink" title="互换"></a>互换</h2><p><code>swap(vec);</code>  // 将vec与本身的元素互换</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">v1.<span class="built_in">swap</span>(v2);</span><br></pre></td></tr></table></figure>
-
-
-
 <h2 id="预留空间"><a href="#预留空间" class="headerlink" title="预留空间"></a>预留空间</h2><p><code>reserve(int len);</code>//容器预留len个元素长度，预留位置不初始化，元素不可访问。</p>
 <p>每次vector扩展空间都是拷贝原值到新空间，再释放旧空间，当数据量较大时可提前预留空间，减少扩展空间的次数。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;<span class="type">int</span>&gt; v;</span><br><span class="line"></span><br><span class="line"><span class="comment">//预留空间</span></span><br><span class="line">v.<span class="built_in">reserve</span>(<span class="number">100000</span>);    <span class="comment">//预留了空间，扩展空间次数为0</span></span><br><span class="line">					<span class="comment">//不预留，18次</span></span><br><span class="line"><span class="type">int</span> num = <span class="number">0</span>;</span><br><span class="line"><span class="type">int</span>* p = &amp;v[<span class="number">0</span>];</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">100000</span>; i++) &#123;</span><br><span class="line">    v.<span class="built_in">push_back</span>(i);</span><br><span class="line">    <span class="keyword">if</span> (p != &amp;v[<span class="number">0</span>]) &#123;</span><br><span class="line">        p = &amp;v[<span class="number">0</span>];</span><br><span class="line">        num++;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">cout &lt;&lt; <span class="string">&quot;num:&quot;</span> &lt;&lt; num &lt;&lt; endl;</span><br></pre></td></tr></table></figure>
-
 
       
     </div>
@@ -520,7 +498,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-count">44</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -533,7 +511,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -581,7 +559,7 @@
        	<h3 class="widget-title">Tag Cloud</h3>
     	<div id="myCanvasContainer" class="widget tagcloud">
         		<canvas width="250" height="250" id="resCanvas" style="width=100%">
-            		<ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CNN/" rel="tag">CNN</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DL/" rel="tag">DL</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/co-lab/" rel="tag">co-lab</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/conda/" rel="tag">conda</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%9B%E6%89%A3/" rel="tag">力扣</a><span class="tag-list-count">20</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a><span class="tag-list-count">2</span></li></ul>
+            		<ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CNN/" rel="tag">CNN</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DL/" rel="tag">DL</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenCV/" rel="tag">OpenCV</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pandas/" rel="tag">Pandas</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/co-lab/" rel="tag">co-lab</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/conda/" rel="tag">conda</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%9B%E6%89%A3/" rel="tag">力扣</a><span class="tag-list-count">20</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a><span class="tag-list-count">2</span></li></ul>
         		</canvas>
     	</div>
 	</div>
@@ -797,6 +775,8 @@
   
 
   
+  
+
 
   
 

@@ -325,10 +325,8 @@
       
 
       
-        <h1 id="SE"><a href="#SE" class="headerlink" title="SE"></a>SE</h1><img src="/images/SE.png">
-
+        <h1 id="SE"><a href="#SE" class="headerlink" title="SE"></a>SE</h1><p><img src="/images/SE.png"></p>
 <span id="more"></span>
-
 <h2 id="1、采样与池化"><a href="#1、采样与池化" class="headerlink" title="1、采样与池化"></a>1、采样与池化</h2><p>上采样（upsampling）：又名放大图像、图像插值；</p>
 <p>主要目的是放大原图像,从而可以显示在更高分辨率的显示设备上；</p>
 <p>上采样有3种常见的方法：双线性插值(bilinear)，反卷积(Transposed Convolution)，反池化(Unpooling)；</p>
@@ -339,25 +337,19 @@
 <p>最大池化可以<strong>获取局部信息，可以更好保留纹理上的特征</strong>；如果不用观察物体在图片中的具体位置，只关心其是否出现，则使用最大池化效果比较好。 </p>
 <p>平均池化往往能<strong>保留整体数据的特征，能凸出背景的信息</strong>。</p>
 <p> 随机池化中元素值大的被选中的概率也大，但不是像最大池化总是取最大值。随机池化一方面最大化地保证了Max值的取值，一方面又确保了不会完全是max值起作用，造成过度失真；除此之外，其可以在一定程度上避免过拟合。</p>
-<h2 id="2、Squeeze-and-Excitation"><a href="#2、Squeeze-and-Excitation" class="headerlink" title="2、Squeeze-and-Excitation"></a>2、Squeeze-and-Excitation</h2><p>Squeeze部分。即为压缩部分，原始feature map的维度为H * W * C，其中H是高度（Height），W是宽度（width），C是通道数（channel）。Squeeze做的事情是把HWC压缩为1 * 1 * C，相当于把H * W压缩成一维了，实际中一般是用global average pooling实现的。H * W压缩成一维后，相当于这一维参数获得了之前H * W全局的视野，感受区域更广。</p>
-<p>Excitation部分。得到Squeeze的1 * 1 * C的表示后，加入一个FC全连接层（Fully Connected），对每个通道的重要性进行预测，得到不同channel的重要性大小后再作用（激励）到之前的feature map的对应channel上，再进行后续操作。</p>
+<h2 id="2、Squeeze-and-Excitation"><a href="#2、Squeeze-and-Excitation" class="headerlink" title="2、Squeeze-and-Excitation"></a>2、Squeeze-and-Excitation</h2><p>Squeeze部分。即为压缩部分，原始feature map的维度为H <em> W </em> C，其中H是高度（Height），W是宽度（width），C是通道数（channel）。Squeeze做的事情是把HWC压缩为1 <em> 1 </em> C，相当于把H <em> W压缩成一维了，实际中一般是用global average pooling实现的。H </em> W压缩成一维后，相当于这一维参数获得了之前H * W全局的视野，感受区域更广。</p>
+<p>Excitation部分。得到Squeeze的1 <em> 1 </em> C的表示后，加入一个FC全连接层（Fully Connected），对每个通道的重要性进行预测，得到不同channel的重要性大小后再作用（激励）到之前的feature map的对应channel上，再进行后续操作。</p>
 <p>给定一个输入 x，其特征通道数为 c_1，通过一系列卷积等一般变换后得到一个特征通道数为 c_2 的特征。与传统的 CNN 不一样的是，接下来我们通过三个操作来重标定前面得到的特征。</p>
 <p>首先是 Squeeze 操作，我们顺着空间维度来进行特征压缩，将每个二维的特征通道变成一个实数，这个实数某种程度上具有全局的感受野，并且输出的维度和输入的特征通道数相匹配。它表征着在特征通道上响应的全局分布，而且使得靠近输入的层也可以获得全局的感受野，这一点在很多任务中都是非常有用的。</p>
 <p>其次是 Excitation 操作，它是一个类似于循环神经网络中门的机制。通过参数 w 来为每个特征通道生成权重，其中参数 w 被学习用来显式地建模特征通道间的相关性。</p>
 <p>最后是一个 Reweight 的操作，我们将 Excitation 的输出的权重看做是进过特征选择后的每个特征通道的重要性，然后通过乘法逐通道加权到先前的特征上，完成在通道维度上的对原始特征的重标定。</p>
-<img src="/images/SE2.png">
-
-<h2 id="3、压缩"><a href="#3、压缩" class="headerlink" title="3、压缩"></a>3、压缩</h2><img src="/images/SES.png">
-
+<p><img src="/images/SE2.png"></p>
+<h2 id="3、压缩"><a href="#3、压缩" class="headerlink" title="3、压缩"></a>3、压缩</h2><p><img src="/images/SES.png"></p>
 <p>这个操作就是一个全局平均池化（global average pooling）。经过压缩操作后特征图被压缩为1×1×C向量。</p>
-<h2 id="4、激励"><a href="#4、激励" class="headerlink" title="4、激励"></a>4、激励</h2><img src="/images/SEE.png">
-
+<h2 id="4、激励"><a href="#4、激励" class="headerlink" title="4、激励"></a>4、激励</h2><p><img src="/images/SEE.png"></p>
 <p>由两个全连接层组成，其中SERatio是一个缩放参数，这个参数的目的是为了减少通道个数从而<strong>降低计算量。</strong> 第一个全连接层有C*SERatio个神经元，输入为1×1×C，输出1×1×C×SERadio。 第二个全连接层有C个神经元，输入为1×1×C×SERadio，输出为1×1×C。</p>
 <h2 id="5、scale操作"><a href="#5、scale操作" class="headerlink" title="5、scale操作"></a>5、scale操作</h2><p>最后是scale操作，在得到1×1×C向量之后，就可以对原来的特征图进行scale操作了。很简单，<strong>就是通道权重相乘，</strong>原有特征向量为W×H×C，<strong>将SE模块计算出来的各通道权重值分别和原特征图对应通道的二维矩阵相乘</strong>，得出的结果输出。 这里我们可以得出SE模块的属性： 参数量 = 2×C×C×SERatio 计算量 = 2×C×C×SERatio <strong>总体来讲SE模块会增加网络的总参数量，总计算量，因为使用的是全连接层计算量相比卷积层并不大，但是参数量会有明显上升</strong>，所以MobileNetV3-Large中的总参数量比MobileNetV2多了2M。</p>
 <h2 id="SE模块代码实现"><a href="#SE模块代码实现" class="headerlink" title="SE模块代码实现"></a>SE模块代码实现</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">SELayer</span>(nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, channel, reduction=<span class="number">16</span></span>):</span><br><span class="line">        <span class="built_in">super</span>(SELayer, self).__init__()</span><br><span class="line">        self.avg_pool = nn.AdaptiveAvgPool2d(<span class="number">1</span>)</span><br><span class="line">        self.fc = nn.Sequential(</span><br><span class="line">            nn.Linear(channel, channel // reduction, bias=<span class="literal">False</span>),</span><br><span class="line">            nn.ReLU(inplace=<span class="literal">True</span>),</span><br><span class="line">            nn.Linear(channel // reduction, channel, bias=<span class="literal">False</span>),</span><br><span class="line">            nn.Sigmoid()</span><br><span class="line">        )</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, x</span>):</span><br><span class="line">        b, c, _, _ = x.size()</span><br><span class="line">        y = self.avg_pool(x).view(b, c)  <span class="comment"># view：相当于numpy的resize</span></span><br><span class="line">        y = self.fc(y).view(b, c, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">        <span class="keyword">return</span> x * y.expand_as(x)   <span class="comment"># 将x*y扩展为和x一样大小</span></span><br></pre></td></tr></table></figure>
-
-
-
 <p>参考：<a target="_blank" rel="noopener" href="https://www.ebaina.com/articles/140000012469">【深度学习】Squeeze-and-Excitation (SE) 模块优势解读_专栏_易百纳技术社区 (ebaina.com)</a></p>
 
       
@@ -398,6 +390,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2022/10/29/csv%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96%E6%95%B0%E6%8D%AE/" rel="prev" title="csv文件读取数据">
+                csv文件读取数据 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -478,7 +474,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-count">44</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -491,7 +487,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -539,7 +535,7 @@
        	<h3 class="widget-title">Tag Cloud</h3>
     	<div id="myCanvasContainer" class="widget tagcloud">
         		<canvas width="250" height="250" id="resCanvas" style="width=100%">
-            		<ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CNN/" rel="tag">CNN</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DL/" rel="tag">DL</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/co-lab/" rel="tag">co-lab</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/conda/" rel="tag">conda</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%9B%E6%89%A3/" rel="tag">力扣</a><span class="tag-list-count">20</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a><span class="tag-list-count">2</span></li></ul>
+            		<ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CNN/" rel="tag">CNN</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DL/" rel="tag">DL</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenCV/" rel="tag">OpenCV</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pandas/" rel="tag">Pandas</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/co-lab/" rel="tag">co-lab</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/conda/" rel="tag">conda</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%9B%E6%89%A3/" rel="tag">力扣</a><span class="tag-list-count">20</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a><span class="tag-list-count">2</span></li></ul>
         		</canvas>
     	</div>
 	</div>
@@ -755,6 +751,8 @@
   
 
   
+  
+
 
   
 

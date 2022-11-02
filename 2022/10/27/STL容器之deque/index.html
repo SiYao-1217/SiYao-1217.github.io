@@ -330,10 +330,9 @@
 <li>deque相对而言，对头部的插入删除速度回比vector快</li>
 <li>vector访问元素时的速度会比deque快,这和两者内部实现有关</li>
 </ul>
-<p><em><strong>deque容器的迭代器也是支持随机访问的</strong></em></p>
+<p><strong><em>deque容器的迭代器也是支持随机访问的</em></strong></p>
 <p>操作方法和vector差不多</p>
 <span id="more"></span>
-
 <h2 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h2><ul>
 <li><code>deque&lt;T&gt;</code> deqT;                      //默认构造形式</li>
 <li><code>deque(beg, end);</code>                  //构造函数将[beg, end)区间中的元素拷贝给本身。</li>
@@ -341,12 +340,11 @@
 <li><code>deque(const deque &amp;deq);</code>   //拷贝构造函数</li>
 </ul>
 <h2 id="赋值操作"><a href="#赋值操作" class="headerlink" title="赋值操作"></a>赋值操作</h2><ul>
-<li><p><code>deque&amp; operator=(const deque &amp;deq); </code>         //重载等号操作符</p>
+<li><p><code>deque&amp; operator=(const deque &amp;deq);</code>         //重载等号操作符</p>
 </li>
 <li><p><code>assign(beg, end);</code>                                           //将[beg, end)区间中的数据拷贝赋值给本身。</p>
 </li>
-<li><p><code>assign(n, elem);</code>                                             //将n个elem拷贝赋值给本身。</p>
-</li>
+<li><code>assign(n, elem);</code>                                             //将n个elem拷贝赋值给本身。</li>
 </ul>
 <h2 id="容量和大小"><a href="#容量和大小" class="headerlink" title="容量和大小"></a>容量和大小</h2><ul>
 <li><p><code>deque.empty();</code>                       //判断容器是否为空</p>
@@ -377,19 +375,15 @@
 <li><code>erase(pos);</code>                    //删除pos位置的数据，返回下一个数据的位置。</li>
 </ul>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 因为迭代器支持随机访问的，所以下面这种操作是允许的</span></span><br><span class="line">d1.<span class="built_in">insert</span>(d1.<span class="built_in">begin</span>()+<span class="number">2</span>,<span class="number">999</span>);</span><br><span class="line"></span><br><span class="line">deque&lt;<span class="type">int</span>&gt;::const_iterator it = d1.<span class="built_in">begin</span>();</span><br><span class="line">it += <span class="number">3</span>;</span><br><span class="line">d1.<span class="built_in">insert</span>(it, <span class="number">777</span>);</span><br><span class="line"><span class="built_in">printDeque</span>(d1);</span><br><span class="line">d1.<span class="built_in">insert</span>(it, <span class="number">888</span>);</span><br><span class="line"><span class="built_in">printDeque</span>(d1);</span><br></pre></td></tr></table></figure>
-
-
-
 <h2 id="数据存取"><a href="#数据存取" class="headerlink" title="数据存取"></a>数据存取</h2><ul>
-<li><code>at(int idx); </code>     //返回索引idx所指的数据</li>
-<li><code>operator[]; </code>      //返回索引idx所指的数据</li>
-<li><code>front(); </code>            //返回容器中第一个数据元素</li>
+<li><code>at(int idx);</code>     //返回索引idx所指的数据</li>
+<li><code>operator[];</code>      //返回索引idx所指的数据</li>
+<li><code>front();</code>            //返回容器中第一个数据元素</li>
 <li><code>back();</code>              //返回容器中最后一个数据元素</li>
 </ul>
 <h2 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h2><p>需要头文件algorithm</p>
 <p><code>sort(iterator beg, iterator end)</code>  //对beg和end区间内元素进行排序</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># <span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="built_in">sort</span>(d1.<span class="built_in">begin</span>(),d1.<span class="built_in">end</span>());</span><br></pre></td></tr></table></figure>
-
 
       
     </div>
@@ -513,7 +507,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-count">44</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -526,7 +520,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -574,7 +568,7 @@
        	<h3 class="widget-title">Tag Cloud</h3>
     	<div id="myCanvasContainer" class="widget tagcloud">
         		<canvas width="250" height="250" id="resCanvas" style="width=100%">
-            		<ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CNN/" rel="tag">CNN</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DL/" rel="tag">DL</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/co-lab/" rel="tag">co-lab</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/conda/" rel="tag">conda</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%9B%E6%89%A3/" rel="tag">力扣</a><span class="tag-list-count">20</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a><span class="tag-list-count">2</span></li></ul>
+            		<ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CNN/" rel="tag">CNN</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DL/" rel="tag">DL</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenCV/" rel="tag">OpenCV</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pandas/" rel="tag">Pandas</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/co-lab/" rel="tag">co-lab</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/conda/" rel="tag">conda</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%9B%E6%89%A3/" rel="tag">力扣</a><span class="tag-list-count">20</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a><span class="tag-list-count">2</span></li></ul>
         		</canvas>
     	</div>
 	</div>
@@ -790,6 +784,8 @@
   
 
   
+  
+
 
   
 

@@ -327,16 +327,11 @@
 <p>当网络训练好后输入的图像尺寸必须是固定值，同时网络输出也是固定大小的vector or matrix，可以使用ROI Pooling处理</p>
 <p>在Faster R-CNN中，输入ROI Pooling的是经过RPN生成的region proposals和原始feature maps</p>
 <span id="more"></span>
-
 <h2 id="ROI映射到feature-maps"><a href="#ROI映射到feature-maps" class="headerlink" title="ROI映射到feature maps"></a>ROI映射到feature maps</h2><p>假设原始图像大小为512x512，ROI大小为145x200 ，左上角设置为  (192x296)，假使网络最后输出feature maps大小为16x16，那么在映射时ROI的各项大小也要除以32。求出的结果可能不是整数，可以使用量化等操作。</p>
 <h2 id="划分与ROI-Pooling一样的sections"><a href="#划分与ROI-Pooling一样的sections" class="headerlink" title="划分与ROI Pooling一样的sections"></a>划分与ROI Pooling一样的sections</h2><p>如果ROI Pooling是2x2的，就将ROI划分为2x2的sections，是3x3的就划分3x3的sections</p>
-<img src="/images/ROIP1.png">
-
+<p><img src="/images/ROIP1.png"></p>
 <h2 id="max-pooling每个section"><a href="#max-pooling每个section" class="headerlink" title="max pooling每个section"></a>max pooling每个section</h2><p>每个section进行max pooling的结果形成的张量就是ROI Pooling</p>
-<img src="/images/ROIP2.gif">
-
-
-
+<p><img src="/images/ROIP2.gif"></p>
 <p>参考：</p>
 <p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1689064">一文读懂 RoIPooling、RoIAlign 和 RoIWarp - 腾讯云开发者社区-腾讯云 (tencent.com)</a></p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/auto1993/article/details/78514071">ROI Pooling层详解_AUTO1993的博客-CSDN博客</a></p>
@@ -464,7 +459,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-count">44</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -477,7 +472,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -525,7 +520,7 @@
        	<h3 class="widget-title">Tag Cloud</h3>
     	<div id="myCanvasContainer" class="widget tagcloud">
         		<canvas width="250" height="250" id="resCanvas" style="width=100%">
-            		<ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CNN/" rel="tag">CNN</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DL/" rel="tag">DL</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/co-lab/" rel="tag">co-lab</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/conda/" rel="tag">conda</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%9B%E6%89%A3/" rel="tag">力扣</a><span class="tag-list-count">20</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a><span class="tag-list-count">2</span></li></ul>
+            		<ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CNN/" rel="tag">CNN</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DL/" rel="tag">DL</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenCV/" rel="tag">OpenCV</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pandas/" rel="tag">Pandas</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/co-lab/" rel="tag">co-lab</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/conda/" rel="tag">conda</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%9B%E6%89%A3/" rel="tag">力扣</a><span class="tag-list-count">20</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a><span class="tag-list-count">2</span></li></ul>
         		</canvas>
     	</div>
 	</div>
@@ -741,6 +736,8 @@
   
 
   
+  
+
 
   
 

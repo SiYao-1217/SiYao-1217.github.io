@@ -322,11 +322,7 @@
       
         <h1 id="STL-string"><a href="#STL-string" class="headerlink" title="STL-string"></a>STL-string</h1><p>常用方法：查找find，拷贝copy，删除delete， 替换replace，插入insert</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span>  <span class="comment">//需包含头文件</span></span></span><br></pre></td></tr></table></figure>
-
-
-
 <span id="more"></span>
-
 <h2 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h2><ul>
 <li><code>string();</code>                          //创建一个空的字符串 例如: string str;</li>
 <li><code>string(const char* s);</code>            //使用字符串s初始化</li>
@@ -334,9 +330,6 @@
 <li><code>string(int n, char c);</code>           //使用n个字符c初始化 </li>
 </ul>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">string s1; <span class="comment">//创建空字符串，调用无参构造函数</span></span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">char</span>* str = <span class="string">&quot;hello world&quot;</span>;</span><br><span class="line"><span class="function">string <span class="title">s2</span><span class="params">(str)</span></span>; <span class="comment">//把c_string转换成了string</span></span><br><span class="line"></span><br><span class="line"><span class="function">string <span class="title">s3</span><span class="params">(s2)</span></span>; <span class="comment">//调用拷贝构造函数</span></span><br><span class="line"></span><br><span class="line"><span class="function">string <span class="title">s4</span><span class="params">(<span class="number">10</span>, <span class="string">&#x27;a&#x27;</span>)</span></span>;</span><br></pre></td></tr></table></figure>
-
-
-
 <h2 id="赋值"><a href="#赋值" class="headerlink" title="赋值"></a>赋值</h2><ul>
 <li><code>string&amp; operator=(const char* s);</code>             //char*类型字符串 赋值给当前的字符串</li>
 <li><code>string&amp; operator=(const string &amp;s);</code>         //把字符串s赋给当前的字符串</li>
@@ -347,73 +340,54 @@
 <li><code>string&amp; assign(int n, char c);</code>                  //用n个字符c赋给当前字符串</li>
 </ul>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">string str1;</span><br><span class="line">str1 = <span class="string">&quot;hello world&quot;</span>;</span><br><span class="line"></span><br><span class="line">string str2;</span><br><span class="line">str2 = str1;</span><br><span class="line"></span><br><span class="line">string str3;</span><br><span class="line">str3 = <span class="string">&#x27;a&#x27;</span>;</span><br><span class="line"></span><br><span class="line">string str4;</span><br><span class="line">str4.<span class="built_in">assign</span>(<span class="string">&quot;hello c++&quot;</span>);</span><br><span class="line"></span><br><span class="line">string str5;</span><br><span class="line">str5.<span class="built_in">assign</span>(<span class="string">&quot;hello c++&quot;</span>,<span class="number">5</span>);</span><br><span class="line"></span><br><span class="line">string str6;</span><br><span class="line">str6.<span class="built_in">assign</span>(str5);</span><br><span class="line"></span><br><span class="line">string str7;</span><br><span class="line">str7.<span class="built_in">assign</span>(<span class="number">5</span>, <span class="string">&#x27;x&#x27;</span>);</span><br></pre></td></tr></table></figure>
-
-
-
 <h2 id="拼接"><a href="#拼接" class="headerlink" title="拼接"></a>拼接</h2><ul>
 <li><code>string&amp; operator+=(const char* str);</code>                   //重载+=操作符</li>
 <li><code>string&amp; operator+=(const char c);</code>                         //重载+=操作符</li>
 <li><code>string&amp; operator+=(const string&amp; str);</code>                //重载+=操作符</li>
-<li><code>string&amp; append(const char *s); </code>                               //把字符串s连接到当前字符串结尾</li>
+<li><code>string&amp; append(const char *s);</code>                               //把字符串s连接到当前字符串结尾</li>
 <li><code>string&amp; append(const char *s, int n);</code>                 //把字符串s的前n个字符连接到当前字符串结尾</li>
 <li><code>string&amp; append(const string &amp;s);</code>                           //同operator+=(const string&amp; str)</li>
 <li><code>string&amp; append(const string &amp;s, int pos, int n);</code>//字符串s中从pos开始的n个字符连接到字符串结尾</li>
 </ul>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">string str1 = <span class="string">&quot;我&quot;</span>;</span><br><span class="line">str1 += <span class="string">&quot;爱玩游戏&quot;</span>;</span><br><span class="line"></span><br><span class="line">string str2 = <span class="string">&quot;LOL DNF&quot;</span>;</span><br><span class="line">str1 += str2;</span><br><span class="line"></span><br><span class="line">string str3 = <span class="string">&quot;I&quot;</span>;</span><br><span class="line">str3.<span class="built_in">append</span>(<span class="string">&quot; love &quot;</span>);</span><br><span class="line">str3.<span class="built_in">append</span>(<span class="string">&quot;game abcde&quot;</span>, <span class="number">4</span>);</span><br><span class="line"></span><br><span class="line">str3.<span class="built_in">append</span>(str2);</span><br><span class="line"></span><br><span class="line">str3.<span class="built_in">append</span>(str2, <span class="number">4</span>, <span class="number">3</span>); <span class="comment">// 从下标4位置开始 ，截取3个字符，拼接到字符串末尾</span></span><br></pre></td></tr></table></figure>
-
-
-
 <h2 id="查找和替换"><a href="#查找和替换" class="headerlink" title="查找和替换"></a>查找和替换</h2><ul>
 <li><code>int find(const string&amp; str, int pos = 0) const;</code>              //查找str第一次出现位置,从pos开始查找</li>
-<li><code>int find(const char* s, int pos = 0) const; </code>                     //查找s第一次出现位置,从pos开始查找</li>
-<li><code>int find(const char* s, int pos, int n) const; </code>               //从pos位置查找s的前n个字符第一次位置</li>
-<li><code>int find(const char c, int pos = 0) const; </code>                       //查找字符c第一次出现位置</li>
+<li><code>int find(const char* s, int pos = 0) const;</code>                     //查找s第一次出现位置,从pos开始查找</li>
+<li><code>int find(const char* s, int pos, int n) const;</code>               //从pos位置查找s的前n个字符第一次位置</li>
+<li><code>int find(const char c, int pos = 0) const;</code>                       //查找字符c第一次出现位置</li>
 <li><code>int rfind(const string&amp; str, int pos = npos) const;</code>      //查找str最后一次位置,从pos开始查找</li>
 <li><code>int rfind(const char* s, int pos = npos) const;</code>              //查找s最后一次出现位置,从pos开始查找</li>
 <li><code>int rfind(const char* s, int pos, int n) const;</code>              //从pos查找s的前n个字符最后一次位置</li>
-<li><code>int rfind(const char c, int pos = 0) const;  </code>                      //查找字符c最后一次出现位置</li>
-<li><code>string&amp; replace(int pos, int n, const string&amp; str); </code>       //替换从pos开始n个字符为字符串str</li>
-<li><code>string&amp; replace(int pos, int n,const char* s); </code>                 //替换从pos开始的n个字符为字符串s</li>
+<li><code>int rfind(const char c, int pos = 0) const;</code>                      //查找字符c最后一次出现位置</li>
+<li><code>string&amp; replace(int pos, int n, const string&amp; str);</code>       //替换从pos开始n个字符为字符串str</li>
+<li><code>string&amp; replace(int pos, int n,const char* s);</code>                 //替换从pos开始的n个字符为字符串s</li>
 </ul>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//查找</span></span><br><span class="line">string str1 = <span class="string">&quot;abcdefgde&quot;</span>;</span><br><span class="line"><span class="type">int</span> pos = str1.<span class="built_in">find</span>(<span class="string">&quot;de&quot;</span>);<span class="comment">//未找到返回-1</span></span><br><span class="line"></span><br><span class="line">pos = str1.<span class="built_in">rfind</span>(<span class="string">&quot;de&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//替换</span></span><br><span class="line">string str1 = <span class="string">&quot;abcdefgde&quot;</span>;</span><br><span class="line">str1.<span class="built_in">replace</span>(<span class="number">1</span>, <span class="number">3</span>, <span class="string">&quot;1111&quot;</span>);</span><br></pre></td></tr></table></figure>
-
-
-
 <h2 id="比较"><a href="#比较" class="headerlink" title="比较"></a>比较</h2><ul>
 <li>字符串比较是按字符的ASCII码进行对比</li>
 </ul>
 <p>= 返回   0</p>
-<p>&gt; 返回   1 </p>
+<p>> 返回   1 </p>
 <p>&lt; 返回  -1</p>
 <ul>
-<li><code>int compare(const string &amp;s) const; </code>  //与字符串s比较</li>
+<li><code>int compare(const string &amp;s) const;</code>  //与字符串s比较</li>
 <li><code>int compare(const char *s) const;</code>      //与字符串s比较</li>
 </ul>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> ret = s1.<span class="built_in">compare</span>(s2);</span><br></pre></td></tr></table></figure>
-
-
-
 <h2 id="取字符"><a href="#取字符" class="headerlink" title="取字符"></a>取字符</h2><ul>
-<li><code>char&amp; operator[](int n); </code>     //通过[]方式取字符</li>
-<li><code>char&amp; at(int n);   </code>                    //通过at方法获取字符</li>
+<li><code>char&amp; operator[](int n);</code>     //通过[]方式取字符</li>
+<li><code>char&amp; at(int n);</code>                    //通过at方法获取字符</li>
 </ul>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">cout &lt;&lt; str[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">cout &lt;&lt; str.<span class="built_in">at</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//字符修改</span></span><br><span class="line">str[<span class="number">0</span>] = <span class="string">&#x27;x&#x27;</span>;</span><br><span class="line">str.<span class="built_in">at</span>(<span class="number">1</span>) = <span class="string">&#x27;x&#x27;</span>;</span><br></pre></td></tr></table></figure>
-
-
-
 <h2 id="插入与删除"><a href="#插入与删除" class="headerlink" title="插入与删除"></a>插入与删除</h2><ul>
-<li><code>string&amp; insert(int pos, const char* s);  </code>                //插入字符串</li>
-<li><code>string&amp; insert(int pos, const string&amp; str); </code>        //插入字符串</li>
+<li><code>string&amp; insert(int pos, const char* s);</code>                //插入字符串</li>
+<li><code>string&amp; insert(int pos, const string&amp; str);</code>        //插入字符串</li>
 <li><code>string&amp; insert(int pos, int n, char c);</code>                //在指定位置插入n个字符c</li>
 <li><code>string&amp; erase(int pos, int n = npos);</code>                    //删除从Pos开始的n个字符 </li>
 </ul>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">string str = <span class="string">&quot;hello&quot;</span>;</span><br><span class="line">str.<span class="built_in">insert</span>(<span class="number">1</span>, <span class="string">&quot;111&quot;</span>);</span><br><span class="line"></span><br><span class="line">str.<span class="built_in">erase</span>(<span class="number">1</span>, <span class="number">3</span>);  <span class="comment">//从1号位置开始3个字符</span></span><br></pre></td></tr></table></figure>
-
-
-
 <h2 id="取子串"><a href="#取子串" class="headerlink" title="取子串"></a>取子串</h2><p><code>string substr(int pos = 0, int n = npos) const;</code>   //返回由pos开始的n个字符组成的字符串</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">string str = <span class="string">&quot;abcdefg&quot;</span>;</span><br><span class="line">string subStr = str.<span class="built_in">substr</span>(<span class="number">1</span>, <span class="number">3</span>);</span><br><span class="line"></span><br><span class="line">string email = <span class="string">&quot;hello@sina.com&quot;</span>;</span><br><span class="line"><span class="type">int</span> pos = email.<span class="built_in">find</span>(<span class="string">&quot;@&quot;</span>);</span><br><span class="line">string username = email.<span class="built_in">substr</span>(<span class="number">0</span>, pos);</span><br></pre></td></tr></table></figure>
-
 
       
     </div>
@@ -537,7 +511,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-count">44</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -550,7 +524,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -598,7 +572,7 @@
        	<h3 class="widget-title">Tag Cloud</h3>
     	<div id="myCanvasContainer" class="widget tagcloud">
         		<canvas width="250" height="250" id="resCanvas" style="width=100%">
-            		<ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CNN/" rel="tag">CNN</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DL/" rel="tag">DL</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/co-lab/" rel="tag">co-lab</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/conda/" rel="tag">conda</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%9B%E6%89%A3/" rel="tag">力扣</a><span class="tag-list-count">20</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a><span class="tag-list-count">2</span></li></ul>
+            		<ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CNN/" rel="tag">CNN</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DL/" rel="tag">DL</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenCV/" rel="tag">OpenCV</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pandas/" rel="tag">Pandas</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/co-lab/" rel="tag">co-lab</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/conda/" rel="tag">conda</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%9B%E6%89%A3/" rel="tag">力扣</a><span class="tag-list-count">20</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a><span class="tag-list-count">2</span></li></ul>
         		</canvas>
     	</div>
 	</div>
@@ -814,6 +788,8 @@
   
 
   
+  
+
 
   
 

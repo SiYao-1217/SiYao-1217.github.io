@@ -79,12 +79,12 @@
 
 
 
-<meta name="description" content="listSTL中的链表是一个双向循环链表   list的优点：  采用动态存储分配，不会造成内存浪费和溢出 链表执行插入和删除操作十分方便，修改指针即可，不需要移动大量元素  list的缺点：  链表灵活，但是空间(指针域) 和 时间（遍历）额外耗费较大">
+<meta name="description" content="listSTL中的链表是一个双向循环链表  list的优点：  采用动态存储分配，不会造成内存浪费和溢出 链表执行插入和删除操作十分方便，修改指针即可，不需要移动大量元素  list的缺点：  链表灵活，但是空间(指针域) 和 时间（遍历）额外耗费较大">
 <meta property="og:type" content="article">
 <meta property="og:title" content="STL容器之list">
 <meta property="og:url" content="http://example.com/2022/10/26/STL%E5%AE%B9%E5%99%A8%E4%B9%8Blist/index.html">
 <meta property="og:site_name" content="YAO">
-<meta property="og:description" content="listSTL中的链表是一个双向循环链表   list的优点：  采用动态存储分配，不会造成内存浪费和溢出 链表执行插入和删除操作十分方便，修改指针即可，不需要移动大量元素  list的缺点：  链表灵活，但是空间(指针域) 和 时间（遍历）额外耗费较大">
+<meta property="og:description" content="listSTL中的链表是一个双向循环链表  list的优点：  采用动态存储分配，不会造成内存浪费和溢出 链表执行插入和删除操作十分方便，修改指针即可，不需要移动大量元素  list的缺点：  链表灵活，但是空间(指针域) 和 时间（遍历）额外耗费较大">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/images/list.jpg">
 <meta property="article:published_time" content="2022-10-26T11:27:18.000Z">
@@ -323,8 +323,7 @@
 
       
         <h1 id="list"><a href="#list" class="headerlink" title="list"></a>list</h1><p>STL中的链表是一个双向循环链表</p>
-<img src="/images/list.jpg">
-
+<p><img src="/images/list.jpg"></p>
 <p>list的优点：</p>
 <ul>
 <li>采用动态存储分配，不会造成内存浪费和溢出</li>
@@ -335,7 +334,6 @@
 <li>链表灵活，但是空间(指针域) 和 时间（遍历）额外耗费较大</li>
 </ul>
 <span id="more"></span>
-
 <h2 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h2><ul>
 <li><code>list&lt;T&gt; lst;</code>                               //list采用采用模板类实现,对象的默认构造形式：</li>
 <li><code>list(beg,end);</code>                           //构造函数将[beg, end)区间中的元素拷贝给本身。</li>
@@ -343,72 +341,52 @@
 <li><code>list(const list &amp;lst);</code>            //拷贝构造函数。</li>
 </ul>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">list&lt;<span class="type">int</span>&gt; L1, L3, L4;</span><br><span class="line">L1.<span class="built_in">push_back</span>(<span class="number">12</span>);</span><br><span class="line">L1.<span class="built_in">push_back</span>(<span class="number">34</span>);</span><br><span class="line">L1.<span class="built_in">push_back</span>(<span class="number">54</span>);</span><br><span class="line"><span class="built_in">printList</span>(L1);</span><br><span class="line"></span><br><span class="line"><span class="function">list&lt;<span class="type">int</span>&gt; <span class="title">L2</span><span class="params">(L1)</span></span>;</span><br><span class="line"><span class="built_in">printList</span>(L2);</span><br></pre></td></tr></table></figure>
-
-
-
 <h2 id="赋值和交换"><a href="#赋值和交换" class="headerlink" title="赋值和交换"></a>赋值和交换</h2><ul>
-<li><code>assign(beg, end);</code>            //将[beg, end)区间中的数据拷贝赋值给本身。 <em><strong>似乎必须是begin-&gt;end</strong></em></li>
+<li><code>assign(beg, end);</code>            //将[beg, end)区间中的数据拷贝赋值给本身。 <strong><em>似乎必须是begin-&gt;end</em></strong></li>
 <li><code>assign(n, elem);</code>              //将n个elem拷贝赋值给本身。</li>
 <li><code>list&amp; operator=(const list &amp;lst);</code>         //重载等号操作符</li>
 <li><code>swap(lst);</code>                         //将lst与本身的元素互换。</li>
 </ul>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">L3.<span class="built_in">assign</span>(L2.<span class="built_in">begin</span>(), L2.<span class="built_in">end</span>());</span><br><span class="line">L3.<span class="built_in">push_back</span>(<span class="number">87</span>);</span><br><span class="line"><span class="built_in">printList</span>(L3);</span><br><span class="line"></span><br><span class="line">list&lt;<span class="type">int</span>&gt;::const_iterator l3_it = L3.<span class="built_in">begin</span>();</span><br><span class="line">L4.<span class="built_in">assign</span>(l3_it, L3.<span class="built_in">end</span>()); <span class="comment">//报错</span></span><br><span class="line"><span class="built_in">printList</span>(L4);</span><br><span class="line"></span><br><span class="line"><span class="comment">//交换</span></span><br><span class="line">L3.<span class="built_in">swap</span>(L1); <span class="comment">// L1变L3，L3变L1</span></span><br></pre></td></tr></table></figure>
-
-
-
 <h2 id="大小"><a href="#大小" class="headerlink" title="大小"></a>大小</h2><ul>
-<li><p><code>size(); </code>                             //返回容器中元素的个数</p>
+<li><p><code>size();</code>                             //返回容器中元素的个数</p>
 </li>
-<li><p><code>empty(); </code>                           //判断容器是否为空</p>
+<li><p><code>empty();</code>                           //判断容器是否为空</p>
 </li>
 <li><p><code>resize(num);</code>                   //重新指定容器的长度为num，若容器变长，则以默认值填充新位置。</p>
 <p>​                        //如果容器变短，则末尾超出容器长度的元素被删除。</p>
 </li>
-<li><p><code>resize(num, elem); </code>       //重新指定容器的长度为num，若容器变长，则以elem值填充新位置。</p>
+<li><p><code>resize(num, elem);</code>       //重新指定容器的长度为num，若容器变长，则以elem值填充新位置。</p>
 <pre><code>      ​                        //如果容器变短，则末尾超出容器长度的元素被删除。
-</code></pre>
-</li>
+</code></pre></li>
 </ul>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">cout &lt;&lt; L1.<span class="built_in">size</span>() &lt;&lt; endl;  <span class="comment">//4</span></span><br><span class="line">cout &lt;&lt; L1.<span class="built_in">empty</span>() &lt;&lt; endl;  <span class="comment">//非空：0</span></span><br><span class="line">L1.<span class="built_in">resize</span>(<span class="number">10</span>);   <span class="comment">//默认用0补全</span></span><br><span class="line"><span class="built_in">printList</span>(L1);</span><br><span class="line">L1.<span class="built_in">resize</span>(<span class="number">15</span>, <span class="number">9</span>);  <span class="comment">//用9补全</span></span><br><span class="line"><span class="built_in">printList</span>(L1);</span><br></pre></td></tr></table></figure>
-
-
-
 <h2 id="插入与删除"><a href="#插入与删除" class="headerlink" title="插入与删除"></a>插入与删除</h2><ul>
 <li><code>push_back(elem);</code>                      //在容器尾部加入一个元素</li>
 <li><code>pop_back();</code>                               //删除容器中最后一个元素</li>
 <li><code>push_front(elem);</code>                       //在容器开头插入一个元素</li>
-<li><code>pop_front();  </code>                               //从容器开头移除第一个元素</li>
+<li><code>pop_front();</code>                               //从容器开头移除第一个元素</li>
 <li><code>insert(pos,elem);</code>                        //在pos位置插elem元素的拷贝，返回新数据的位置。</li>
-<li><code>insert(pos,n,elem);  </code>                    //在pos位置插入n个elem数据，无返回值。</li>
-<li><code>insert(pos,beg,end);   </code>                 //在pos位置插入[beg,end)区间的数据，无返回值。</li>
+<li><code>insert(pos,n,elem);</code>                    //在pos位置插入n个elem数据，无返回值。</li>
+<li><code>insert(pos,beg,end);</code>                 //在pos位置插入[beg,end)区间的数据，无返回值。</li>
 <li><code>clear();</code>                                         //移除容器的所有数据</li>
 <li><code>erase(beg,end);</code>                           //删除[beg,end)区间的数据，返回下一个数据的位置。</li>
-<li><code>erase(pos);   </code>                                //删除pos位置的数据，返回下一个数据的位置。</li>
-<li><code>remove(elem);  </code>                            //删除容器中所有与elem值匹配的元素。</li>
+<li><code>erase(pos);</code>                                //删除pos位置的数据，返回下一个数据的位置。</li>
+<li><code>remove(elem);</code>                            //删除容器中所有与elem值匹配的元素。</li>
 </ul>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">L1.<span class="built_in">push_back</span>(<span class="number">213</span>); <span class="comment">//尾插</span></span><br><span class="line">L1.<span class="built_in">push_front</span>(<span class="number">442</span>); <span class="comment">//头插</span></span><br><span class="line"></span><br><span class="line">L1.<span class="built_in">pop_back</span>(); <span class="comment">//尾删</span></span><br><span class="line">L1.<span class="built_in">pop_front</span>(); <span class="comment">//头删</span></span><br><span class="line"></span><br><span class="line">L1.<span class="built_in">resize</span>(<span class="number">5</span>); <span class="comment">//12，34，57，87，0</span></span><br><span class="line">list&lt;<span class="type">int</span>&gt;::const_iterator l1_it = L1.<span class="built_in">begin</span>();</span><br><span class="line">L1.<span class="built_in">insert</span>(++l1_it, <span class="number">444</span>);<span class="comment">//it在&lt;34&gt;位置，前面插入，12，444，34，57，87，0</span></span><br><span class="line"></span><br><span class="line">l1_it++;</span><br><span class="line">l1_it++;<span class="comment">//&lt;87&gt;位置</span></span><br><span class="line">L1.<span class="built_in">insert</span>(l1_it,L3.<span class="built_in">begin</span>(),L3.<span class="built_in">end</span>());<span class="comment">//12，444，34，57，12，34，57，87，0</span></span><br><span class="line"><span class="comment">//it仍在&lt;87&gt;位置</span></span><br><span class="line">L1.<span class="built_in">insert</span>(l1_it,<span class="number">77777</span>);<span class="comment">//12，444，34，57，12，34，57，777，87，0</span></span><br><span class="line"></span><br><span class="line">L1.<span class="built_in">erase</span>(l1_it);<span class="comment">//12，444，34，57，12，34，57，777，0</span></span><br><span class="line"></span><br><span class="line">L1.<span class="built_in">clear</span>(); <span class="comment">//none</span></span><br></pre></td></tr></table></figure>
-
-
-
 <h2 id="数据存取"><a href="#数据存取" class="headerlink" title="数据存取"></a>数据存取</h2><ul>
 <li><code>front();</code>        //返回第一个元素。</li>
 <li><code>back();</code>         //返回最后一个元素。</li>
 </ul>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//cout &lt;&lt; L1.at(0) &lt;&lt; endl;//错误 不支持at访问数据</span></span><br><span class="line"><span class="comment">//cout &lt;&lt; L1[0] &lt;&lt; endl; //错误  不支持[]方式访问数据</span></span><br><span class="line">cout &lt;&lt; <span class="string">&quot;第一个元素为： &quot;</span> &lt;&lt; L1.<span class="built_in">front</span>() &lt;&lt; endl;</span><br><span class="line">cout &lt;&lt; <span class="string">&quot;最后一个元素为： &quot;</span> &lt;&lt; L1.<span class="built_in">back</span>() &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line"><span class="comment">//list容器的迭代器是双向迭代器，不支持随机访问</span></span><br><span class="line">list&lt;<span class="type">int</span>&gt;::iterator it = L1.<span class="built_in">begin</span>();</span><br><span class="line"><span class="comment">//it = it + 1;//错误，不可以跳跃访问，即使是+1</span></span><br></pre></td></tr></table></figure>
-
-
-
 <h2 id="反转和排序"><a href="#反转和排序" class="headerlink" title="反转和排序"></a>反转和排序</h2><ul>
 <li><code>reverse();</code>   //反转链表</li>
 <li><code>sort();</code>        //链表排序  默认从小到大</li>
 </ul>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">bool</span> <span class="title">myCompare</span><span class="params">(<span class="type">int</span> v1,<span class="type">int</span> v2)</span></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> v1 &gt; v2;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">L1.<span class="built_in">reverse</span>();</span><br><span class="line">L1.<span class="built_in">sort</span>();</span><br><span class="line"></span><br><span class="line">L1.<span class="built_in">sort</span>(myCompare); <span class="comment">//从大到小</span></span><br></pre></td></tr></table></figure>
-
-
-
 <h2 id="排序练习"><a href="#排序练习" class="headerlink" title="排序练习"></a>排序练习</h2><p>按照年龄进行升序，如果年龄相同按照身高进行降序</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># <span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta"># <span class="keyword">include</span> <span class="string">&lt;list&gt;</span></span></span><br><span class="line"><span class="meta"># <span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Person</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="comment">/* data */</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Person</span>(string name,<span class="type">int</span> age,<span class="type">int</span> height);</span><br><span class="line">    ~<span class="built_in">Person</span>();</span><br><span class="line">    <span class="type">int</span> m_age;</span><br><span class="line">    <span class="type">int</span> m_height;</span><br><span class="line">    string m_name;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Person::<span class="built_in">Person</span>(string name,<span class="type">int</span> age,<span class="type">int</span> height)</span><br><span class="line">&#123;</span><br><span class="line">    m_age = age;</span><br><span class="line">    m_name = name;</span><br><span class="line">    m_height = height;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Person::~<span class="built_in">Person</span>()</span><br><span class="line">&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">myCompare</span><span class="params">(Person p1,Person p2)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (p1.m_age == p2.m_age)&#123;</span><br><span class="line">        <span class="keyword">return</span> p1.m_height &gt; p2.m_height;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> p1.m_age &lt; p2.m_age;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">printList</span><span class="params">(<span class="type">const</span> list&lt;Person&gt; lp)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (list&lt;Person&gt;::const_iterator it = lp.<span class="built_in">begin</span>(); it != lp.<span class="built_in">end</span>(); it++)&#123;</span><br><span class="line">        cout &lt;&lt; it-&gt;m_name &lt;&lt; <span class="string">&quot;||&quot;</span> &lt;&lt; it-&gt;m_age &lt;&lt; <span class="string">&quot;||&quot;</span> &lt;&lt; it-&gt;m_height &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;==================&quot;</span> &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">test</span><span class="params">()</span></span>&#123;</span><br><span class="line">    list&lt;Person&gt; li;</span><br><span class="line"></span><br><span class="line">    <span class="function">Person <span class="title">p1</span><span class="params">(<span class="string">&quot;a&quot;</span>,<span class="number">29</span>,<span class="number">177</span>)</span></span>;</span><br><span class="line">    <span class="function">Person <span class="title">p2</span><span class="params">(<span class="string">&quot;b&quot;</span>,<span class="number">23</span>,<span class="number">156</span>)</span></span>;</span><br><span class="line">    <span class="function">Person <span class="title">p3</span><span class="params">(<span class="string">&quot;c&quot;</span>,<span class="number">29</span>,<span class="number">163</span>)</span></span>;</span><br><span class="line">    <span class="function">Person <span class="title">p4</span><span class="params">(<span class="string">&quot;d&quot;</span>,<span class="number">43</span>,<span class="number">177</span>)</span></span>;</span><br><span class="line">    <span class="function">Person <span class="title">p5</span><span class="params">(<span class="string">&quot;e&quot;</span>,<span class="number">12</span>,<span class="number">133</span>)</span></span>;</span><br><span class="line">    <span class="comment">// cout &lt;&lt; p1.m_name &lt;&lt; endl;</span></span><br><span class="line">    li.<span class="built_in">push_back</span>(p1);</span><br><span class="line">    li.<span class="built_in">push_back</span>(p2);</span><br><span class="line">    li.<span class="built_in">push_back</span>(p3);</span><br><span class="line">    li.<span class="built_in">push_back</span>(p4);</span><br><span class="line">    li.<span class="built_in">push_back</span>(p5);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printList</span>(li);</span><br><span class="line"></span><br><span class="line">    li.<span class="built_in">sort</span>(myCompare);</span><br><span class="line">    <span class="built_in">printList</span>(li);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">test</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">a||29||177</span></span><br><span class="line"><span class="comment">b||23||156</span></span><br><span class="line"><span class="comment">c||29||163</span></span><br><span class="line"><span class="comment">d||43||177</span></span><br><span class="line"><span class="comment">e||12||133</span></span><br><span class="line"><span class="comment">==================</span></span><br><span class="line"><span class="comment">e||12||133</span></span><br><span class="line"><span class="comment">b||23||156</span></span><br><span class="line"><span class="comment">a||29||177</span></span><br><span class="line"><span class="comment">c||29||163</span></span><br><span class="line"><span class="comment">d||43||177</span></span><br><span class="line"><span class="comment">==================</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
-
 
       
     </div>
@@ -532,7 +510,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-count">44</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -545,7 +523,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -593,7 +571,7 @@
        	<h3 class="widget-title">Tag Cloud</h3>
     	<div id="myCanvasContainer" class="widget tagcloud">
         		<canvas width="250" height="250" id="resCanvas" style="width=100%">
-            		<ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CNN/" rel="tag">CNN</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DL/" rel="tag">DL</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/co-lab/" rel="tag">co-lab</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/conda/" rel="tag">conda</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%9B%E6%89%A3/" rel="tag">力扣</a><span class="tag-list-count">20</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a><span class="tag-list-count">2</span></li></ul>
+            		<ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CNN/" rel="tag">CNN</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DL/" rel="tag">DL</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenCV/" rel="tag">OpenCV</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pandas/" rel="tag">Pandas</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/co-lab/" rel="tag">co-lab</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/conda/" rel="tag">conda</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%9B%E6%89%A3/" rel="tag">力扣</a><span class="tag-list-count">20</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a><span class="tag-list-count">2</span></li></ul>
         		</canvas>
     	</div>
 	</div>
@@ -809,6 +787,8 @@
   
 
   
+  
+
 
   
 
