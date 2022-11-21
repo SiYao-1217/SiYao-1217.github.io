@@ -86,13 +86,11 @@
 <meta property="og:site_name" content="YAO">
 <meta property="og:description" content="问题记录1、目录不跳转控制台报错：Uncaught TypeError: Cannot read properties of undefined (reading ‘top’) 报错文件：post-details.js?v&#x3D;5.1.4:76 报错文件路径：\themes\next\source\js\src\post-details.js 解决方法：在文件post-details.js的76行处添">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/images/图片名">
 <meta property="article:published_time" content="2022-10-31T02:17:19.000Z">
-<meta property="article:modified_time" content="2022-10-31T02:25:46.009Z">
+<meta property="article:modified_time" content="2022-11-04T03:00:02.346Z">
 <meta property="article:author" content="思遥Yao">
 <meta property="article:tag" content="hexo">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/images/图片名">
 
 
 
@@ -329,7 +327,7 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> targetSelector = <span class="title class_">NexT</span>.<span class="property">utils</span>.escapeSelector(<span class="variable language_">this</span>.<span class="title function_">getAttribute</span>(<span class="string">&#x27;href&#x27;</span>));</span><br><span class="line">targetSelector = <span class="built_in">decodeURI</span>(<span class="variable language_">this</span>.<span class="title function_">getAttribute</span>(<span class="string">&#x27;href&#x27;</span>)) <span class="comment">// 添加该行</span></span><br><span class="line"><span class="keyword">var</span> offset = $(targetSelector).<span class="title function_">offset</span>().<span class="property">top</span>;</span><br></pre></td></tr></table></figure>
 <h2 id="2、插入图片不显示"><a href="#2、插入图片不显示" class="headerlink" title="2、插入图片不显示"></a>2、插入图片不显示</h2><p>直接在typora中插入的图片，无法在网页显示</p>
 <p>解决办法：使用以下语句插入，图片放在images文件夹下</p>
-<p><img src="/images/图片名"></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;/images/图片名&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <h2 id="3、数学公式显示不全"><a href="#3、数学公式显示不全" class="headerlink" title="3、数学公式显示不全"></a>3、数学公式显示不全</h2><p>参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/yexiaohhjk/article/details/82526604">(3条消息) hexo next主题解决无法显示数学公式_code_learne的博客-CSDN博客</a></p>
 
       
@@ -454,7 +452,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-count">50</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -467,7 +465,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -515,7 +513,7 @@
        	<h3 class="widget-title">Tag Cloud</h3>
     	<div id="myCanvasContainer" class="widget tagcloud">
         		<canvas width="250" height="250" id="resCanvas" style="width=100%">
-            		<ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CNN/" rel="tag">CNN</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DL/" rel="tag">DL</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenCV/" rel="tag">OpenCV</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pandas/" rel="tag">Pandas</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/co-lab/" rel="tag">co-lab</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/conda/" rel="tag">conda</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%9B%E6%89%A3/" rel="tag">力扣</a><span class="tag-list-count">20</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a><span class="tag-list-count">2</span></li></ul>
+            		<ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CNN/" rel="tag">CNN</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DL/" rel="tag">DL</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenCV/" rel="tag">OpenCV</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pandas/" rel="tag">Pandas</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/co-lab/" rel="tag">co-lab</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/conda/" rel="tag">conda</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pytorch/" rel="tag">pytorch</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%9B%E6%89%A3/" rel="tag">力扣</a><span class="tag-list-count">20</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a><span class="tag-list-count">2</span></li></ul>
         		</canvas>
     	</div>
 	</div>

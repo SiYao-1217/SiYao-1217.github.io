@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh_CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Linux," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="11、ls用法1：#ls含义：列出当前工作目录下的所有文件&#x2F;文件夹的名称 用法2：#ls 路径 含义：列出指定路径下的所有文件&#x2F;文件夹的名称 用法3：#ls 选项 路径含义：在列出指定路径下的文件&#x2F;文件夹的名称，并以指定的格式进行显示。常见的语法： #ls -l 路径 #ls -la 路径 选项解释：    -l：表示list，表示以详细列表的形式进行展示    -a：表示显示所有的文件&#x2F;文件夹（">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux学习">
+<meta property="og:url" content="http://example.com/2022/11/03/Linux%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:site_name" content="YAO">
+<meta property="og:description" content="11、ls用法1：#ls含义：列出当前工作目录下的所有文件&#x2F;文件夹的名称 用法2：#ls 路径 含义：列出指定路径下的所有文件&#x2F;文件夹的名称 用法3：#ls 选项 路径含义：在列出指定路径下的文件&#x2F;文件夹的名称，并以指定的格式进行显示。常见的语法： #ls -l 路径 #ls -la 路径 选项解释：    -l：表示list，表示以详细列表的形式进行展示    -a：表示显示所有的文件&#x2F;文件夹（">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-11-03T06:16:52.000Z">
+<meta property="article:modified_time" content="2022-11-04T02:39:40.869Z">
+<meta property="article:author" content="思遥Yao">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":"ture","scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://example.com/2022/11/03/Linux学习/"/>
+
+
+
+
+
+  <title>Linux学习 | YAO</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh_CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">YAO</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">为往圣继绝学</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/11/03/Linux%E5%AD%A6%E4%B9%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/cat.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YAO">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Linux学习</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-11-03T14:16:52+08:00">
+                2022-11-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="1"><a href="#1" class="headerlink" title="1"></a>1</h1><h2 id="1、ls"><a href="#1、ls" class="headerlink" title="1、ls"></a>1、ls</h2><p><strong>用法1：#ls</strong><br>含义：列出当前工作目录下的所有文件/文件夹的名称</p>
+<p><strong>用法2：#ls</strong> <strong>路径</strong></p>
+<p>含义：列出指定路径下的所有文件/文件夹的名称</p>
+<p>用法3：#ls 选项 路径<br>含义：在列出指定路径下的文件/文件夹的名称，并以指定的格式进行显示。<br>常见的语法：</p>
+<pre><code>#ls -l 路径
+#ls -la 路径
+</code></pre><p>选项解释：<br>    -l：表示list，表示以详细列表的形式进行展示<br>    -a：表示显示所有的文件/文件夹（包含了隐藏文件/文件夹）</p>
+<p>用法4：#ls -lh 路径<br>含义：列出指定路径下的所有文件/文件夹的名称，以列表的形式并且在显示文档大小的时候以可读性较高的形式显示</p>
+<span id="more"></span>
+<h2 id="2、pwd"><a href="#2、pwd" class="headerlink" title="2、pwd"></a>2、pwd</h2><p>用法：#pwd        （print working directory，打印当前工作目录）</p>
+<h2 id="3、cd"><a href="#3、cd" class="headerlink" title="3、cd"></a>3、cd</h2><p>命令：#cd        （change directory，改变目录）<br>作用：用于切换当前的工作目录的<br>语法：#cd 路径</p>
+<h2 id="4、mkdir"><a href="#4、mkdir" class="headerlink" title="4、mkdir"></a>4、mkdir</h2><p>指令：mkdir    （make directory，创建目录）<br>语法1：#mkdir 路径 【路径，可以是文件夹名称也可以是包含名称的一个完整路径】</p>
+<p>语法2：#mkdir -p 路径<br>含义：当一次性创建多层不存在的目录的时候，添加-p参数，否则会报错</p>
+<p>语法3：<strong>#mkdir</strong> <strong>路径1</strong> <strong>路径2</strong> <strong>路径3 ….</strong>  【表示一次性创建多个目录】</p>
+<h2 id="5、touch"><a href="#5、touch" class="headerlink" title="5、touch"></a>5、touch</h2><p>指令：touch<br>作用：创建文件<br>语法：#touch 文件路径    【路径可以是直接的文件名也可以是路径】</p>
+<h2 id="6、cp"><a href="#6、cp" class="headerlink" title="6、cp"></a>6、cp</h2><p>指令：cp        （copy，复制）<br>作用：复制文件/文件夹到指定的位置<br>语法：#cp 被复制的文档路径 文档被复制到的路径</p>
+<h2 id="7、mv"><a href="#7、mv" class="headerlink" title="7、mv"></a>7、mv</h2><p>指令：mv   （move，移动，剪切）<br>作用：移动文档到新的位置<br>语法：#mv 需要移动的文档路径 需要保存的位置路径</p>
+<h2 id="8、rm"><a href="#8、rm" class="headerlink" title="8、rm"></a>8、rm</h2><p>指令：rm （remove，移除、删除）<br>作用：移除/删除文档<br>语法：#rm 选项 需要移除的文档路径<br>选项：<br>    -f：force，强制删除，不提示是否删除<br>    -r：表示递归</p>
+<h2 id="9、vim"><a href="#9、vim" class="headerlink" title="9、vim"></a>9、vim</h2><p>指令：vim   （vim是一款文本编辑器）<br>语法：#vim 文件的路径<br>作用：打开一个文件（可以不存在，也可以存在）</p>
+<h2 id="10、-gt-gt-gt"><a href="#10、-gt-gt-gt" class="headerlink" title="10、&gt; / &gt;&gt;"></a>10、&gt; / &gt;&gt;</h2><p>一般命令的输出都会显示在终端中，有些时候需要将一些命令的执行结果想要保存到文件中进行后续的分析/统计，则这时候需要使用到的输出重定向技术。</p>
+<p>“&gt;”：覆盖输出，会覆盖掉原先的文件内容</p>
+<p>“&gt;&gt;”：追加输出，不会覆盖原始文件内容，会在原始内容末尾继续添加</p>
+<p>语法：#正常执行的指令 &gt; / &gt;&gt; 文件的路径<br>注意：文件可以不存在，不存在则新建</p>
+<h2 id="11、cat"><a href="#11、cat" class="headerlink" title="11、cat"></a>11、cat</h2><p>作用1：cat有直接打开一个文件的功能。<br>语法1：#cat 文件的路径</p>
+<p>作用2：cat还可以对文件进行合并<br>语法2：#cat 待合并的文件路径1 待合并的文件路径2 …. 文件路径n &gt; 合并之后的文件路径</p>
+<h2 id="12、df"><a href="#12、df" class="headerlink" title="12、df"></a>12、df</h2><p>作用：查看磁盘的空间<br>语法：#df -h        -h表示以可读性较高的形式展示大小</p>
+<h2 id="13、free"><a href="#13、free" class="headerlink" title="13、free"></a>13、free</h2><p>作用：查看内存使用情况<br>语法：#free -m   -m表示以mb为单位查看</p>
+<h2 id="14、head"><a href="#14、head" class="headerlink" title="14、head"></a>14、head</h2><p>作用：查看一个文件的前n行，如果不指定n，则默认显示前10行。<br>语法：#head -n 文件路径   【n表示数字】</p>
+<h2 id="15、tail"><a href="#15、tail" class="headerlink" title="15、tail"></a>15、tail</h2><p>作用1：查看一个文件的未n行，如果n不指定默认显示后10行<br>语法：#tail -n 文件的路径    n同样表示数字</p>
+<h2 id="16、wc"><a href="#16、wc" class="headerlink" title="16、wc"></a>16、wc</h2><p>作用：统计文件内容信息（包含行数、单词数、字节数）<br>语法：#wc -lwc 需要统计的文件路径<br>    -l：表示lines，行数<br>    -w：表示words，单词数   依照空格来判断单词数量<br>    -c：表示bytes，字节数</p>
+<h2 id="17、date"><a href="#17、date" class="headerlink" title="17、date"></a>17、date</h2><p>作用：表示操作时间日期（读取、设置）<br>语法1：#date            输出的形式：2018年 3月 24日 星期六 15:54:28<br>语法2：#date  +%F    （等价于#date  “+%Y-%m-%d” ）    输出形式：2018-03-24<br>语法3：#date  “+%F %T”    引号表示让“年月日与时分秒”成为一个不可分割的整体<br>    等价操作#date  “+%Y-%m-%d %H:%M:%S”<br>输出的形式：2018-03-24 16:01:00</p>
+<p>语法4：获取之前或者之后的某个时间（备份）</p>
+<h1 id="date-d-“-1-day”-“-Y-m-d-H-M-S”"><a href="#date-d-“-1-day”-“-Y-m-d-H-M-S”" class="headerlink" title="date  -d  “-1 day”  “+%Y-%m-%d %H:%M:%S”"></a>date  -d  “-1 day”  “+%Y-%m-%d %H:%M:%S”</h1><p>符号的可选值：+（之后） 或者 - （之前）<br>单位的可选值：day（天）、month（月份）、year（年）</p>
+<h2 id="18、less"><a href="#18、less" class="headerlink" title="18、less"></a>18、less</h2><p>作用：查看文件，以较少的内容进行输出，按下辅助功能键（数字+回车、空格键+上下方向键）查看更多<br>语法：#less 需要查看的文件路径</p>
+<h2 id="19、clear-ctrl-L"><a href="#19、clear-ctrl-L" class="headerlink" title="19、clear    ctrl+L"></a>19、clear    ctrl+L</h2><p>作用：清除终端中已经存在的命令和结果（信息）。<br>语法：clear        或者快捷键：ctrl + L</p>
+<h2 id="20、管道"><a href="#20、管道" class="headerlink" title="20、管道 |"></a>20、管道 |</h2><p>管道符：|<br>作用：管道一般可以用于“过滤”，“特殊”，“扩展处理”。<br>语法：管道不能单独使用，必须需要配合前面所讲的一些指令来一起使用，其作用主要是辅助作用。</p>
+<p>①过滤案例（100%使用）：需要通过管道查询出根目录下包含“y”字母的文档名称。</p>
+<h1 id="ls-grep-y"><a href="#ls-grep-y" class="headerlink" title="ls / | grep y"></a>ls / | grep y</h1><p>针对上面这个命令说明：<br>①以管道作为分界线，前面的命令有个输出，后面需要先输入，然后再过滤，最后再输出，通俗的讲就是管道前面的输出就是后面指令的输入；</p>
+<p>②grep指令：主要用于过滤</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2022/11/02/python-partial-%E5%87%BD%E6%95%B0/" rel="next" title="python partial()函数">
+                <i class="fa fa-chevron-left"></i> python partial()函数
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2022/11/04/Batch-Normalization/" rel="prev" title="Batch Normalization">
+                Batch Normalization <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/cat.jpg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">50</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1"><span class="nav-number">1.</span> <span class="nav-text">1</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81ls"><span class="nav-number">1.1.</span> <span class="nav-text">1、ls</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81pwd"><span class="nav-number">1.2.</span> <span class="nav-text">2、pwd</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%E3%80%81cd"><span class="nav-number">1.3.</span> <span class="nav-text">3、cd</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4%E3%80%81mkdir"><span class="nav-number">1.4.</span> <span class="nav-text">4、mkdir</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5%E3%80%81touch"><span class="nav-number">1.5.</span> <span class="nav-text">5、touch</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6%E3%80%81cp"><span class="nav-number">1.6.</span> <span class="nav-text">6、cp</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7%E3%80%81mv"><span class="nav-number">1.7.</span> <span class="nav-text">7、mv</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8%E3%80%81rm"><span class="nav-number">1.8.</span> <span class="nav-text">8、rm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9%E3%80%81vim"><span class="nav-number">1.9.</span> <span class="nav-text">9、vim</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10%E3%80%81-gt-gt-gt"><span class="nav-number">1.10.</span> <span class="nav-text">10、&gt; &#x2F; &gt;&gt;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11%E3%80%81cat"><span class="nav-number">1.11.</span> <span class="nav-text">11、cat</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12%E3%80%81df"><span class="nav-number">1.12.</span> <span class="nav-text">12、df</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#13%E3%80%81free"><span class="nav-number">1.13.</span> <span class="nav-text">13、free</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#14%E3%80%81head"><span class="nav-number">1.14.</span> <span class="nav-text">14、head</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#15%E3%80%81tail"><span class="nav-number">1.15.</span> <span class="nav-text">15、tail</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#16%E3%80%81wc"><span class="nav-number">1.16.</span> <span class="nav-text">16、wc</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#17%E3%80%81date"><span class="nav-number">1.17.</span> <span class="nav-text">17、date</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#date-d-%E2%80%9C-1-day%E2%80%9D-%E2%80%9C-Y-m-d-H-M-S%E2%80%9D"><span class="nav-number">2.</span> <span class="nav-text">date  -d  “-1 day”  “+%Y-%m-%d %H:%M:%S”</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#18%E3%80%81less"><span class="nav-number">2.1.</span> <span class="nav-text">18、less</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#19%E3%80%81clear-ctrl-L"><span class="nav-number">2.2.</span> <span class="nav-text">19、clear    ctrl+L</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#20%E3%80%81%E7%AE%A1%E9%81%93"><span class="nav-number">2.3.</span> <span class="nav-text">20、管道 |</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ls-grep-y"><span class="nav-number">3.</span> <span class="nav-text">ls &#x2F; | grep y</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+       
+       <script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+       <script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+       <div class="widget-wrap">
+       	<h3 class="widget-title">Tag Cloud</h3>
+    	<div id="myCanvasContainer" class="widget tagcloud">
+        		<canvas width="250" height="250" id="resCanvas" style="width=100%">
+            		<ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CNN/" rel="tag">CNN</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DL/" rel="tag">DL</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenCV/" rel="tag">OpenCV</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pandas/" rel="tag">Pandas</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/co-lab/" rel="tag">co-lab</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/conda/" rel="tag">conda</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pytorch/" rel="tag">pytorch</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%9B%E6%89%A3/" rel="tag">力扣</a><span class="tag-list-count">20</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a><span class="tag-list-count">2</span></li></ul>
+        		</canvas>
+    	</div>
+	</div>
+	
+
+
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">思遥Yao</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>
