@@ -87,7 +87,7 @@
 <meta property="og:description" content="辨析iterator、const_iterator及const iterator对于const类型的容器，只能用const_iterator遍历 1234567891011void printList(const list&lt;Person&gt; lp)&amp;#123;    for (list&lt;Person&gt;::const_iterator it &#x3D; lp。begin(); it !">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-11-21T02:50:07.000Z">
-<meta property="article:modified_time" content="2022-11-21T02:59:43.020Z">
+<meta property="article:modified_time" content="2022-11-23T08:01:16.333Z">
 <meta property="article:author" content="思遥Yao">
 <meta property="article:tag" content="C++">
 <meta name="twitter:card" content="summary">
@@ -325,7 +325,7 @@
 <p><strong>1、</strong>iterator，const_iterator作用：遍历容器内的元素，并访问这些元素的值。iterator可以改元素值，但const_iterator不可改。跟C的指针有点像<br>(容器均可以++iter，而vector还可以iter-n， iter+n，n为一整型，iter1-iter2:结果是difference_type类型，表两元素的距离。)</p>
 <p><strong>2、</strong>const_iterator 对象可以用于const vector 或非 const vector，它自身的值可以改(可以指向其他元素)，但不能改写其指向的元素值。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (vector&lt;string&gt;::const_iterator iter = text.<span class="built_in">begin</span>(); iter != text.<span class="built_in">end</span>(); ++ iter)&#123;</span><br><span class="line">         cout &lt;&lt; *iter &lt;&lt; endl; <span class="comment">//ok: print each element in text</span></span><br><span class="line">         *iter = <span class="string">&quot; &quot;</span>;     <span class="comment">// error: *iter is const</span></span><br><span class="line">     &#125;</span><br></pre></td></tr></table></figure>
-<p><strong>3、</strong>const iterator与const_iterator是不一样的：声明一个const iterator时，必须初始化它。一旦被初始化后，就不能改变它的值，它一旦被初始化后，只能用它来改它指的元素，不能使它指向其他元素。(因此const iterator几乎没什么用途)</p>
+<p><strong>3、</strong>const iterator与const_iterator是不一样的：声明一个const iterator时，必须初始化它。<strong>一旦被初始化后，就不能改变它的值</strong>，它一旦被初始化后，只能用它来改它指的元素，不能使它指向其他元素。(因此const iterator几乎没什么用途)</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">nums</span><span class="params">(<span class="number">10</span>)</span></span>; <span class="comment">// nums is nonconst</span></span><br><span class="line"><span class="type">const</span> vector&lt;<span class="type">int</span>&gt;::iterator cit = nums.<span class="built_in">begin</span>();</span><br><span class="line">*cit = <span class="number">1</span>;               <span class="comment">// ok: cit can change its underlying element</span></span><br><span class="line">++cit;                  <span class="comment">// error: can&#x27;t change the value of cit</span></span><br></pre></td></tr></table></figure>
 
       
@@ -450,7 +450,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">50</span>
+                  <span class="site-state-item-count">56</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -463,7 +463,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -511,7 +511,7 @@
        	<h3 class="widget-title">Tag Cloud</h3>
     	<div id="myCanvasContainer" class="widget tagcloud">
         		<canvas width="250" height="250" id="resCanvas" style="width=100%">
-            		<ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CNN/" rel="tag">CNN</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DL/" rel="tag">DL</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenCV/" rel="tag">OpenCV</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pandas/" rel="tag">Pandas</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/co-lab/" rel="tag">co-lab</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/conda/" rel="tag">conda</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pytorch/" rel="tag">pytorch</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%9B%E6%89%A3/" rel="tag">力扣</a><span class="tag-list-count">20</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a><span class="tag-list-count">2</span></li></ul>
+            		<ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CNN/" rel="tag">CNN</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DL/" rel="tag">DL</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenCV/" rel="tag">OpenCV</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pandas/" rel="tag">Pandas</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/co-lab/" rel="tag">co-lab</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/conda/" rel="tag">conda</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pytorch/" rel="tag">pytorch</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%9B%E6%89%A3/" rel="tag">力扣</a><span class="tag-list-count">20</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" rel="tag">图像处理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a><span class="tag-list-count">2</span></li></ul>
         		</canvas>
     	</div>
 	</div>
