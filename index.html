@@ -679,7 +679,35 @@ mjx-container[display="true"] + br {
       
         
           
-            
+            <h2 id="激活函数"><a href="#激活函数" class="headerlink" title="激活函数"></a>激活函数</h2><p>激活函数的作用：提供网络的非线性表达建模能力。</p>
+<ul>
+<li>线性可分数据：可以通过机器学习(感知机、SVM)找到的线性方程来进行划分。</li>
+<li>非线性可分数据：找不到一种线性方程来划分数据，此时需要引入非线性函数。</li>
+</ul>
+<p><img src="/images/act1.png"></p>
+<h2 id="Sigmoid"><a href="#Sigmoid" class="headerlink" title="Sigmoid"></a>Sigmoid</h2><p><img src="/images/act2.png"></p>
+<h2 id="Hard-Sigmoid"><a href="#Hard-Sigmoid" class="headerlink" title="Hard-Sigmoid"></a>Hard-Sigmoid</h2><p><img src="/images/act3.png"></p>
+<h2 id="Tanh"><a href="#Tanh" class="headerlink" title="Tanh"></a>Tanh</h2><p><img src="/images/act4.png"></p>
+<h2 id="Hard-Tanh"><a href="#Hard-Tanh" class="headerlink" title="Hard-Tanh"></a>Hard-Tanh</h2><p><img src="/images/act5.png"></p>
+<h2 id="ReLU"><a href="#ReLU" class="headerlink" title="ReLU"></a>ReLU</h2><p><img src="/images/act6.png"></p>
+<h2 id="Leaky-ReLU-a为人为设置-和PReLU-a为学习获得"><a href="#Leaky-ReLU-a为人为设置-和PReLU-a为学习获得" class="headerlink" title="Leaky ReLU(a为人为设置)和PReLU(a为学习获得)"></a>Leaky ReLU(a为人为设置)和PReLU(a为学习获得)</h2><p><img src="/images/act7.png"></p>
+<h2 id="ELU"><a href="#ELU" class="headerlink" title="ELU"></a>ELU</h2><p><img src="/images/act8.png"></p>
+<h2 id="SELU"><a href="#SELU" class="headerlink" title="SELU"></a>SELU</h2><p><img src="/images/act9.png"></p>
+<h2 id="ReLU6"><a href="#ReLU6" class="headerlink" title="ReLU6"></a>ReLU6</h2><p><img src="/images/act10.png"></p>
+<h2 id="Swish"><a href="#Swish" class="headerlink" title="Swish"></a>Swish</h2><p><img src="/images/act11.png"></p>
+<h2 id="Hard-Swish"><a href="#Hard-Swish" class="headerlink" title="Hard-Swish"></a>Hard-Swish</h2><p><img src="/images/act12.png"></p>
+<h2 id="Mish"><a href="#Mish" class="headerlink" title="Mish"></a>Mish</h2><p><img src="/images/act13.png"></p>
+<h2 id="GELU"><a href="#GELU" class="headerlink" title="GELU"></a>GELU</h2><p><img src="/images/gelu.png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">gelu_1</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="comment"># 使用numpy实现</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0.5</span> * x * (<span class="number">1</span> + np.tanh(np.sqrt(<span class="number">2</span> / np.pi) * (x + <span class="number">0.044715</span> * x ** <span class="number">3</span>)))</span><br></pre></td></tr></table></figure>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li>在深度不是特别深的CNN中，激活函数的影响一般不会太大。</li>
+<li>网络输出层使用Sigmoid</li>
+<li>网络中间层优先使用ReLU</li>
+<li>深层网络使用Mish、Swish</li>
+<li>float16/int8时使用ReLU6</li>
+<li>轻量级网络可以将Sigmoid换成Hard-Sigmoid，Swish换成Hard-Swish</li>
+</ul>
+
           
         
       
@@ -1546,7 +1574,18 @@ mjx-container[display="true"] + br {
         
           <h1 id="Batch-Normalization"><a href="#Batch-Normalization" class="headerlink" title="Batch Normalization"></a>Batch Normalization</h1><p>Batch Normalization的目的就是使我们的feature map满足均值为0，方差为1的分布规律</p>
 <p><img src="/images/bn1.png"></p>
-<p><img src="/images/bn2.png"></p>
+<p>作用：</p>
+<ol>
+<li>加快网络的训练和收敛的速度</li>
+<li>控制梯度爆炸防止梯度消失</li>
+<li>防止过拟合</li>
+</ol>
+<p>分析：<br>（1）加快收敛速度：在深度神经网络中中，如果每层的数据分布都不一样的话，将会导致网络非常难收敛和训练，而如果把 每层的数据都在转换在均值为零，方差为1 的状态下，这样每层数据的分布都是一样的训练会比较容易收敛。</p>
+<p>（2）防止梯度爆炸和梯度消失：</p>
+<p>以sigmoid函数为例，sigmoid函数使得输出在[0,1]之间，实际上当x道了一定的大小，经过sigmoid函数后输出范围就会变得很小</p>
+<p>梯度消失：在深度神经网络中，如果网络的激活输出很大，其对应的梯度就会很小，导致网络的学习速率就会很慢，假设网络中每层的学习梯度都小于最大值0.25，网络中有n层，因为链式求导的原因，第一层的梯度将会小于0.25的n次方，所以学习速率相对来说会变的很慢，而对于网络的最后一层只需要对自身求导一次，梯度就大，学习速率就会比较快，这就会造成在一个很深的网络中，浅层基本不学习，权值变化小，而后面几层网络一直学习，后面的网络基本可以表征整个网络，这样失去了深度的意义。（使用BN层归一化后，网络的输出就不会很大，梯度就不会很小）</p>
+<p>梯度爆炸：第一层偏移量的梯度=激活层斜率1x权值1x激活层斜率2x…激活层斜率(n-1)x权值(n-1)x激活层斜率n，假如激活层斜率均为最大值0.25，所有层的权值为100，这样梯度就会指数增加。（使用bn层后权值的更新也不会很大）</p>
+<p>BN算法防止过拟合：在网络的训练中，BN的使用使得一个minibatch中所有样本都被关联在了一起，因此网络不会从某一个训练样本中生成确定的结果，即同样一个样本的输出不再仅仅取决于样本的本身，也取决于跟这个样本同属一个batch的其他样本，而每次网络都是随机取batch，这样就会使得整个网络不会朝这一个方向使劲学习。一定程度上避免了过拟合。</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2022/11/04/Batch-Normalization/#more" rel="contents">
@@ -1686,7 +1725,7 @@ mjx-container[display="true"] + br {
        	<h3 class="widget-title">Tag Cloud</h3>
     	<div id="myCanvasContainer" class="widget tagcloud">
         		<canvas width="250" height="250" id="resCanvas" style="width=100%">
-            		<ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CNN/" rel="tag">CNN</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DL/" rel="tag">DL</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenCV/" rel="tag">OpenCV</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pandas/" rel="tag">Pandas</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/co-lab/" rel="tag">co-lab</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/conda/" rel="tag">conda</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pytorch/" rel="tag">pytorch</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%9B%E6%89%A3/" rel="tag">力扣</a><span class="tag-list-count">20</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" rel="tag">图像处理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a><span class="tag-list-count">2</span></li></ul>
+            		<ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CNN/" rel="tag">CNN</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DL/" rel="tag">DL</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenCV/" rel="tag">OpenCV</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pandas/" rel="tag">Pandas</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/co-lab/" rel="tag">co-lab</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/conda/" rel="tag">conda</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pytorch/" rel="tag">pytorch</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%9B%E6%89%A3/" rel="tag">力扣</a><span class="tag-list-count">20</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" rel="tag">图像处理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a><span class="tag-list-count">2</span></li></ul>
         		</canvas>
     	</div>
 	</div>
