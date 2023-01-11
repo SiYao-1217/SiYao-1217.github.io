@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh_CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="C++,QT," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="什么是QT QT是一个跨平台的C++图像用户界面应用程序框架 QT在1991年由奇趣科技开发 QT的优点 跨平台,几乎支持所有平台 接口简单，容易上手 一定程度上简化了内存回收机制 有很好的社区氛围 可以进行嵌入式开发">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Qt简单介绍">
+<meta property="og:url" content="http://example.com/2023/01/11/Qt%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D/index.html">
+<meta property="og:site_name" content="YAO">
+<meta property="og:description" content="什么是QT QT是一个跨平台的C++图像用户界面应用程序框架 QT在1991年由奇趣科技开发 QT的优点 跨平台,几乎支持所有平台 接口简单，容易上手 一定程度上简化了内存回收机制 有很好的社区氛围 可以进行嵌入式开发">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-01-11T13:24:53.000Z">
+<meta property="article:modified_time" content="2023-01-11T16:45:24.830Z">
+<meta property="article:author" content="思遥Yao">
+<meta property="article:tag" content="C++">
+<meta property="article:tag" content="QT">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":"ture","scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://example.com/2023/01/11/Qt简单介绍/"/>
+
+
+
+
+
+  <title>Qt简单介绍 | YAO</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh_CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">YAO</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">为往圣继绝学</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/01/11/Qt%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/cat.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YAO">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Qt简单介绍</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2023-01-11T21:24:53+08:00">
+                2023-01-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="什么是QT"><a href="#什么是QT" class="headerlink" title="什么是QT"></a>什么是QT</h3><ul>
+<li>QT是一个跨平台的C++图像用户界面应用程序框架</li>
+<li>QT在1991年由奇趣科技开发</li>
+<li>QT的优点<ul>
+<li>跨平台,几乎支持所有平台</li>
+<li>接口简单，容易上手</li>
+<li>一定程度上简化了内存回收机制</li>
+<li>有很好的社区氛围</li>
+<li>可以进行嵌入式开发</li>
+</ul>
+</li>
+</ul>
+<span id="more"></span>
+<h1 id="QWidget"><a href="#QWidget" class="headerlink" title="QWidget"></a>QWidget</h1><h3 id="QT注意事项"><a href="#QT注意事项" class="headerlink" title="QT注意事项"></a>QT注意事项</h3><ul>
+<li>命名规范<ul>
+<li>类名 首字母大写，单词和单词之间首字母大写</li>
+<li>函数名 变量名称 首字母小写,单词和单词之间首字母大写</li>
+</ul>
+</li>
+<li>快捷键<ul>
+<li>注释 ctrl + /</li>
+<li>运行 ctrl + r</li>
+<li>编译 ctrl + b</li>
+<li>查找 ctrl + f</li>
+<li>帮助文档 F1</li>
+<li>自动对齐 ctrl + i</li>
+<li>同名的.h和.cpp切换 F4</li>
+</ul>
+</li>
+</ul>
+<h3 id="按钮"><a href="#按钮" class="headerlink" title="按钮"></a>按钮</h3><ul>
+<li>按钮常用API</li>
+</ul>
+<ol>
+<li>show() 以顶层方式弹出窗口控件</li>
+<li>setParent() 选择依赖方式</li>
+<li>setText() 设置文本</li>
+<li>resize() 重置窗口大小</li>
+<li>move() 移动</li>
+<li>setWindowTitle() 设置窗口大小</li>
+<li>setFixedSize() 设置固定窗口大小</li>
+</ol>
+<h3 id="QT中的对象树"><a href="#QT中的对象树" class="headerlink" title="QT中的对象树"></a>QT中的对象树</h3><ol>
+<li>当创建的对象在堆区的时候,如果指定的付钱是QObject 派生下来的类或者子类</li>
+<li>派生下来的类,可以不需要管理释放操作,会将对象放入对象树<br>一定程度上简化了内存回收机制</li>
+</ol>
+<h3 id="QT的窗口坐标系"><a href="#QT的窗口坐标系" class="headerlink" title="QT的窗口坐标系"></a>QT的窗口坐标系</h3><ol>
+<li>笛卡尔坐标系[左上角为0,0点]</li>
+</ol>
+<h3 id="QT信号和槽"><a href="#QT信号和槽" class="headerlink" title="QT信号和槽"></a>QT信号和槽</h3><ul>
+<li>connect( 信号的发送者 ,信号的具体信息, 信号的接受者,信号的处理[槽])</li>
+<li>信号槽的优点 松散耦合<ul>
+<li>信号发送端 和 接收端本身是没有关联的,通过connectl连接,将两者耦合在一起</li>
+<li>信号关键字：Signals<ul>
+<li>chlicked(bool) 点击</li>
+<li>pressed() 按下</li>
+<li>released() 释放</li>
+<li>toggled(bool) 切换状态</li>
+</ul>
+</li>
+<li>槽的关键字：Slots</li>
+</ul>
+</li>
+<li>自定义信号和槽位函数<ul>
+<li>自定义信号<ul>
+<li>写在类的signals下,返回值为void,可以有参数,支持重载,不需要实现</li>
+</ul>
+</li>
+<li>自定义槽函数<ul>
+<li>不能写在signals下,public slots[公共的槽函数] 5.4版本以后全局函数或者public都行</li>
+<li>返回值也是void,需要声明,也需要实现,可以有参数,支持重载</li>
+</ul>
+</li>
+<li>然后用connect连接信号和槽</li>
+<li>触发信号 emit</li>
+<li>信号和槽重载，需要函数指针，明确指向函数的地址</li>
+<li>QString 转char * 使用.toUtf8().data()</li>
+<li>信号和槽连接：触发这个信号才能触发槽<ul>
+<li>一个信号可以连接多个槽</li>
+<li>多个信号也可以连接同一个槽函数</li>
+<li>信号和槽的参数和类型必须对应</li>
+<li>信号的参数个数可以多于槽的参数个数</li>
+</ul>
+</li>
+<li>信号和信号连接 触发一个信号也能触发另外一个信号</li>
+<li>断开信号 disconnect(参数一样)</li>
+</ul>
+</li>
+</ul>
+<h3 id="Lambda表达式"><a href="#Lambda表达式" class="headerlink" title="Lambda表达式"></a>Lambda表达式</h3><ul>
+<li>C++11版本特性 [CONFIG += c++11] 匿名函数对象<ul>
+<li>Lambda表达式函数声明 <a href=""></a>{}<ul>
+<li>[=] 允许使用局部变量</li>
+<li>[&amp;] 允许使用引用传递变量</li>
+<li>[变量] 允许变量使用值传递</li>
+<li>mutable 可修改值传递进来的参数[虽然还是局部变量]<ul>
+<li><a href="">m</a>mutable{m+=100;打印}; 不加mutable会报错</li>
+</ul>
+</li>
+<li>-&gt;类型 带返回值<ul>
+<li>int ret = <a href=""></a>-&gt;int{return 1000}();</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Lambda表达式函数调用 <a href=""></a>{}()</li>
+<li>最常见的<a href="">=</a>{}</li>
+</ul>
+</li>
+</ul>
+<h1 id="MainWindow"><a href="#MainWindow" class="headerlink" title="MainWindow"></a>MainWindow</h1><h3 id="菜单栏-QMenuBar"><a href="#菜单栏-QMenuBar" class="headerlink" title="菜单栏 QMenuBar"></a>菜单栏 QMenuBar</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">* 菜单栏最多只能有一个</span><br><span class="line">    + QMenuBar * bar = menuBar(); setMenuBar(bar);</span><br><span class="line">    + 创建菜单</span><br><span class="line">        * QMenu * fileMenu = bar-&gt;addMenu(&quot;文件&quot;);</span><br><span class="line">            + 创建菜单栏目</span><br><span class="line">                * QAction * newAction =  fileMenu-&gt;addAction(&quot;新建&quot;);</span><br><span class="line">            + 添加分隔符 </span><br><span class="line">                * fileMenu-&gt;addSeparator();</span><br></pre></td></tr></table></figure>
+<h3 id="工具栏-QToolBar"><a href="#工具栏-QToolBar" class="headerlink" title="工具栏 QToolBar"></a>工具栏 QToolBar</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">* 工具栏可以有多个</span><br><span class="line">    + QToolBar * toolBar = new QToolBar(this);  </span><br><span class="line">    + addToolBar(toolBar);</span><br><span class="line">        * 可选参数 默认停靠范围</span><br><span class="line">            + addToolBar(Qt::BottomToolBarArea,toolBar);</span><br><span class="line">        * 只允许左右停靠</span><br><span class="line">            + toolBar-&gt;setAllowedAreas(Qt::LeftToolBarArea | Qt::RightToolBarArea);</span><br><span class="line">        * 取消浮动</span><br><span class="line">            + toolBar-&gt;setFloatable(false);</span><br><span class="line">        * 设置禁止移动</span><br><span class="line">            + toolBar-&gt;setMovable(false);</span><br><span class="line">        * 给工具栏设置栏目</span><br><span class="line">            + toolBar-&gt;addAction(&quot;绝了&quot;或者QAction);</span><br><span class="line">        * 给工具栏添加控件</span><br><span class="line">            + toolBar-&gt;addWidget(QPushButton按钮);</span><br></pre></td></tr></table></figure>
+<h3 id="状态栏-QStatusBar"><a href="#状态栏-QStatusBar" class="headerlink" title="状态栏 QStatusBar"></a>状态栏 QStatusBar</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">* 状态栏最多只能有一个</span><br><span class="line">    + QStatusBar * stBar = statusBar();</span><br><span class="line">    + setStatusBar(stBar);</span><br><span class="line">        * 添加标签控件</span><br><span class="line">            + QLabel * label = new QLabel(&quot;左侧提示的信息&quot;,this);</span><br><span class="line">            + QLabel * label1 = new QLabel(&quot;右侧提示的信息&quot;,this);</span><br><span class="line">            + stBar-&gt;addWidget(label);</span><br><span class="line">            + stBar-&gt;addPermanentWidget(label1);</span><br></pre></td></tr></table></figure>
+<h3 id="铆接部件-QDockWidget"><a href="#铆接部件-QDockWidget" class="headerlink" title="铆接部件 QDockWidget"></a>铆接部件 QDockWidget</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">* 铆接部件可以有多个</span><br><span class="line">    + QDockWidget * dockWidget = new QDockWidget(&quot;浮动&quot;,this);</span><br><span class="line">    + addDockWidget(Qt::BottomDockWidgetArea,dockWidget); 放置位置下面 如果没有中心部件默认占满</span><br><span class="line">        + 只允许上下</span><br><span class="line">                * dockWidget-&gt;setAllowedAreas(Qt::TopDockWidgetArea | Qt::BottomDockWidgetArea);  </span><br></pre></td></tr></table></figure>
+<h3 id="中心部件"><a href="#中心部件" class="headerlink" title="中心部件"></a>中心部件</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">* 中心内容也只能有一个</span><br><span class="line">    + 文本窗口 QTextEdit</span><br><span class="line">        + QTextEdit * edit = new QTextEdit(this);</span><br><span class="line">        + setCentralWidget(edit); //设置中心部件</span><br></pre></td></tr></table></figure>
+<h3 id="资源文件"><a href="#资源文件" class="headerlink" title="资源文件"></a>资源文件</h3><ol>
+<li>将图片文件文件夹拷贝到项目下</li>
+<li>右键项目-&gt;添加新文件-&gt;Qt-&gt;Qt recourse File</li>
+<li>res 生成 res.qrc</li>
+<li>右键res.qrc-&gt;open in editor 编辑资源</li>
+<li>添加前缀 添加文件</li>
+<li>使用 “: + 前缀名 + 文件名”</li>
+</ol>
+<h3 id="小总结"><a href="#小总结" class="headerlink" title="小总结"></a>小总结</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+ 只能有一个的是set 可以允许多个是add</span><br></pre></td></tr></table></figure>
+<h3 id="对话框"><a href="#对话框" class="headerlink" title="对话框"></a>对话框</h3><ul>
+<li>模态对话框 不可以对其他窗口进行操作<ul>
+<li>QDialog dlg(this);</li>
+<li>dlg.exec();</li>
+<li>消息对话框<ul>
+<li>错误对话框 QMessageBox::critical(this,”critical”,”错误”);</li>
+<li>信息对话框 information</li>
+<li>提问对话框 question</li>
+<li>警告对话框warning</li>
+<li>颜色对话框<ul>
+<li>QColor a = QColorDialog::getColor(QColor(255,0,0));</li>
+</ul>
+</li>
+<li>文件对话框 最后一个是过滤<ul>
+<li>QString str = QFileDialog::getOpenFileName(this,”打开文件”,”./“,”(*.cpp)”);</li>
+</ul>
+</li>
+<li>字体对话框<ul>
+<li>bool flag;</li>
+<li>QFont font = QFontDialog::getFont(&amp;flag,QFont(“华文彩云”,12));</li>
+<li>setFont(font);//设置字体</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>非模态对话框 可以对其他窗口进行操作<ul>
+<li>QDialog *dlg2 = new QDialog(this); //为了确保不释放,开在堆上</li>
+<li>dlg2-&gt;show();</li>
+<li>dlg2-&gt;setAttribute(Qt::WA_DeleteOnClose);//55号 用于按关闭键自动释放[QWidge的对象树是在关闭总的窗口才会全部释放]</li>
+</ul>
+</li>
+</ul>
+<h3 id="列表控件-listWidget"><a href="#列表控件-listWidget" class="headerlink" title="列表控件 listWidget"></a>列表控件 listWidget</h3><ul>
+<li>QListWidgetItem * item = new QListWidgetItem(“锄禾日当午”);</li>
+<li>ui-&gt;listWidget-&gt;addItem(item); //添加进去</li>
+<li>item-&gt;setTextAlignment(Qt::AlignCenter); //居中</li>
+</ul>
+<h3 id="ui窗口自布局"><a href="#ui窗口自布局" class="headerlink" title="ui窗口自布局"></a>ui窗口自布局</h3><ol>
+<li>Spacers 弹簧 Widget div盒子</li>
+<li>Group Box 分组[适用于Radio Button]</li>
+<li>主窗口设置垂直布局后可以在sizePolicy-&gt;垂直策略-&gt;Fixed来使组件高度合适</li>
+<li>如果找不到某个组件的信号或者槽，找基类</li>
+</ol>
+<h3 id="自定义组件"><a href="#自定义组件" class="headerlink" title="自定义组件"></a>自定义组件</h3><ol>
+<li>add new -&gt; 设计师类</li>
+<li>使用自定义组件<ul>
+<li>查看基类[如widget] 从界面库中拖出来一个widget组件,然后点击提升为,写入类名<ul>
+<li>[设置全局后可以直接在右键中显示]<br>3 自定义组件只有同基类才能被提升</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="QT事件-QEvent"><a href="#QT事件-QEvent" class="headerlink" title="QT事件 QEvent"></a>QT事件 QEvent</h3><ul>
+<li>鼠标事件<ul>
+<li>事件是虚函数,可以进行重载<br>//鼠标进入事件<br>virtual void enterEvent(QEvent <em>event);<br>//鼠标离开事件<br>virtual void leaveEvent(QEvent </em>event);<br>//鼠标按下<br>virtual void mouseReleaseEvent(QMouseEvent <em>ev);<br>//鼠标释放<br>virtual void mousePressEvent(QMouseEvent </em>ev);<br>//鼠标移动<br>virtual void mouseMoveEvent(QMouseEvent *ev);  </li>
+</ul>
+</li>
+<li>定时器 QTimeEvent<ul>
+<li>利用事件实现定时器<ul>
+<li>startTimer(1000); 启动定时器，单位毫秒,返回一个唯一定时器id</li>
+<li>void timerEvent(QTimerEvent * ev)<ul>
+<li>定时器函数,可以通过ev-&gt;timerId()== id1来判断当前是哪个id进来的</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>定时器类QTimer<ul>
+<li>//通过定时器类<br>QTimer * timer = new QTimer(this);<br>//启动定时器 每隔500秒发一个信号<br>timer-&gt;start(500);<br>//连接信号<br>connect(timer,&amp;QTimer::timeout,中括号小括号{<br>static int num = 1;<br>ui-&gt;label_5-&gt;setText(QString::number(num++));<br>});  </li>
+</ul>
+</li>
+</ul>
+</li>
+<li>event事件分发器<ul>
+<li>bool event(QEvent * ev)<ul>
+<li>返回值是bool类型，如果返回true，代表用户要处理这个事件,不向下分发事件了[类似于钩子]</li>
+</ul>
+</li>
+<li>事件枚举QEvent<ul>
+<li>ev.type();</li>
+<li>拦截后使用子类的操作可以使用静态类型转换<ul>
+<li>QMouseEvent <em>ev = static_cast&lt;QMouseEvent </em>&gt;(QEvent中行参);</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>但是尽量别拦截</li>
+</ul>
+</li>
+<li>事件过滤器<ul>
+<li>在app到事件分发器前还能做个过滤</li>
+<li>使用方式<ul>
+<li>给控件安装时间过滤器<ul>
+<li>installEventFilter(this);</li>
+</ul>
+</li>
+<li>重写eventfilter事件</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="绘图-QPainter"><a href="#绘图-QPainter" class="headerlink" title="绘图 QPainter"></a>绘图 QPainter</h3><ul>
+<li>绘图事件 void paintEvent(QPaintEvent *)</li>
+<li>画家类 QPainter(构图的设备)<ul>
+<li>拿起笔 .setPen(笔)</li>
+<li>拿起刷子 .setBrush(刷子)</li>
+</ul>
+</li>
+<li>画笔类 QPen(笔的颜色)</li>
+<li>画刷类 QBrush(笔的颜色)</li>
+<li>高级操作<ul>
+<li>效率降低的抗锯齿<ul>
+<li>painter.setRenderHint()</li>
+</ul>
+</li>
+<li>改变画家位置<ul>
+<li>painter.save();保存当前位置</li>
+<li>painter.restore(); 还原到保存的位置</li>
+<li>painter.translate(); 移动画家</li>
+</ul>
+</li>
+<li>画家绘制图片drawPixmap</li>
+</ul>
+</li>
+</ul>
+<h3 id="绘图设备"><a href="#绘图设备" class="headerlink" title="绘图设备"></a>绘图设备</h3><ul>
+<li>QPixmap 专门对图像显示做了优化</li>
+<li>QBitmap 色深限定为1</li>
+<li>QImage 专门为图像的像素级访问做了优化</li>
+<li>QPicture 可以记录和重视画家的QPainter的各类命令<ul>
+<li>自定义绘图操作 </li>
+</ul>
+</li>
+</ul>
+<h3 id="文件读写-QFile"><a href="#文件读写-QFile" class="headerlink" title="文件读写 QFile"></a>文件读写 QFile</h3><ul>
+<li>file.open(打开方式) QtODevice::readOnly</li>
+<li>全部读取 file.readAll() 按行读 file.readLine() 判断文件末尾atend()</li>
+<li>QFile默认支持的是utf-8 指定格式 QTextCodec<ul>
+<li>QTextCodec *codec = QTextCodec::codecForName(“gbk”);</li>
+<li>ui-&gt;textEdit-&gt;setText(codec-&gt;toUnicode(array)); </li>
+</ul>
+</li>
+<li>关闭文件对象 file.close();</li>
+</ul>
+<h3 id="文件信息-QFileInfo"><a href="#文件信息-QFileInfo" class="headerlink" title="文件信息 QFileInfo"></a>文件信息 QFileInfo</h3><ul>
+<li>QFileInfo info(path);</li>
+<li>后缀名 info.suffix()</li>
+<li>创建日期 info.birthTime().toString(“yyyy/MM/dd hh:mm:ss”);</li>
+<li>修改日期 info.lastModified().toString(“yyyy/MM/dd hh:mm:ss”);</li>
+</ul>
+<h3 id="Qss-前端人狂喜"><a href="#Qss-前端人狂喜" class="headerlink" title="Qss 前端人狂喜"></a>Qss 前端人狂喜</h3><ul>
+<li><h1 id="myButton-这里的id实际上就是objectName指定的值"><a href="#myButton-这里的id实际上就是objectName指定的值" class="headerlink" title="myButton 这里的id实际上就是objectName指定的值"></a>myButton 这里的id实际上就是objectName指定的值</h1></li>
+<li>伪状态<ul>
+<li>:active 当小部件驻留在活动窗口中时，将设置此状态</li>
+<li>:checked    该控件被选中时候的状态</li>
+<li>:hover    鼠标在控件上方</li>
+<li>:pressed    该控件被按下时的状态</li>
+<li>:disabled    该控件禁用时的状态</li>
+<li>:first    该控件是第一个（列表中）</li>
+<li>:focus    该控件有输入焦点时</li>
+</ul>
+</li>
+</ul>
+<h3 id="动画-QPropertyAnimation"><a href="#动画-QPropertyAnimation" class="headerlink" title="动画 QPropertyAnimation"></a>动画 QPropertyAnimation</h3><p>//winLabel 你要对那个组件使用动画  geometry几何结构<br>QPropertyAnimation * an = new QPropertyAnimation(winLabel,”geometry”);<br>//动画时间<br>an-&gt;setDuration(1000);<br>//动画开始<br>an-&gt;setStartValue(QRect(winLabel-&gt;x(),winLabel-&gt;y(),winLabel-&gt;width(),winLabel-&gt;height()));<br>//动画结束<br>an-&gt;setEndValue(QRect(winLabel-&gt;x(),winLabel-&gt;y() + 300,winLabel-&gt;width(),winLabel-&gt;height()));<br>//动画方式<br>an-&gt;setEasingCurve(QEasingCurve::OutBounce);<br>an-&gt;start();  </p>
+<h3 id="背景音乐-QSound"><a href="#背景音乐-QSound" class="headerlink" title="背景音乐 QSound"></a>背景音乐 QSound</h3><ul>
+<li>qmake: QT += multimedia</li>
+<li>QSound * startSound = new QSound(“:/res/TapButtonSound.wav”,this); 载入音效</li>
+<li>startSound-&gt;play(); 播放</li>
+<li>startSound-&gt;setLoops(-1); -1循环次数无限</li>
+</ul>
+<h3 id="打包发布"><a href="#打包发布" class="headerlink" title="打包发布"></a>打包发布</h3><ul>
+<li>debug-&gt;release</li>
+<li>运行 运行失败添加环境变量D:\QT\5.12.3\mingw73_64\lib</li>
+<li>把 Goldreverse.exe 单独丢到一个文件夹下</li>
+<li>cmd中路径后windeployqt .\Goldreverse.exe 运行</li>
+<li>此时已经可以使用了</li>
+<li>深入打包[hm nis edit][<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1g4411H78N?p=63&amp;spm_id_from=pageDriver">https://www.bilibili.com/video/BV1g4411H78N?p=63&amp;spm_id_from=pageDriver</a>]</li>
+<li>HM NIS Edit 和 NSIS</li>
+</ul>
+<h3 id="案例-翻金币"><a href="#案例-翻金币" class="headerlink" title="案例:翻金币"></a>案例:翻金币</h3><ul>
+<li>收获<ol>
+<li>删除资源文件后需要删除debug文件,不然会报错</li>
+<li>界面的切换可以使用信号和槽 即其它界面emit发送一个信号,主界面接收<ul>
+<li>当然也可以选择记录父类指针,但是必须要在构造函数中多传个参数，而不是使用默认的parent</li>
+</ul>
+</li>
+<li>在按钮上方有其他组件，可以使用label-&gt;setAttribute(Qt::WA_TransparentForMouseEvents);让其可以点到按钮[51号属性]</li>
+<li>界面翻转金币 本质上是个按钮 <ul>
+<li>人点击后 </li>
+<li>金币触发翻转</li>
+<li>定时器每隔30ms发送一次信号给金币</li>
+<li>金币触发图片重新放置,到最大值或者最小值的时候关闭定时器</li>
+<li>金币中有坐标i 和 j 以及一个flag 来确定该金币在页面中的位置</li>
+</ul>
+</li>
+<li>锁定窗口 m_chooseScence-&gt;setGeometry(this-&gt;geometry()); 每次进入或者退出都锁定他的位置</li>
+</ol>
+</li>
+<li>延时器<br>QTimer::singleShot(毫秒,拉姆达表达式);</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/C/" rel="tag"># C++</a>
+          
+            <a href="/tags/QT/" rel="tag"># QT</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2023/01/11/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/" rel="next" title="快速排序">
+                <i class="fa fa-chevron-left"></i> 快速排序
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2023/01/11/YOLO-V4/" rel="prev" title="YOLO V4">
+                YOLO V4 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/cat.jpg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFQT"><span class="nav-number">1.</span> <span class="nav-text">什么是QT</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#QWidget"><span class="nav-number"></span> <span class="nav-text">QWidget</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#QT%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-number">1.</span> <span class="nav-text">QT注意事项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%89%E9%92%AE"><span class="nav-number">2.</span> <span class="nav-text">按钮</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#QT%E4%B8%AD%E7%9A%84%E5%AF%B9%E8%B1%A1%E6%A0%91"><span class="nav-number">3.</span> <span class="nav-text">QT中的对象树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#QT%E7%9A%84%E7%AA%97%E5%8F%A3%E5%9D%90%E6%A0%87%E7%B3%BB"><span class="nav-number">4.</span> <span class="nav-text">QT的窗口坐标系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#QT%E4%BF%A1%E5%8F%B7%E5%92%8C%E6%A7%BD"><span class="nav-number">5.</span> <span class="nav-text">QT信号和槽</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">6.</span> <span class="nav-text">Lambda表达式</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MainWindow"><span class="nav-number"></span> <span class="nav-text">MainWindow</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8F%9C%E5%8D%95%E6%A0%8F-QMenuBar"><span class="nav-number">1.</span> <span class="nav-text">菜单栏 QMenuBar</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B7%A5%E5%85%B7%E6%A0%8F-QToolBar"><span class="nav-number">2.</span> <span class="nav-text">工具栏 QToolBar</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8A%B6%E6%80%81%E6%A0%8F-QStatusBar"><span class="nav-number">3.</span> <span class="nav-text">状态栏 QStatusBar</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%93%86%E6%8E%A5%E9%83%A8%E4%BB%B6-QDockWidget"><span class="nav-number">4.</span> <span class="nav-text">铆接部件 QDockWidget</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%AD%E5%BF%83%E9%83%A8%E4%BB%B6"><span class="nav-number">5.</span> <span class="nav-text">中心部件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B5%84%E6%BA%90%E6%96%87%E4%BB%B6"><span class="nav-number">6.</span> <span class="nav-text">资源文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%8F%E6%80%BB%E7%BB%93"><span class="nav-number">7.</span> <span class="nav-text">小总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E8%AF%9D%E6%A1%86"><span class="nav-number">8.</span> <span class="nav-text">对话框</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%97%E8%A1%A8%E6%8E%A7%E4%BB%B6-listWidget"><span class="nav-number">9.</span> <span class="nav-text">列表控件 listWidget</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ui%E7%AA%97%E5%8F%A3%E8%87%AA%E5%B8%83%E5%B1%80"><span class="nav-number">10.</span> <span class="nav-text">ui窗口自布局</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E7%BB%84%E4%BB%B6"><span class="nav-number">11.</span> <span class="nav-text">自定义组件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#QT%E4%BA%8B%E4%BB%B6-QEvent"><span class="nav-number">12.</span> <span class="nav-text">QT事件 QEvent</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%98%E5%9B%BE-QPainter"><span class="nav-number">13.</span> <span class="nav-text">绘图 QPainter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%98%E5%9B%BE%E8%AE%BE%E5%A4%87"><span class="nav-number">14.</span> <span class="nav-text">绘图设备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99-QFile"><span class="nav-number">15.</span> <span class="nav-text">文件读写 QFile</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E4%BF%A1%E6%81%AF-QFileInfo"><span class="nav-number">16.</span> <span class="nav-text">文件信息 QFileInfo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Qss-%E5%89%8D%E7%AB%AF%E4%BA%BA%E7%8B%82%E5%96%9C"><span class="nav-number">17.</span> <span class="nav-text">Qss 前端人狂喜</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#myButton-%E8%BF%99%E9%87%8C%E7%9A%84id%E5%AE%9E%E9%99%85%E4%B8%8A%E5%B0%B1%E6%98%AFobjectName%E6%8C%87%E5%AE%9A%E7%9A%84%E5%80%BC"><span class="nav-number"></span> <span class="nav-text">myButton 这里的id实际上就是objectName指定的值</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A8%E7%94%BB-QPropertyAnimation"><span class="nav-number">1.</span> <span class="nav-text">动画 QPropertyAnimation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%83%8C%E6%99%AF%E9%9F%B3%E4%B9%90-QSound"><span class="nav-number">2.</span> <span class="nav-text">背景音乐 QSound</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%93%E5%8C%85%E5%8F%91%E5%B8%83"><span class="nav-number">3.</span> <span class="nav-text">打包发布</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A1%88%E4%BE%8B-%E7%BF%BB%E9%87%91%E5%B8%81"><span class="nav-number">4.</span> <span class="nav-text">案例:翻金币</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+       
+       <script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+       <script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+       <div class="widget-wrap">
+       	<h3 class="widget-title">Tag Cloud</h3>
+    	<div id="myCanvasContainer" class="widget tagcloud">
+        		<canvas width="250" height="250" id="resCanvas" style="width=100%">
+            		<ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CNN/" rel="tag">CNN</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DL/" rel="tag">DL</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenCV/" rel="tag">OpenCV</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pandas/" rel="tag">Pandas</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/QT/" rel="tag">QT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/co-lab/" rel="tag">co-lab</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/conda/" rel="tag">conda</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pytorch/" rel="tag">pytorch</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%9B%E6%89%A3/" rel="tag">力扣</a><span class="tag-list-count">20</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" rel="tag">图像处理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a><span class="tag-list-count">3</span></li></ul>
+        		</canvas>
+    	</div>
+	</div>
+	
+
+
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">思遥Yao</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>
