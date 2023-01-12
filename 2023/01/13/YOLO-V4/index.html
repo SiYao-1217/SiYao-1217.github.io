@@ -79,18 +79,40 @@
 
 
 
-<meta name="description" content="保持好奇">
+<meta name="description" content="yoloV4yoloV4的前世今生 前世：Yolo V3 多尺度检测头，resblock darknet53 YoloV2：全流程多尺度方法：数据多尺度，网络检测头多尺度 YoloV1：直接回归出位置 今生：主干特征提取网络：CSPDarkNet53 输入为416x416：">
 <meta property="og:type" content="article">
 <meta property="og:title" content="YOLO V4">
-<meta property="og:url" content="http://example.com/2023/01/11/YOLO-V4/index.html">
+<meta property="og:url" content="http://example.com/2023/01/13/YOLO-V4/index.html">
 <meta property="og:site_name" content="YAO">
-<meta property="og:description" content="保持好奇">
+<meta property="og:description" content="yoloV4yoloV4的前世今生 前世：Yolo V3 多尺度检测头，resblock darknet53 YoloV2：全流程多尺度方法：数据多尺度，网络检测头多尺度 YoloV1：直接回归出位置 今生：主干特征提取网络：CSPDarkNet53 输入为416x416：">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-01-11T13:29:45.000Z">
-<meta property="article:modified_time" content="2023-01-11T13:32:03.672Z">
+<meta property="og:image" content="http://example.com/images/CSPDN1.png">
+<meta property="og:image" content="http://example.com/images/CSPDN2.png">
+<meta property="og:image" content="http://example.com/images/act13.png">
+<meta property="og:image" content="http://example.com/images/resblock.png">
+<meta property="og:image" content="http://example.com/images/spp.png">
+<meta property="og:image" content="http://example.com/images/panet.png">
+<meta property="og:image" content="http://example.com/images/paneto.png">
+<meta property="og:image" content="http://example.com/images/nms.png">
+<meta property="og:image" content="http://example.com/images/egs1.png">
+<meta property="og:image" content="http://example.com/images/egs2.png">
+<meta property="og:image" content="http://example.com/images/mosaic.png">
+<meta property="og:image" content="http://example.com/images/it1.png">
+<meta property="og:image" content="http://example.com/images/it2.png">
+<meta property="og:image" content="http://example.com/images/it3.png">
+<meta property="og:image" content="http://example.com/images/ls1.png">
+<meta property="og:image" content="http://example.com/images/ls2.png">
+<meta property="og:image" content="http://example.com/images/ca.png">
+<meta property="og:image" content="http://example.com/images/giou.png">
+<meta property="og:image" content="http://example.com/images/diou1.png">
+<meta property="og:image" content="http://example.com/images/diou2.png">
+<meta property="og:image" content="http://example.com/images/ciou.png">
+<meta property="article:published_time" content="2023-01-12T16:52:45.000Z">
+<meta property="article:modified_time" content="2023-01-12T16:54:34.405Z">
 <meta property="article:author" content="思遥Yao">
 <meta property="article:tag" content="pytorch">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/CSPDN1.png">
 
 
 
@@ -120,7 +142,7 @@
 
 
 
-  <link rel="canonical" href="http://example.com/2023/01/11/YOLO-V4/"/>
+  <link rel="canonical" href="http://example.com/2023/01/13/YOLO-V4/"/>
 
 
 
@@ -253,7 +275,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/01/11/YOLO-V4/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/01/13/YOLO-V4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -282,8 +304,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2023-01-11T21:29:45+08:00">
-                2023-01-11
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2023-01-13T00:52:45+08:00">
+                2023-01-13
               </time>
             
 
@@ -320,7 +342,75 @@
       
 
       
-        
+        <h1 id="yoloV4"><a href="#yoloV4" class="headerlink" title="yoloV4"></a>yoloV4</h1><p>yoloV4的前世今生</p>
+<h2 id="前世："><a href="#前世：" class="headerlink" title="前世："></a>前世：</h2><p>Yolo V3 多尺度检测头，resblock darknet53</p>
+<p>YoloV2：全流程多尺度方法：数据多尺度，网络检测头多尺度</p>
+<p>YoloV1：直接回归出位置</p>
+<h2 id="今生："><a href="#今生：" class="headerlink" title="今生："></a>今生：</h2><p>主干特征提取网络：CSPDarkNet53</p>
+<p>输入为416x416：</p>
+<p><img src="/images/CSPDN1.png"></p>
+<span id="more"></span>
+<p>输入为608x608：</p>
+<p><img src="/images/CSPDN2.png"></p>
+<h3 id="对DarkNet53的改进："><a href="#对DarkNet53的改进：" class="headerlink" title="对DarkNet53的改进："></a>对DarkNet53的改进：</h3><p>1、激活函数使用mish</p>
+<p>Mish=x×tanh(ln(1+exp(x))</p>
+<p><img src="/images/act13.png"></p>
+<p>2、在resblock_body中使用的是CSPnet结构，相比于输入直接进入resblock中，CSP对输入分成两部分，一部分输入resblock，另一部分作skip connect</p>
+<p><img src="/images/resblock.png"></p>
+<p>3、加入了SPP结构：“<strong>它能够极大地增加感受野，分离出最显著的上下文特征</strong>”</p>
+<p><img src="/images/spp.png"></p>
+<p>CSPDarkNet53的输出，经过3个conv层后进入SPP，将经过大小为5、9、13的三个maxpool与skip connect在通道维度上堆叠</p>
+<p>4、PANet结构：特征融合</p>
+<p><img src="/images/panet.png"></p>
+<p>假设输入416，resblock body中，size为52、26、13的输出为p1、p2、p3。将p3经过conv和上采样，与conv后的p2堆叠，生成的为新的p2，这个p2再用同样的步骤，更新p1，p1下采样后与p2堆叠+conv，更新p2，同样地，更新p3。<strong>这样起到特征融合的作用</strong></p>
+<p><img src="/images/paneto.png"></p>
+<p>上图为原始的PANet的结构，可以看出来其具有<strong>一个非常重要的特点就是特征的反复提取</strong>。<br>在（a）里面是传统的特征金字塔结构，在完成特征金字塔<strong>从下到上的特征提取后</strong>，还需要实现（b）中<strong>从上到下的特征提取</strong>。</p>
+<p>输出的p1尺寸应当是（52，52，75），75=3种尺度的先验框<em>（VOC2007有20个类别+4个bbox回归参数+类别）<br>52就相当于将输入图像划分为52</em>52个网格，每个网格的左上角作为先验框的中心，预测部分就是对框中心和框的宽高进行回归。52用来检测小目标效果好，因为感受野大</p>
+<h3 id="Predict部分"><a href="#Predict部分" class="headerlink" title="Predict部分"></a>Predict部分</h3><p>以（52，52，75）为例，首先reshape（52，52，3，25），25为4+1+20，分别代表<strong>x_offset、y_offset、h和w、置信度、分类结果</strong></p>
+<p>解码过程就是将每个网格点加上它对应的<strong>x_offset和y_offset</strong>，加完后的结果就是<strong>预测框的中心</strong>，然后<strong>再利用 先验框和h、w结合 计算出预测框的长和宽。这样就能得到整个预测框的位置了</strong></p>
+<p><strong>1、取出每一类得分大于self.obj_threshold的框和得分。</strong><br><strong>2、利用框的位置和得分进行非极大抑制。</strong></p>
+<p><img src="/images/nms.png"></p>
+<h3 id="论文中提及的几个trick："><a href="#论文中提及的几个trick：" class="headerlink" title="论文中提及的几个trick："></a>论文中提及的几个trick：</h3><p><strong>• S: Eliminate grid sensitivity</strong> the equation bx = σ(tx)+ cx, by = σ(ty) +cy, where cx and cy are always whole numbers, is used in YOLOv3 for evaluating the object coordinates, therefore, extremely high tx absolute values are required for the bx value approaching the cx or cx + 1 values. We solve this problem through multiplying the sigmoid by a factor exceeding 1.0, so eliminating the effect of grid on which the object is undetectable.</p>
+<p><img src="/images/egs1.png"></p>
+<p>之前在v3中使用的sigmoid函数，但是想达到0和1的值将非常的极端，例如gt就在cell的左上角位置时，所需要预测的                                                  就应当为0，而在sigmoid函数中t_x应当取-∞，这是难以实现的</p>
+<p>所以引入了scale，主流scale设置为2</p>
+<p><img src="/images/egs2.png"></p>
+<p><strong>• M: Mosaic data augmentation</strong> - using the 4-image mosaic during training instead of single image</p>
+<p><img src="/images/mosaic.png"></p>
+<p>四张图片拼接成一张</p>
+<p> <strong>• IT: IoU threshold</strong> - using multiple anchors for a single ground truth IoU (truth, anchor) &gt; IoU threshold </p>
+<p><img src="/images/it1.png"></p>
+<p>三种anchor模板进行匹配，设置一个iou的阈值，将gt与模板的左上角对齐，选择iou&gt;阈值的模板，如上图选择对于这个anchor的就是AT2，回到特征图上，看这个gt的中心点落在哪个cell里面，那么，这个cell的AT2就作为是正样本</p>
+<p>有多个anchor模板的iou＞阈值的话，也将它们作为正样本，以扩充正样本数</p>
+<p><img src="/images/it2.png"></p>
+<p>特别的，因为在上面第一个优化策略：减少grid敏感性中，使用了带有scale的策略，使得grid cell的选取不再局限在与gt中心位置距离（0，1）的cell了，而是扩展到了（-0.5，1.5）如上图所示，左边和上边的cell的左上角点与gt中心点显然满足这一关系</p>
+<p><img src="/images/it3.png"></p>
+<p>具体扩展策略就是如上图，gt_x%1&gt;0.5，就向右扩展一个grid，&lt;0.5就向左，同理，对于gt_y就是向下或向上</p>
+<p> <strong>• GA: Genetic algorithms</strong> - using genetic algorithms for selecting the optimal hyperparameters during network training on the first 10% of time periods </p>
+<p>遗传算法</p>
+<p> <strong>• LS: Class label smoothing</strong> - using class label smoothing for sigmoid activation </p>
+<p>标签平滑</p>
+<p>通过soft one-hot来加入噪声，减少了真实样本标签的类别在计算损失函数时的权重，最终起到抑制过拟合的效果</p>
+<p><img src="/images/ls1.png"></p>
+<p><img src="/images/ls2.png"></p>
+<p>好处：</p>
+<p>1）是更加符合实际情况的分布，即不同样本之间其实是有相似的特征的，具体每一类之间有多少相似性，需要按照实际情况来考虑分配。</p>
+<p>2）Label Smoothing是分类问题中解决noisy label一种方法。当样本标签错误时，由于采样这种方法，让Loss不至于像原来那般大。</p>
+<p> <strong>• CBN: CmBN</strong> - using Cross mini-Batch Normalization for collecting statistics inside the entire batch, instead of collecting statistics inside a single mini-batch </p>
+<p><strong>• CA: Cosine annealing scheduler</strong> - altering the learning rate during sinusoid training </p>
+<p>余弦退火</p>
+<p><img src="/images/ca.png"></p>
+<p><strong>• DM: Dynamic mini-batch size</strong> - automatic increase of mini-batch size during small resolution training by using Random training shapes </p>
+<p><strong>• OA: Optimized Anchors</strong> - using the optimized anchors for training with the 512x512 network resolution </p>
+<p><strong>• GIoU, CIoU, DIoU, MSE</strong> - using different loss algorithms for bounded box regression</p>
+<p><img src="/images/giou.png"></p>
+<p>蓝色是真实边界框和预测框的最小外接矩形，<strong>Ac是蓝色的面积</strong>，u是绿色和红色并集的面积</p>
+<p>当绿色和红色是水平/垂直重叠时，giou会退化成iou</p>
+<p><img src="/images/diou1.png"></p>
+<p><img src="/images/diou2.png"></p>
+<p>b参数是预测目标边界框中心点的坐标，bgt是真实边界框的中心点坐标，ρ即欧式距离</p>
+<p><img src="/images/ciou.png"></p>
+
       
     </div>
     
@@ -350,8 +440,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2023/01/11/Qt%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D/" rel="next" title="Qt简单介绍">
-                <i class="fa fa-chevron-left"></i> Qt简单介绍
+              <a href="/2023/01/12/python%E4%B8%AD%E6%9C%89%E5%85%B3-%E2%80%A6-0-%E7%9A%84%E8%A7%A3%E6%9E%90/" rel="next" title="python中有关[…,0]的解析">
+                <i class="fa fa-chevron-left"></i> python中有关[…,0]的解析
               </a>
             
           </div>
@@ -359,10 +449,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2023/01/12/torch-linspace-%E7%94%A8%E6%B3%95/" rel="prev" title="torch.linspace()用法~">
-                torch.linspace()用法~ <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -414,8 +500,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -470,6 +565,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#yoloV4"><span class="nav-number">1.</span> <span class="nav-text">yoloV4</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E4%B8%96%EF%BC%9A"><span class="nav-number">1.1.</span> <span class="nav-text">前世：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8A%E7%94%9F%EF%BC%9A"><span class="nav-number">1.2.</span> <span class="nav-text">今生：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9DarkNet53%E7%9A%84%E6%94%B9%E8%BF%9B%EF%BC%9A"><span class="nav-number">1.2.1.</span> <span class="nav-text">对DarkNet53的改进：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Predict%E9%83%A8%E5%88%86"><span class="nav-number">1.2.2.</span> <span class="nav-text">Predict部分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BA%E6%96%87%E4%B8%AD%E6%8F%90%E5%8F%8A%E7%9A%84%E5%87%A0%E4%B8%AAtrick%EF%BC%9A"><span class="nav-number">1.2.3.</span> <span class="nav-text">论文中提及的几个trick：</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
        
