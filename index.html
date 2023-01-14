@@ -251,6 +251,637 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/01/15/nn-Module%E5%92%8Cforward%E7%9A%84%E5%8F%82%E6%95%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/cat.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YAO">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2023/01/15/nn-Module%E5%92%8Cforward%E7%9A%84%E5%8F%82%E6%95%B0/" itemprop="url">nn.Module和forward的参数</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2023-01-15T00:43:43+08:00">
+                2023-01-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="nn-Module和forward的参数"><a href="#nn-Module和forward的参数" class="headerlink" title="nn.Module和forward的参数"></a>nn.Module和forward的参数</h1><h2 id="1-nn-Module"><a href="#1-nn-Module" class="headerlink" title="1.nn.Module"></a>1.nn.Module</h2><p>文字来源：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/luckyplj/p/13378293.html#:~:text=nn.Module是nn中十分重要的类%2C包含网络各层的定义及forward方法。. 需要继承nn.Module类，并实现forward方法。. 只要在nn.Module的子类中定义了forward函数，backward函数就会被自动实现,(利用Autograd">Pytorch学习笔记07——nn.Module类与前向传播函数forward的理解 - 雨后观山色 - 博客园 (cnblogs.com)</a>。. 在forward函数中可以使用任何Variable支持的函数，毕竟在整个pytorch构建的图中，是Variable在流动。. 还可以使用if%2Cfor%2Cprint%2Clog等python语法.)</p>
+<p>我们在定义自已的网络的时候，需要继承nn.Module类，并重新实现构造函数<strong>init</strong>和forward这两个方法。但有一些注意技巧：</p>
+<p>（1）一般把网络中具有可学习参数的层（如全连接层、卷积层等）放在构造函数<strong>init</strong>()中，当然我也可以吧不具有参数的层也放在里面；</p>
+<p>（2）一般把不具有可学习参数的层(如ReLU、dropout、BatchNormanation层)可放在构造函数中，也可不放在构造函数中，如果不放在构造函数<strong>init</strong>里面，则在forward方法里面可以使用nn.functional来代替</p>
+<p>（3）<strong>forward方法是必须要重写的，它是实现模型的功能，实现各个层之间的连接关系的核心</strong>。</p>
+<p><strong>总结：</strong></p>
+<p>torch.nn是专门为神经网络设计的模块化接口。nn构建于autograd之上，可以用来定义和运行神经网络。<br><strong>nn.Module是nn中十分重要的类,包含网络各层的定义及forward方法</strong>。<br>定义自已的网络：<br>　　需要继承nn.Module类，并实现forward方法。<br>　　一般把网络中具有可学习参数的层放在构造函数<strong>init</strong>()中，<br>　　不具有可学习参数的层(如ReLU)可放在构造函数中，也可不放在构造函数中(而在forward中使用nn.functional来代替)<br>　　<strong>只要在nn.Module的子类中定义了forward函数，backward函数就会被自动实现(利用Autograd)。</strong><br>　　在forward函数中可以使用任何Variable支持的函数，毕竟在整个pytorch构建的图中，是Variable在流动。还可以使用if,for,print,log等python语法.<br>注：Pytorch基于nn.Module构建的模型中，只支持mini-batch的Variable输入方式</p>
+<h2 id="2-forward-函数自动调用的理解和分析"><a href="#2-forward-函数自动调用的理解和分析" class="headerlink" title="2.forward()函数自动调用的理解和分析"></a><strong>2.forward()函数自动调用的理解和分析</strong></h2><p>最近在使用pytorch的时候，模型训练时，不需要使用forward，只要在实例化一个对象中传入对应的参数就可以自动调用 forward 函数</p>
+<p>自动调用 forward 函数原因分析：</p>
+<p><strong>利用Python的语言特性，y = model(x)是调用了对象model的<strong>call</strong>方法，而nn.Module把<strong>call</strong>方法实现为类对象的forward函数，所以任意继承了nn.Module的类对象都可以这样简写来调用forward函数。</strong></p>
+<p>调用forward方法的具体流程是：</p>
+<p>执行y = model(x)时，由于LeNet类继承了Module类，而Module这个基类中定义了<strong>call</strong>方法，所以会执行<strong>call</strong>方法，而<strong>call</strong>方法中调用了forward()方法</p>
+<p><strong>只要定义类型的时候，实现<strong>call</strong>函数，这个类型就成为可调用的</strong>。 换句话说，我们可以把这个类型的对象当作函数来使用。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/01/15/torch-clamp-%E5%87%BD%E6%95%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/cat.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YAO">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2023/01/15/torch-clamp-%E5%87%BD%E6%95%B0/" itemprop="url">torch.clamp()函数</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2023-01-15T00:13:20+08:00">
+                2023-01-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="torch-clamp"><a href="#torch-clamp" class="headerlink" title="torch.clamp()"></a>torch.clamp()</h1><p>torch.clamp(input, min, max, out=None)</p>
+<p>将输入input张量每个元素的范围限制到区间 [min,max]，返回结果到一个新张量。</p>
+<p>input (Tensor) – 输入张量<br>min (Number) – 限制范围下限<br>max (Number) – 限制范围上限<br>out (Tensor, optional) – 输出张量</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">tensor([[-<span class="number">4</span>,  <span class="number">1</span>,  <span class="number">4</span>],</span><br><span class="line">        [-<span class="number">2</span>,  <span class="number">0</span>, -<span class="number">9</span>],</span><br><span class="line">        [-<span class="number">5</span>, -<span class="number">7</span>, -<span class="number">8</span>],</span><br><span class="line">        [-<span class="number">2</span>,  <span class="number">7</span>,  <span class="number">0</span>]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a[:,<span class="number">1</span>] = torch.clamp(a[:,<span class="number">1</span>],<span class="built_in">min</span>=-<span class="number">2</span>,<span class="built_in">max</span>=<span class="number">5</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">tensor([[-<span class="number">4</span>,  <span class="number">1</span>,  <span class="number">4</span>],</span><br><span class="line">        [-<span class="number">2</span>,  <span class="number">0</span>, -<span class="number">9</span>],</span><br><span class="line">        [-<span class="number">5</span>, -<span class="number">2</span>, -<span class="number">8</span>],</span><br><span class="line">        [-<span class="number">2</span>,  <span class="number">5</span>,  <span class="number">0</span>]])</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/01/14/C-%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E5%BC%95%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/cat.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YAO">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2023/01/14/C-%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E5%BC%95%E7%94%A8/" itemprop="url">C++成员函数返回引用</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2023-01-14T23:05:47+08:00">
+                2023-01-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="C-成员函数返回引用"><a href="#C-成员函数返回引用" class="headerlink" title="C++成员函数返回引用"></a>C++成员函数返回引用</h1><p>假设有某一具有修改成员变量功能的成员函数func()的返回值是*this，即对象A本身，如果返回值类型是引用，则接收这个返回值的对象将是A的引用，否则，将是A的一个复制。</p>
+<p>当计算B=A.func().func().func().func()，当返回类型为引用时，A.func()创建了一个匿名对象是A 的引用，依次执行func()，整个右式就是A的引用，每一次操作会对A的变量产生影响。最后复制给B。<strong>但是</strong>，当返回类型不是引用时，在执行第一个func()时，匿名对象是A的复制，只对A的变量进行这一次改变。</p>
+<p><strong>当然</strong>，仅执行B=A.func()，这时的返回值类型对运算结果没有影响。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2023/01/14/C-%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E5%BC%95%E7%94%A8/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/01/14/%E8%BF%90%E7%AE%97%E7%AC%A6%E9%87%8D%E8%BD%BD/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/cat.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YAO">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2023/01/14/%E8%BF%90%E7%AE%97%E7%AC%A6%E9%87%8D%E8%BD%BD/" itemprop="url">运算符重载</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2023-01-14T23:02:01+08:00">
+                2023-01-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="运算符重载"><a href="#运算符重载" class="headerlink" title="运算符重载"></a>运算符重载</h1><h2 id="运算符重载函数的定义格式"><a href="#运算符重载函数的定义格式" class="headerlink" title="运算符重载函数的定义格式"></a>运算符重载函数的定义格式</h2><h3 id="运算符重载函数作为类的成员函数"><a href="#运算符重载函数作为类的成员函数" class="headerlink" title="运算符重载函数作为类的成员函数"></a>运算符重载函数作为类的成员函数</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">函数类型   	<span class="keyword">operator</span>	重载运算符（形参表）</span><br><span class="line">&#123;</span><br><span class="line">	函数体；</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="运算符重载函数作为类的友元函数"><a href="#运算符重载函数作为类的友元函数" class="headerlink" title="运算符重载函数作为类的友元函数"></a>运算符重载函数作为类的友元函数</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">friend</span>	函数类型	<span class="keyword">operator</span>	重载运算符（形参表）</span><br><span class="line">&#123;</span><br><span class="line">	函数体；</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>运算符重载有两种方式：一种是类内重载（运算符重载函数作为类的成员函数），另一种是类外重载（运算符重载函数作为类的友元函数）</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Person</span> &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="type">int</span> x, y;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="built_in">Person</span>(<span class="type">int</span> x=<span class="number">0</span>, <span class="type">int</span> y=<span class="number">0</span>) :<span class="built_in">x</span>(x), <span class="built_in">y</span>(y) &#123;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">	Person <span class="keyword">operator</span>+ (<span class="type">const</span> Person&amp; p)&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="built_in">Person</span>(<span class="keyword">this</span>-&gt;x + p.x, <span class="keyword">this</span>-&gt;y + p.y);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运算符重载是类内重载时，运算符重载函数作为类的成员函数，以上述代码为例 <strong>a + b 相当于 a 对象调用+方法并且传入参数时 b 对象</strong></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2023/01/14/%E8%BF%90%E7%AE%97%E7%AC%A6%E9%87%8D%E8%BD%BD/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/01/13/C-explicit-%E5%85%B3%E9%94%AE%E5%AD%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/cat.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YAO">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2023/01/13/C-explicit-%E5%85%B3%E9%94%AE%E5%AD%97/" itemprop="url">C++ explicit 关键字</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2023-01-13T16:06:50+08:00">
+                2023-01-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="explicit"><a href="#explicit" class="headerlink" title="explicit"></a>explicit</h1><p>手册：<a target="_blank" rel="noopener" href="https://zh.cppreference.com/w/cpp/language/explicit">explicit 说明符 - cppreference.com</a></p>
+<p>1) 指定构造函数或转换函数 (C++11 起)或<a target="_blank" rel="noopener" href="https://zh.cppreference.com/w/cpp/language/class_template_argument_deduction">推导指引</a> (C++17 起)为显式，即它不能用于<a target="_blank" rel="noopener" href="https://zh.cppreference.com/w/cpp/language/implicit_conversion">隐式转换</a>和<a target="_blank" rel="noopener" href="https://zh.cppreference.com/w/cpp/language/copy_initialization">复制初始化</a>。</p>
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">A</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">A</span>(<span class="type">int</span>) &#123; &#125;      <span class="comment">// 转换构造函数</span></span><br><span class="line">    <span class="built_in">A</span>(<span class="type">int</span>, <span class="type">int</span>) &#123; &#125; <span class="comment">// 转换构造函数（C++11）</span></span><br><span class="line">    <span class="function"><span class="keyword">operator</span> <span class="title">bool</span><span class="params">()</span> <span class="type">const</span> </span>&#123; <span class="keyword">return</span> <span class="literal">true</span>; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">B</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">explicit</span> <span class="title">B</span><span class="params">(<span class="type">int</span>)</span> </span>&#123; &#125;</span><br><span class="line">    <span class="function"><span class="keyword">explicit</span> <span class="title">B</span><span class="params">(<span class="type">int</span>, <span class="type">int</span>)</span> </span>&#123; &#125;</span><br><span class="line">    <span class="function"><span class="keyword">explicit</span> <span class="keyword">operator</span> <span class="title">bool</span><span class="params">()</span> <span class="type">const</span> </span>&#123; <span class="keyword">return</span> <span class="literal">true</span>; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    A a1 = <span class="number">1</span>;      <span class="comment">// OK：复制初始化选择 A::A(int)</span></span><br><span class="line">    <span class="function">A <span class="title">a2</span><span class="params">(<span class="number">2</span>)</span></span>;       <span class="comment">// OK：直接初始化选择 A::A(int)</span></span><br><span class="line">    A a3 &#123;<span class="number">4</span>, <span class="number">5</span>&#125;;   <span class="comment">// OK：直接列表初始化选择 A::A(int, int)</span></span><br><span class="line">    A a4 = &#123;<span class="number">4</span>, <span class="number">5</span>&#125;; <span class="comment">// OK：复制列表初始化选择 A::A(int, int)</span></span><br><span class="line">    A a5 = (A)<span class="number">1</span>;   <span class="comment">// OK：显式转型进行 static_cast</span></span><br><span class="line">    <span class="keyword">if</span> (a1) ;      <span class="comment">// OK：A::operator bool()</span></span><br><span class="line">    <span class="type">bool</span> na1 = a1; <span class="comment">// OK：复制初始化选择 A::operator bool()</span></span><br><span class="line">    <span class="type">bool</span> na2 = <span class="built_in">static_cast</span>&lt;<span class="type">bool</span>&gt;(a1); <span class="comment">// OK：static_cast 进行直接初始化</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">//  B b1 = 1;      // 错误：复制初始化不考虑 B::B(int)</span></span><br><span class="line">    <span class="function">B <span class="title">b2</span><span class="params">(<span class="number">2</span>)</span></span>;       <span class="comment">// OK：直接初始化选择 B::B(int)</span></span><br><span class="line">    B b3 &#123;<span class="number">4</span>, <span class="number">5</span>&#125;;   <span class="comment">// OK：直接列表初始化选择 B::B(int, int)</span></span><br><span class="line"><span class="comment">//  B b4 = &#123;4, 5&#125;; // 错误：复制列表初始化不考虑 B::B(int,int)</span></span><br><span class="line">    B b5 = (B)<span class="number">1</span>;   <span class="comment">// OK：显式转型进行 static_cast</span></span><br><span class="line">    <span class="keyword">if</span> (b2) ;      <span class="comment">// OK：B::operator bool()</span></span><br><span class="line"><span class="comment">//  bool nb1 = b2; // 错误：复制初始化不考虑 B::operator bool()</span></span><br><span class="line">    <span class="type">bool</span> nb2 = <span class="built_in">static_cast</span>&lt;<span class="type">bool</span>&gt;(b2); <span class="comment">// OK：static_cast 进行直接初始化</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/01/13/YOLO-V4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -876,625 +1507,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/01/11/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/cat.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="YAO">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2023/01/11/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/" itemprop="url">快速排序</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2023-01-11T21:23:09+08:00">
-                2023-01-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h1><p>python示例</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">arr = [<span class="number">6</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">7</span>,<span class="number">9</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">10</span>,<span class="number">8</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">quick_sort</span>(<span class="params">arr, begin, end</span>):</span><br><span class="line">    <span class="keyword">if</span> begin &gt;= end:</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    temp = arr[begin]</span><br><span class="line">    i = begin</span><br><span class="line">    j = end</span><br><span class="line">    <span class="keyword">while</span> i != j:</span><br><span class="line">        <span class="keyword">while</span> arr[j] &gt;= temp <span class="keyword">and</span> j &gt; i:</span><br><span class="line">            j -= <span class="number">1</span></span><br><span class="line">        <span class="keyword">while</span> arr[i] &lt;= temp <span class="keyword">and</span> j &gt; i:</span><br><span class="line">            i += <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> j &gt; i:</span><br><span class="line">            t = arr[i]</span><br><span class="line">            arr[i] = arr[j]</span><br><span class="line">            arr[j] = t</span><br><span class="line">    arr[begin] = arr[i]</span><br><span class="line">    arr[i] = temp</span><br><span class="line">    quick_sort(arr,begin,i-<span class="number">1</span>)</span><br><span class="line">    quick_sort(arr,i+<span class="number">1</span>,end)</span><br><span class="line"></span><br><span class="line">quick_sort(arr,<span class="number">0</span>,<span class="built_in">len</span>(arr)-<span class="number">1</span>)</span><br><span class="line"><span class="built_in">print</span>(arr)</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/11/24/torch-flatten/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/cat.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="YAO">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/11/24/torch-flatten/" itemprop="url">torch.flatten</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-11-24T16:11:44+08:00">
-                2022-11-24
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="torch-flatten"><a href="#torch-flatten" class="headerlink" title="torch.flatten"></a>torch.flatten</h1><p>1）flatten(x,1)是按照x的第1个维度拼接（按照列来拼接，横向拼接）；<br>2）flatten(x,0)是按照x的第0个维度拼接（按照行来拼接，纵向拼接）；<br>3）有时候会遇到flatten里面有两个维度参数，flatten(x, start_dim, end_dimension)，此时flatten函数执行的功能是将从start_dim到end_dim之间的所有维度值乘起来，其他的维度保持不变。例如x是一个size为[4,5,6]的tensor, flatten(x, 0, 1)的结果是一个size为[20,6]的tensor。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>A = torch.tensor([[[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>],[<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>],[<span class="number">9</span>,<span class="number">10</span>,<span class="number">11</span>,<span class="number">12</span>]],[[<span class="number">13</span>,<span class="number">14</span>,<span class="number">15</span>,<span class="number">16</span>],[<span class="number">17</span>,<span class="number">18</span>,<span class="number">19</span>,<span class="number">20</span>],[<span class="number">21</span>,<span class="number">22</span>,<span class="number">23</span>,<span class="number">24</span>]]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>A</span><br><span class="line">tensor([[[ <span class="number">1</span>,  <span class="number">2</span>,  <span class="number">3</span>,  <span class="number">4</span>],</span><br><span class="line">         [ <span class="number">5</span>,  <span class="number">6</span>,  <span class="number">7</span>,  <span class="number">8</span>],</span><br><span class="line">         [ <span class="number">9</span>, <span class="number">10</span>, <span class="number">11</span>, <span class="number">12</span>]],</span><br><span class="line"></span><br><span class="line">        [[<span class="number">13</span>, <span class="number">14</span>, <span class="number">15</span>, <span class="number">16</span>],</span><br><span class="line">         [<span class="number">17</span>, <span class="number">18</span>, <span class="number">19</span>, <span class="number">20</span>],</span><br><span class="line">         [<span class="number">21</span>, <span class="number">22</span>, <span class="number">23</span>, <span class="number">24</span>]]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>A.view(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>)</span><br><span class="line">tensor([[[[ <span class="number">1</span>,  <span class="number">2</span>,  <span class="number">3</span>,  <span class="number">4</span>],</span><br><span class="line">          [ <span class="number">5</span>,  <span class="number">6</span>,  <span class="number">7</span>,  <span class="number">8</span>],</span><br><span class="line">          [ <span class="number">9</span>, <span class="number">10</span>, <span class="number">11</span>, <span class="number">12</span>]],</span><br><span class="line"></span><br><span class="line">         [[<span class="number">13</span>, <span class="number">14</span>, <span class="number">15</span>, <span class="number">16</span>],</span><br><span class="line">          [<span class="number">17</span>, <span class="number">18</span>, <span class="number">19</span>, <span class="number">20</span>],</span><br><span class="line">          [<span class="number">21</span>, <span class="number">22</span>, <span class="number">23</span>, <span class="number">24</span>]]]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>A.shape</span><br><span class="line">torch.Size([<span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>A.view(<span class="number">2</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">2</span>)</span><br><span class="line">tensor([[[[ <span class="number">1</span>,  <span class="number">2</span>],</span><br><span class="line">          [ <span class="number">3</span>,  <span class="number">4</span>],</span><br><span class="line">          [ <span class="number">5</span>,  <span class="number">6</span>]],</span><br><span class="line"></span><br><span class="line">         [[ <span class="number">7</span>,  <span class="number">8</span>],</span><br><span class="line">          [ <span class="number">9</span>, <span class="number">10</span>],</span><br><span class="line">          [<span class="number">11</span>, <span class="number">12</span>]]],</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        [[[<span class="number">13</span>, <span class="number">14</span>],</span><br><span class="line">          [<span class="number">15</span>, <span class="number">16</span>],</span><br><span class="line">          [<span class="number">17</span>, <span class="number">18</span>]],</span><br><span class="line"></span><br><span class="line">         [[<span class="number">19</span>, <span class="number">20</span>],</span><br><span class="line">          [<span class="number">21</span>, <span class="number">22</span>],</span><br><span class="line">          [<span class="number">23</span>, <span class="number">24</span>]]]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>B = torch.flatten(A,<span class="number">1</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>B</span><br><span class="line">tensor([[ <span class="number">1</span>,  <span class="number">2</span>,  <span class="number">3</span>,  <span class="number">4</span>,  <span class="number">5</span>,  <span class="number">6</span>,  <span class="number">7</span>,  <span class="number">8</span>,  <span class="number">9</span>, <span class="number">10</span>, <span class="number">11</span>, <span class="number">12</span>],</span><br><span class="line">        [<span class="number">13</span>, <span class="number">14</span>, <span class="number">15</span>, <span class="number">16</span>, <span class="number">17</span>, <span class="number">18</span>, <span class="number">19</span>, <span class="number">20</span>, <span class="number">21</span>, <span class="number">22</span>, <span class="number">23</span>, <span class="number">24</span>]])</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/11/24/pytorch-concat%E5%92%8Cstack/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/cat.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="YAO">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/11/24/pytorch-concat%E5%92%8Cstack/" itemprop="url">pytorch:concat和stack</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-11-24T15:08:25+08:00">
-                2022-11-24
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="concat和stack"><a href="#concat和stack" class="headerlink" title="concat和stack"></a>concat和stack</h1><p>concat是对dim进行拼接，stack是对dim维进行堆叠。<br>concat：不会增加新的维度，在指定维度上拼接。<br>stack：增加一个新的维度将两个单位，然后再上一维度分别进行堆叠。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2022/11/24/pytorch-concat%E5%92%8Cstack/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/11/23/%E5%B8%B8%E7%94%A8%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/cat.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="YAO">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/11/23/%E5%B8%B8%E7%94%A8%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0/" itemprop="url">常用激活函数</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-11-23T17:19:59+08:00">
-                2022-11-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="激活函数"><a href="#激活函数" class="headerlink" title="激活函数"></a>激活函数</h2><p>激活函数的作用：提供网络的非线性表达建模能力。</p>
-<ul>
-<li>线性可分数据：可以通过机器学习(感知机、SVM)找到的线性方程来进行划分。</li>
-<li>非线性可分数据：找不到一种线性方程来划分数据，此时需要引入非线性函数。</li>
-</ul>
-<p><img src="/images/act1.png"></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2022/11/23/%E5%B8%B8%E7%94%A8%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/11/23/%E6%8C%87%E9%92%88%E5%B8%B8%E9%87%8F%E4%B8%8E%E5%B8%B8%E9%87%8F%E6%8C%87%E9%92%88/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/cat.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="YAO">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/11/23/%E6%8C%87%E9%92%88%E5%B8%B8%E9%87%8F%E4%B8%8E%E5%B8%B8%E9%87%8F%E6%8C%87%E9%92%88/" itemprop="url">指针常量与常量指针</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-11-23T16:01:54+08:00">
-                2022-11-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="指针常量与常量指针"><a href="#指针常量与常量指针" class="headerlink" title="指针常量与常量指针"></a>指针常量与常量指针</h1><p>定义指针常量：type * const pointer</p>
-<p>修饰符const与指针变量紧邻，说明指针变量不允许修改，既然指针变量的值不能修改，所以一定要在定义的时候给定初值（指向一个确定存在的地方）</p>
-<p>定义常量指针（指向常量的指针）：const type <em> pointer 或 type const </em> pointer</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># <span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta"># <span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="type">int</span> a = <span class="number">10</span>;</span><br><span class="line">    <span class="type">int</span> b = <span class="number">7</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// const pointer</span></span><br><span class="line">    <span class="comment">// 地址固定，地址里的值可修改</span></span><br><span class="line">    <span class="type">int</span>* <span class="type">const</span> p1 = &amp;a;</span><br><span class="line">    <span class="comment">// p1 = &amp;b;   错误，变量必须是可修改的左值</span></span><br><span class="line">    *p1 = <span class="number">3</span>;   <span class="comment">// 正确</span></span><br><span class="line">    cout &lt;&lt; a &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// pointer to const</span></span><br><span class="line">    <span class="comment">// 地址可更改，不可以修改地址里的值</span></span><br><span class="line">    <span class="type">const</span> <span class="type">int</span>* p2 = &amp;a;</span><br><span class="line">    cout &lt;&lt; *p2 &lt;&lt; endl;</span><br><span class="line">    cout &lt;&lt; b &lt;&lt; endl;</span><br><span class="line">    p2 = &amp;b;       <span class="comment">//正确</span></span><br><span class="line">    <span class="comment">// *p2 = 2;    //错误</span></span><br><span class="line">    cout &lt;&lt; *p2 &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 第二种定义方法</span></span><br><span class="line">    <span class="type">int</span> <span class="type">const</span> * p3 = &amp;a;</span><br><span class="line">    p3 = &amp;b;</span><br><span class="line">    cout &lt;&lt; *p3 &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 常指针常量</span></span><br><span class="line">    <span class="type">const</span> <span class="type">int</span>* <span class="type">const</span> p4 = &amp;a;</span><br><span class="line">    <span class="comment">// p4 = &amp;b; 错误</span></span><br><span class="line">    <span class="comment">// *p4 = 9; 错误</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>常量指针（pointer to const），指针常量（constant pointer）<br>在C++编程思想_中文版_第2版_第1卷_8.2指针 章节中提到：“当使用带有指针的const时，有两种选择：<br>const修饰指针正在指向的对象，<br>const修饰在指针里存储的地址”<br>只需要遵循指针的定义技巧“从指针标识符开始，由里到外地读，const修饰最靠近它的那个”就能帮助理解<br>例如“const int <em>u;”会读成“变量u，是一个指针，指向 const int ”<br>另外“int const </em>u”本质与前一个一样，应该读成“u是一个指针，恰好指向一个const的int”，不过是语法习惯问题；<br>“int * const v ”会读成“v是一个const指针，这个const指针指向int”</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1549,7 +1561,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-count">67</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1594,7 +1606,7 @@
        	<h3 class="widget-title">Tag Cloud</h3>
     	<div id="myCanvasContainer" class="widget tagcloud">
         		<canvas width="250" height="250" id="resCanvas" style="width=100%">
-            		<ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CNN/" rel="tag">CNN</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DL/" rel="tag">DL</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenCV/" rel="tag">OpenCV</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pandas/" rel="tag">Pandas</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/QT/" rel="tag">QT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/co-lab/" rel="tag">co-lab</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/conda/" rel="tag">conda</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pytorch/" rel="tag">pytorch</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%9B%E6%89%A3/" rel="tag">力扣</a><span class="tag-list-count">20</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" rel="tag">图像处理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a><span class="tag-list-count">3</span></li></ul>
+            		<ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CNN/" rel="tag">CNN</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DL/" rel="tag">DL</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenCV/" rel="tag">OpenCV</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pandas/" rel="tag">Pandas</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/QT/" rel="tag">QT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/co-lab/" rel="tag">co-lab</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/conda/" rel="tag">conda</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pytorch/" rel="tag">pytorch</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%9B%E6%89%A3/" rel="tag">力扣</a><span class="tag-list-count">20</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" rel="tag">图像处理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a><span class="tag-list-count">3</span></li></ul>
         		</canvas>
     	</div>
 	</div>
